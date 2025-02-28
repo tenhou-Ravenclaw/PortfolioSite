@@ -1,6 +1,6 @@
 <?php
 // データベース接続情報
-$host = "mysql_container"; // DockerのMySQLサービス名
+$host = "172.18.0.2"; // DockerのMySQLサービス名
 $username = "user";
 $password = "password";
 $database = "portfolio_blog";
