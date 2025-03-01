@@ -1,7 +1,7 @@
 <?php
 // 記事詳細画面のコードを記述
 echo '記事詳細画面です';
-include 'includes/db.php';
+include '../includes/db.php';
 
 // 記事IDの取得
 $post_id = $_GET['id'] ?? 0;
