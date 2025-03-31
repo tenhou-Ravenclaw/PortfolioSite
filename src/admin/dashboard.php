@@ -39,22 +39,5 @@ echo '管理画面です';
         }
         ?>
     </ul>
-
-    <h2>お問い合わせ一覧</h2>
-    <ul>
-        <?php
-        $sql = "SELECT id, name, email, message, created_at FROM contacts ORDER BY created_at DESC";
-        $result = $conn->query($sql);
-        
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<li>" . htmlspecialchars($row["name"]) . " (" . $row["email"] . ") - " . $row["created_at"] . "<br>";
-                echo htmlspecialchars($row["message"]) . "</li>";
-            }
-        } else {
-            echo "<li>お問い合わせはありません</li>";
-        }
-        ?>
-    </ul>
 </body>
 </html>
