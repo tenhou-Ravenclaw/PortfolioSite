@@ -1,30 +1,43 @@
-<?php
-// ブログページのコードを記述
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ブログ</title>
+    <link rel="stylesheet" href="../includes/styles.css">
+</head>
+<body>
 
-// ヘッダーのインクルード
-include '../includes/header.php';
+<?php include '../includes/header.php'; ?>
 
-// データベース接続をインクルード
-include '../includes/db.php';
+<main>
+    <h1>ブログ</h1>
 
-// 投稿内容を取得するSQLクエリ
-$sql = "SELECT title, content, created_at FROM posts";
-$result = $conn->query($sql);
+    <?php
+    // データベース接続をインクルード
+    include '../includes/db.php';
 
-if ($result->num_rows > 0) {
-    // 各投稿を出力
-    while($row = $result->fetch_assoc()) {
-        echo "<h2>" . $row["title"] . "</h2>";
-        echo "<p>" . $row["content"] . "</p>";
-        echo "<small>投稿日: " . $row["created_at"] . "</small><hr>";
+    // 投稿内容を取得するSQLクエリ
+    $sql = "SELECT title, content, created_at FROM posts";
+    $result = $conn->query($sql);
+
+    if ($result->num_rows > 0) {
+        // 各投稿を出力
+        while($row = $result->fetch_assoc()) {
+            echo "<h2>" . htmlspecialchars($row["title"]) . "</h2>";
+            echo "<p>" . nl2br(htmlspecialchars($row["content"])) . "</p>";
+            echo "<small>投稿日: " . $row["created_at"] . "</small><hr>";
+        }
+    } else {
+        echo "<p>投稿がありません</p>";
     }
-} else {
-    echo "投稿がありません";
-}
 
-// データベース接続を閉じる
-$conn->close();
+    // データベース接続を閉じる
+    $conn->close();
+    ?>
+</main>
 
-// フッターのインクルード
-include '../includes/footer.php';
-?>
+<?php include '../includes/footer.php'; ?>
+
+</body>
+</html>
