@@ -1,0 +1,119 @@
+/* 管理画面のスタイル */
+
+.admin-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.admin-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.admin-header h1 {
+    font-size: 2.5em;
+    color: #007acc;
+    margin-bottom: 10px;
+}
+
+.admin-section {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.admin-section h2 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.admin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.admin-form label {
+    font-weight: bold;
+    color: #495057;
+}
+
+.admin-form input[type="text"],
+.admin-form textarea {
+    padding: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.admin-form textarea {
+    min-height: 150px;
+    resize: vertical;
+}
+
+.admin-form button {
+    background-color: #007acc;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.3s ease;
+}
+
+.admin-form button:hover {
+    background-color: #005999;
+}
+
+.admin-list {
+    list-style: none;
+    padding: 0;
+}
+
+.admin-list li {
+    padding: 15px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.admin-list li:last-child {
+    border-bottom: none;
+}
+
+.admin-list a {
+    color: #007acc;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.admin-list a:hover {
+    color: #005999;
+}
+
+.admin-list .date {
+    color: #6c757d;
+    font-size: 0.9em;
+    margin-left: 10px;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .admin-container {
+        padding: 10px;
+    }
+
+    .admin-section {
+        padding: 20px;
+    }
+
+    .admin-header h1 {
+        font-size: 2em;
+    }
+}

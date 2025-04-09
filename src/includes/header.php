@@ -9,14 +9,13 @@
 <body>
     <header>
         <h1>ポートフォリオサイト</h1>
-        <nav>
-            <ul>
-                <li><a href="../home/index.php">ホーム</a></li>
-                <li><a href="../home/about.php">自己紹介</a></li>
-                <li><a href="../project/index.php">プロジェクト</a></li>
-                <li><a href="../blog/index.php">ブログ</a></li>
-                <li><a href="../home/contact.php">お問い合わせ</a></li>
-            </ul>
-        </nav>
+        <div class="dropdown">
+            <button class="dropbtn">メニュー</button>
+            <div class="dropdown-content">
+                <a href="../home/index.php">ホーム</a>
+                <a href="../project/index.php">プロジェクト</a>
+                <a href="../blog/index.php">ブログ</a>
+            </div>
+        </div>
     </header>
     <main>

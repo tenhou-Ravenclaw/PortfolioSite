@@ -1,6 +1,5 @@
 <?php
 // 記事詳細画面のコードを記述
-echo '記事詳細画面です';
 include '../includes/db.php';
 
 // 記事IDの取得
@@ -19,16 +18,28 @@ $post = $result->fetch_assoc();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo htmlspecialchars($post['title'] ?? "記事が見つかりません"); ?></title>
+    <link rel="stylesheet" href="../includes/styles.css">
+    <link rel="stylesheet" href="./post.css">
 </head>
 <body>
-    <?php if ($post): ?>
-        <h1><?php echo htmlspecialchars($post['title']); ?></h1>
-        <p><?php echo nl2br(htmlspecialchars($post['content'])); ?></p>
-        <p><small>投稿日: <?php echo $post['created_at']; ?></small></p>
-        <a href="index.php">戻る</a>
-    <?php else: ?>
-        <p>記事が見つかりません</p>
-        <a href="index.php">戻る</a>
-    <?php endif; ?>
+    <main>
+        <div class="post-container">
+            <?php if ($post): ?>
+                <div class="post-header">
+                    <h1><?php echo htmlspecialchars($post['title']); ?></h1>
+                </div>
+                <div class="post-content">
+                    <p><?php echo nl2br(htmlspecialchars($post['content'])); ?></p>
+                    <span class="date">投稿日: <?php echo $post['created_at']; ?></span>
+                    <a href="index.php">戻る</a>
+                </div>
+            <?php else: ?>
+                <div class="post-content">
+                    <p>記事が見つかりません</p>
+                    <a href="index.php">戻る</a>
+                </div>
+            <?php endif; ?>
+        </div>
+    </main>
 </body>
 </html>
