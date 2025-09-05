@@ -1,0 +1,59 @@
+/* post_process.phpのスタイル */
+
+.process-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.process-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.process-header h1 {
+    font-size: 2.5em;
+    color: #007acc;
+    margin-bottom: 10px;
+}
+
+.process-content {
+    background-color: white;
+    border-radius: 10px;
+    padding: 30px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.process-content p {
+    color: #495057;
+    line-height: 1.8;
+    margin-bottom: 20px;
+}
+
+.process-content a {
+    color: #007acc;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.process-content a:hover {
+    color: #005999;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    .process-container {
+        padding: 10px;
+    }
+
+    .process-content {
+        padding: 20px;
+    }
+
+    .process-header h1 {
+        font-size: 2em;
+    }
+} 
