@@ -1,3 +1,10 @@
+-- イベント参加履歴テーブル
+CREATE TABLE IF NOT EXISTS event_history (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    event_name VARCHAR(255) NOT NULL,
+    participated_at DATE NOT NULL,
+    description TEXT
+);
 CREATE TABLE posts (
     id INT PRIMARY KEY AUTO_INCREMENT,
     title VARCHAR(255) NOT NULL,

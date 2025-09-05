@@ -15,6 +15,7 @@
                 <a href="../home/index.php">ホーム</a>
                 <a href="../project/index.php">プロジェクト</a>
                 <a href="../blog/index.php">ブログ</a>
+                <a href="../event/index.php">イベント参加履歴</a>
             </div>
         </div>
     </header>
