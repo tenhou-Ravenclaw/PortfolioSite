@@ -1,5 +1,6 @@
 "use client";
 import { useRef, useState, useEffect } from "react";
+import Link from "next/link";
 
 export default function GlobalNav() {
     const navToggleRef = useRef<HTMLInputElement>(null);
@@ -31,16 +32,11 @@ export default function GlobalNav() {
                 <button className="nav-close" aria-label="メニューを閉じる" onClick={closeMenu}>
                     <span>&times;</span>
                 </button>
-                <a href="/" className="nav-link" onClick={closeMenu}>Home</a>
-                <a href="/about" className="nav-link" onClick={closeMenu}>About</a>
-                <a href="/works" className="nav-link" onClick={closeMenu}>Works</a>
-                <a href="/events" className="nav-link" onClick={closeMenu}>Events</a>
-                <a
-                    href="/#skills-section"
-                    className="nav-link"
-                >
-                    Skills
-                </a>
+                <Link href="/" className="nav-link" onClick={closeMenu}>Home</Link>
+                <Link href="/about" className="nav-link" onClick={closeMenu}>About</Link>
+                <Link href="/works" className="nav-link" onClick={closeMenu}>Works</Link>
+                <Link href="/events" className="nav-link" onClick={closeMenu}>Events</Link>
+                <Link href="/#skills-section" className="nav-link">Skills</Link>
                 <a href="https://forms.gle/mgff1SAhDBBkF4AG8" target="_blank" rel="noopener noreferrer" className="nav-link">Contact</a>
             </div>
         </nav>
