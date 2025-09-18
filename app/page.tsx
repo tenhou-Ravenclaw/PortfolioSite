@@ -1,8 +1,10 @@
-"use client";
+
+
 
 export default function Home() {
   return (
     <>
+
       <main className="container" style={{ position: 'relative' }}>
         <div className="bg-geometry" />
         {/* Heroセクション */}
@@ -27,7 +29,7 @@ export default function Home() {
           </p>
         </section>
         {/* Skillsセクション */}
-        <section className="section">
+        <section className="section" id="skills-section">
           <h2 className="section-title">Skills</h2>
           <p className="section-desc"></p>
         </section>
