@@ -1,33 +1,35 @@
 export default function Home() {
   return (
-    <main style={{ minHeight: '100vh', padding: '2rem 0', maxWidth: 900, margin: '0 auto' }}>
+    <main className="container" style={{ position: 'relative' }}>
+      <div className="bg-geometry" />
       {/* Heroセクション */}
-      <section style={{ textAlign: 'center', marginBottom: '3rem' }}>
-        <h1 style={{ fontSize: '2.5rem', fontWeight: 'bold' }}>Welcome to My Portfolio</h1>
-        <p style={{ color: '#666', marginTop: 12 }}>フロントエンドエンジニア／デザイナー など肩書き</p>
+      <section className="hero">
+        <h1 className="hero-title">Tenhou’s Portfolio Site</h1>
+        <p className="hero-sub">誠実さと美しさを大切に。<br />趣味：ダーツ・音楽鑑賞／好きな動物：フクロウ／好きな植物：桜／好きな自然：夜空</p>
+
       </section>
 
       {/* Aboutセクション */}
-      <section style={{ marginBottom: '2.5rem' }}>
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>About</h2>
-        <p style={{ color: '#444', marginTop: 8 }}>自己紹介や経歴のダイジェスト。<a href="/about" style={{ color: '#0070f3', textDecoration: 'underline' }}>もっと見る</a></p>
+      <section className="section">
+        <h2 className="section-title">About</h2>
+        <p className="section-desc">「無理なく、無駄なく、美しく」を信条に、誠実なものづくりを心がけています。<a href="/about" className="link">もっと見る</a></p>
       </section>
 
       {/* Worksセクション */}
-      <section style={{ marginBottom: '2.5rem' }}>
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Works</h2>
-        <p style={{ color: '#444', marginTop: 8 }}>制作物・実績の一部を紹介。<a href="/works" style={{ color: '#0070f3', textDecoration: 'underline' }}>もっと見る</a></p>
+      <section className="section">
+        <h2 className="section-title">Works</h2>
+        <p className="section-desc">美しさと機能性を両立した制作物・実績を紹介します。<a href="/works" className="link">もっと見る</a></p>
       </section>
 
       {/* Skillsセクション */}
-      <section style={{ marginBottom: '2.5rem' }}>
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold' }}>Skills</h2>
-        <p style={{ color: '#444', marginTop: 8 }}>得意な技術やツール。<a href="/skills" style={{ color: '#0070f3', textDecoration: 'underline' }}>もっと見る</a></p>
+      <section className="section">
+        <h2 className="section-title">Skills</h2>
+        <p className="section-desc">幾何学的な思考と創造性を活かした技術・ツール。<a href="/skills" className="link">もっと見る</a></p>
       </section>
 
       {/* Contactセクション */}
-      <section style={{ textAlign: 'center' }}>
-        <a href="/contact" style={{ display: 'inline-block', padding: '0.75rem 2rem', background: '#0070f3', color: '#fff', borderRadius: 8, fontWeight: 'bold', textDecoration: 'none' }}>Contact</a>
+      <section className="hero">
+        <a href="/contact" className="contact-btn">Contact</a>
       </section>
     </main>
   );
