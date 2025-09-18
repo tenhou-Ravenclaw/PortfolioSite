@@ -19,6 +19,13 @@ export default function Home() {
           <h2 className="section-title">Works</h2>
           <p className="section-desc"><a href="/works" className="link">もっと見る</a></p>
         </section>
+        {/* Eventsセクション */}
+        <section className="section">
+          <h2 className="section-title">Events</h2>
+          <p className="section-desc">
+            <a href="/events" className="link">イベント参加履歴を見る</a>
+          </p>
+        </section>
         {/* Skillsセクション */}
         <section className="section">
           <h2 className="section-title">Skills</h2>

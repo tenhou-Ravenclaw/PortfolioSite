@@ -1,3 +1,50 @@
+/* --- イベントカード --- */
+.event-card-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  justify-content: flex-start;
+  margin-top: 2rem;
+}
+
+.event-card {
+  background: var(--color-accent);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  border: 1px solid var(--color-border);
+  padding: 1.2rem 1.4rem 1rem 1.4rem;
+  min-width: 260px;
+  max-width: 340px;
+  flex: 1 1 260px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 0.5rem;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.event-card:hover {
+  box-shadow: 0 8px 32px 0 rgba(124, 58, 237, 0.13);
+  transform: translateY(-4px) scale(1.02);
+}
+
+.event-title {
+  font-size: 1.18rem;
+  font-weight: bold;
+  color: var(--color-primary-hover);
+  margin-bottom: 0.3em;
+}
+
+.event-date {
+  font-size: 0.98rem;
+  color: #888;
+  margin-bottom: 0.5em;
+}
+
+.event-desc {
+  font-size: 1.05rem;
+  color: var(--color-fg);
+}
+
 /* --- カラーパレット・UI変数 --- */
 /* --- カラーパレット・UI変数 --- */
 :root {
