@@ -6,7 +6,7 @@ export default function Home() {
   const getRecentActivities = () => {
     // イベントを日付でパース
     const eventsWithDates = events.map(event => {
-      const dateMatch = event.date.split('~')[0].match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);
+      const dateMatch = event.date.split('~')[0].match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
       const date = dateMatch
         ? new Date(parseInt(dateMatch[1]), parseInt(dateMatch[2]) - 1, parseInt(dateMatch[3]))
         : new Date();
@@ -15,7 +15,7 @@ export default function Home() {
 
     // プロジェクトを開始日でパース
     const projectsWithDates = projects.map(project => {
-      const dateMatch = project.startDate.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);
+      const dateMatch = project.startDate.match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
       const date = dateMatch
         ? new Date(parseInt(dateMatch[1]), parseInt(dateMatch[2]) - 1, parseInt(dateMatch[3]))
         : new Date();
@@ -78,7 +78,7 @@ export default function Home() {
         return `${startFormatted}-`;
       }
 
-      const endMatch = activity.endDate.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);
+      const endMatch = activity.endDate.match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
       if (endMatch) {
         const endDate = new Date(parseInt(endMatch[1]), parseInt(endMatch[2]) - 1, parseInt(endMatch[3]));
         const endFormatted = `${endDate.getFullYear()}.${String(endDate.getMonth() + 1).padStart(2, '0')}`;

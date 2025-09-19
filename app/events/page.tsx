@@ -1,17 +1,38 @@
 
 "use client";
+
+import { useState } from "react";
+import { events, projects, Event, Project, TimelineItem } from "../../data/event";
+
+// 日付文字列から Date オブジェクトを作成するヘルパー関数
+function parseEventDate(dateString: string): Date {
+  const startDate = dateString.split('~')[0];
+  const match = startDate.match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
+  if (match) {
+    return new Date(parseInt(match[1]), parseInt(match[2]) - 1, parseInt(match[3]));
+  }
+  return new Date();
+}
+
+function parseProjectDate(dateString: string): Date {
+  if (dateString === "進行中" || dateString === "") {
+    return new Date();
+  }
+  return parseEventDate(dateString);
+}
+
 // 年月リストを新しい順で生成（イベントまたはプロジェクトの開始/終了月がある月のみ）
 function getTimelineYearMonthList(events: Event[], projects: Project[]) {
   const ymSet = new Set<string>();
   events.forEach(ev => {
     const date = parseEventDate(ev.date);
-    ymSet.add(`${date.getFullYear()}年${String(date.getMonth() + 1).padStart(2, '0')}月`);
+    ymSet.add(`${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, '0')}`);
   });
   projects.forEach(prj => {
     const start = parseProjectDate(prj.startDate);
     const end = (prj.endDate === '進行中' || !prj.endDate) ? new Date() : parseProjectDate(prj.endDate);
-    ymSet.add(`${start.getFullYear()}年${String(start.getMonth() + 1).padStart(2, '0')}月`);
-    ymSet.add(`${end.getFullYear()}年${String(end.getMonth() + 1).padStart(2, '0')}月`);
+    ymSet.add(`${start.getFullYear()}/${String(start.getMonth() + 1).padStart(2, '0')}`);
+    ymSet.add(`${end.getFullYear()}/${String(end.getMonth() + 1).padStart(2, '0')}`);
   });
   const ymList = Array.from(ymSet);
   ymList.sort((a, b) => b.localeCompare(a)); // 新しい順
@@ -41,26 +62,6 @@ function assignProjectColumns(projects: Project[]) {
   return result;
 }
 
-import { useState } from "react";
-import { events, projects, Event, Project, TimelineItem } from "../../data/event";
-
-// 日付文字列から Date オブジェクトを作成するヘルパー関数
-function parseEventDate(dateString: string): Date {
-  const startDate = dateString.split('~')[0];
-  const match = startDate.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);
-  if (match) {
-    return new Date(parseInt(match[1]), parseInt(match[2]) - 1, parseInt(match[3]));
-  }
-  return new Date();
-}
-
-function parseProjectDate(dateString: string): Date {
-  if (dateString === "進行中" || dateString === "") {
-    return new Date();
-  }
-  return parseEventDate(dateString);
-}
-
 // イベントとプロジェクトを統合してソート
 const createTimelineItems = (): TimelineItem[] => {
   const eventItems: TimelineItem[] = events.map(event => ({
@@ -88,7 +89,7 @@ const createTimelineItems = (): TimelineItem[] => {
 //   let d = new Date(start.getFullYear(), start.getMonth(), 1);
 //   const last = new Date(end.getFullYear(), end.getMonth(), 1);
 //   while (d <= last) {
-//     result.push(`${d.getFullYear()}年${String(d.getMonth() + 1).padStart(2, '0')}月`);
+//     result.push(`${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}`);
 //     d.setMonth(d.getMonth() + 1);
 //   }
 //   return result;
@@ -105,7 +106,7 @@ function groupByYearMonthWithProjectEdge(items: TimelineItem[]) {
   items.forEach(item => {
     if (item.type === 'event') {
       const date = parseEventDate((item.data as Event).date);
-      const ym = `${date.getFullYear()}年${String(date.getMonth() + 1).padStart(2, '0')}月`;
+      const ym = `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, '0')}`;
       eventMonths.add(ym);
       if (!eventMap[ym]) eventMap[ym] = [];
       eventMap[ym].push(item);
@@ -114,8 +115,8 @@ function groupByYearMonthWithProjectEdge(items: TimelineItem[]) {
       const start = parseProjectDate(project.startDate);
       const end = (project.endDate === '進行中' || !project.endDate)
         ? new Date() : parseProjectDate(project.endDate);
-      const startYm = `${start.getFullYear()}年${String(start.getMonth() + 1).padStart(2, '0')}月`;
-      const endYm = `${end.getFullYear()}年${String(end.getMonth() + 1).padStart(2, '0')}月`;
+      const startYm = `${start.getFullYear()}/${String(start.getMonth() + 1).padStart(2, '0')}`;
+      const endYm = `${end.getFullYear()}/${String(end.getMonth() + 1).padStart(2, '0')}`;
       projectEdgeMonths.add(startYm);
       projectEdgeMonths.add(endYm);
       if (!projectEdgeMap[startYm]) projectEdgeMap[startYm] = [];
@@ -158,8 +159,8 @@ export default function Events() {
   const projectBlocks = projects.map((prj, i) => {
     const start = parseProjectDate(prj.startDate);
     const end = (prj.endDate === '進行中' || !prj.endDate) ? new Date() : parseProjectDate(prj.endDate);
-    const startYm = `${start.getFullYear()}年${String(start.getMonth() + 1).padStart(2, '0')}月`;
-    const endYm = `${end.getFullYear()}年${String(end.getMonth() + 1).padStart(2, '0')}月`;
+    const startYm = `${start.getFullYear()}/${String(start.getMonth() + 1).padStart(2, '0')}`;
+    const endYm = `${end.getFullYear()}/${String(end.getMonth() + 1).padStart(2, '0')}`;
     const startIdx = ymIndexMap[startYm];
     const endIdx = ymIndexMap[endYm];
     return { project: prj, col: projectColumns[i], startIdx, endIdx };
@@ -169,7 +170,7 @@ export default function Events() {
   const eventMap: { [ym: string]: Event[] } = {};
   events.forEach(ev => {
     const date = parseEventDate(ev.date);
-    const ym = `${date.getFullYear()}年${String(date.getMonth() + 1).padStart(2, '0')}月`;
+    const ym = `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, '0')}`;
     if (!eventMap[ym]) eventMap[ym] = [];
     eventMap[ym].push(ev);
   });

@@ -7,7 +7,7 @@ export default function WorksPage() {
     const formatProjectPeriod = (startDate: string, endDate: string) => {
         const parseDate = (dateString: string) => {
             if (dateString === "進行中" || dateString === "") return null;
-            const match = dateString.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);
+            const match = dateString.match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
             if (match) {
                 return new Date(parseInt(match[1]), parseInt(match[2]) - 1, parseInt(match[3]));
             }
