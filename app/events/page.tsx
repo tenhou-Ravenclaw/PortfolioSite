@@ -10,6 +10,13 @@ export default function Events() {
             <div className="event-title">{event.title}</div>
             <div className="event-date">{event.date}</div>
             <div className="event-desc">{event.desc}</div>
+            {event.url && (
+              <div className="event-link-area">
+                <a href={event.url} target="_blank" rel="noopener noreferrer" className="event-link">
+                  イベントページを見る
+                </a>
+              </div>
+            )}
             <hr className="event-divider" />
             <div className="event-meta">
               <div className="event-role"><span className="event-label">立場</span>：{event.role}</div>
