@@ -36,6 +36,7 @@ export default function GlobalNav() {
                 <Link href="/about" className="nav-link" onClick={closeMenu}>About</Link>
                 <Link href="/works" className="nav-link" onClick={closeMenu}>Works</Link>
                 <Link href="/events" className="nav-link" onClick={closeMenu}>Events</Link>
+                <Link href="/#awards-section" className="nav-link" onClick={closeMenu}>Awards</Link>
                 <Link href="/#skills-section" className="nav-link">Skills</Link>
                 <a href="https://forms.gle/mgff1SAhDBBkF4AG8" target="_blank" rel="noopener noreferrer" className="nav-link">Contact</a>
             </div>
