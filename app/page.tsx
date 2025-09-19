@@ -1,6 +1,93 @@
 import { awards } from "../data/awards";
+import { events, projects } from "../data/event";
 
 export default function Home() {
+  // 最新の活動を抽出・整理
+  const getRecentActivities = () => {
+    // イベントを日付でパース
+    const eventsWithDates = events.map(event => {
+      const dateMatch = event.date.split('~')[0].match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);
+      const date = dateMatch
+        ? new Date(parseInt(dateMatch[1]), parseInt(dateMatch[2]) - 1, parseInt(dateMatch[3]))
+        : new Date();
+      return { ...event, parsedDate: date, type: 'event' as const };
+    });
+
+    // プロジェクトを開始日でパース
+    const projectsWithDates = projects.map(project => {
+      const dateMatch = project.startDate.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);
+      const date = dateMatch
+        ? new Date(parseInt(dateMatch[1]), parseInt(dateMatch[2]) - 1, parseInt(dateMatch[3]))
+        : new Date();
+      return { ...project, parsedDate: date, type: 'project' as const };
+    });
+
+    // 全ての活動をマージして日付順にソート
+    const allActivities = [...eventsWithDates, ...projectsWithDates]
+      .sort((a, b) => b.parsedDate.getTime() - a.parsedDate.getTime())
+      .slice(0, 5); // 最新5件
+
+    return allActivities;
+  };
+
+  const recentActivities = getRecentActivities();
+
+  // 役割/ステータスの色を取得
+  const getRoleColor = (activity: any) => {
+    if (activity.type === 'event') {
+      switch (activity.role) {
+        case 'イベントオーナー': return '#f59e0b';
+        case 'スタッフ': return '#3b82f6';
+        case '参加者': return '#6b7280';
+        default: return '#6b7280';
+      }
+    } else {
+      switch (activity.status) {
+        case 'completed': return '#10b981';
+        case 'in-progress': return '#f59e0b';
+        case 'planned': return '#6b7280';
+        default: return '#6b7280';
+      }
+    }
+  };
+
+  // 役割/ステータスのテキストを取得
+  const getRoleText = (activity: any) => {
+    if (activity.type === 'event') {
+      return activity.role;
+    } else {
+      switch (activity.status) {
+        case 'completed': return '完了';
+        case 'in-progress': return '進行中';
+        case 'planned': return '予定';
+        default: return activity.status;
+      }
+    }
+  };
+
+  // 日付フォーマット
+  const formatDate = (activity: any) => {
+    if (activity.type === 'event') {
+      const date = activity.parsedDate;
+      return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}`;
+    } else {
+      const startDate = activity.parsedDate;
+      const startFormatted = `${startDate.getFullYear()}.${String(startDate.getMonth() + 1).padStart(2, '0')}`;
+
+      if (activity.endDate === '進行中' || activity.endDate === '') {
+        return `${startFormatted}-`;
+      }
+
+      const endMatch = activity.endDate.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);
+      if (endMatch) {
+        const endDate = new Date(parseInt(endMatch[1]), parseInt(endMatch[2]) - 1, parseInt(endMatch[3]));
+        const endFormatted = `${endDate.getFullYear()}.${String(endDate.getMonth() + 1).padStart(2, '0')}`;
+        return `${startFormatted}-${endFormatted}`;
+      }
+      return startFormatted;
+    }
+  };
+
   return (
     <>
 
@@ -13,7 +100,15 @@ export default function Home() {
         {/* Aboutセクション */}
         <section className="section">
           <h2 className="section-title">About</h2>
-          <p className="section-desc"><a href="/about" className="link">もっと見る</a></p>
+          <div className="section-desc">
+            <p style={{ marginBottom: '1.5rem' }}>
+              フルスタック(を目指している)エンジニアです。<br />
+              近畿大学情報学部実世界コンピューティングコースに在学中。<br />
+              プログラミングは大学入学と同時に始めました。<br />
+              Webアプリケーション開発を中心にハードウェアやサーバーなど、幅広く学んでいます。
+            </p>
+            <p><a href="/about" className="link">もっと見る</a></p>
+          </div>
         </section>
         {/* Awardsセクション */}
         <section className="section" id="awards-section">
@@ -29,14 +124,116 @@ export default function Home() {
         {/* Worksセクション */}
         <section className="section">
           <h2 className="section-title">Works</h2>
-          <p className="section-desc"><a href="/works" className="link">もっと見る</a></p>
+          <div className="section-desc">
+            <div style={{ marginBottom: '1.5rem' }}>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {projects
+                  .filter(project => project.status === 'completed' || project.github)
+                  .slice(0, 3)
+                  .map((project, index, array) => (
+                    <li
+                      key={project.title}
+                      style={{
+                        marginBottom: index === array.length - 1 ? 0 : '1rem',
+                        paddingBottom: index === array.length - 1 ? 0 : '1rem',
+                        borderBottom: index === array.length - 1 ? 'none' : '1px solid #f0f0f0'
+                      }}
+                    >
+                      <div style={{ marginBottom: '0.5rem' }}>
+                        <strong style={{ fontSize: '1.1rem' }}>{project.title}</strong>
+                        <span style={{
+                          marginLeft: '0.5rem',
+                          fontSize: '0.8rem',
+                          color: project.status === 'completed' ? '#10b981' : '#f59e0b',
+                          fontWeight: '600'
+                        }}>
+                          {project.status === 'completed' ? '完了' : '進行中'}
+                        </span>
+                      </div>
+                      <p style={{
+                        margin: '0 0 0.5rem 0',
+                        color: '#6b7280',
+                        fontSize: '0.9rem',
+                        lineHeight: '1.5'
+                      }}>
+                        {project.desc.length > 100 ? project.desc.substring(0, 100) + '...' : project.desc}
+                      </p>
+                      {project.technologies && (
+                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.3rem', marginBottom: '0.5rem' }}>
+                          {project.technologies.slice(0, 4).map(tech => (
+                            <span
+                              key={tech}
+                              style={{
+                                fontSize: '0.75rem',
+                                padding: '0.2rem 0.5rem',
+                                background: '#f3f4f6',
+                                color: '#6b7280',
+                                borderRadius: '8px',
+                                fontWeight: '500'
+                              }}
+                            >
+                              {tech}
+                            </span>
+                          ))}
+                          {project.technologies.length > 4 && (
+                            <span style={{
+                              fontSize: '0.75rem',
+                              padding: '0.2rem 0.5rem',
+                              background: '#e5e7eb',
+                              color: '#6b7280',
+                              borderRadius: '8px',
+                              fontWeight: '500'
+                            }}>
+                              +{project.technologies.length - 4}
+                            </span>
+                          )}
+                        </div>
+                      )}
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+            <p><a href="/works" className="link">すべての作品を見る</a></p>
+          </div>
         </section>
         {/* Eventsセクション */}
         <section className="section">
-          <h2 className="section-title">Events</h2>
-          <p className="section-desc">
-            <a href="/events" className="link">イベント参加履歴を見る</a>
-          </p>
+          <h2 className="section-title">Recent Activities</h2>
+          <div className="section-desc">
+            <div style={{ marginBottom: '1.5rem' }}>
+              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
+                {recentActivities.map((activity, index) => (
+                  <li
+                    key={`${activity.title}-${index}`}
+                    style={{
+                      marginBottom: index === recentActivities.length - 1 ? 0 : '0.8rem',
+                      paddingBottom: index === recentActivities.length - 1 ? 0 : '0.8rem',
+                      borderBottom: index === recentActivities.length - 1 ? 'none' : '1px solid #f0f0f0'
+                    }}
+                  >
+                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap' }}>
+                      <div>
+                        <strong>{activity.title}</strong>
+                        <span style={{
+                          marginLeft: '0.5rem',
+                          fontSize: '0.85rem',
+                          color: getRoleColor(activity),
+                          fontWeight: '600'
+                        }}>
+                          {getRoleText(activity)}
+                        </span>
+                      </div>
+                      <span style={{ fontSize: '0.85rem', color: '#6b7280' }}>
+                        {formatDate(activity)}
+                      </span>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <p><a href="/events" className="link">イベント・プロジェクト履歴をすべて見る</a></p>
+          </div>
         </section>
         {/* Skillsセクション */}
         <section className="section" id="skills-section">
