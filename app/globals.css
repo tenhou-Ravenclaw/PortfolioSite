@@ -51,11 +51,6 @@
   letter-spacing: 0.01em;
 }
 
-.event-label {
-  color: var(--color-primary-hover);
-  font-weight: bold;
-  margin-right: 0.2em;
-}
 
 html,
 body {
