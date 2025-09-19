@@ -18,7 +18,7 @@ export default function Home() {
         {/* Awardsセクション */}
         <section className="section" id="awards-section">
           <h2 className="section-title">Awards</h2>
-          <ul style={{ margin: '0.5em 0 0 1.2em', padding: 0, color: '#555', fontSize: '1.05rem' }}>
+          <ul className="awards-list">
             {awards.map((award, idx) => (
               <li key={`${award.year}-${award.title}`}>
                 <strong>{award.year} {award.title}</strong> {award.prize}
