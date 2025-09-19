@@ -11,12 +11,12 @@ export default function Home() {
           <h1 className="hero-title">Tenhou’s Portfolio Site</h1>
         </section>
         {/* Aboutセクション */}
-        <section className="section" id="awards-section">
+        <section className="section">
           <h2 className="section-title">About</h2>
           <p className="section-desc"><a href="/about" className="link">もっと見る</a></p>
         </section>
         {/* Awardsセクション */}
-        <section className="section">
+        <section className="section" id="awards-section">
           <h2 className="section-title">Awards</h2>
           <ul style={{ margin: '0.5em 0 0 1.2em', padding: 0, color: '#555', fontSize: '1.05rem' }}>
             {awards.map((award, idx) => (
