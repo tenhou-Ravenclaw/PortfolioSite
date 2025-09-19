@@ -1,6 +1,4 @@
-
 import { events } from "../../data/event";
-import React from "react";
 
 export default function Events() {
   return (
