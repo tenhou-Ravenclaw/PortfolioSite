@@ -10,9 +10,4 @@ export const awards: Award[] = [
         year: "2024年",
         prize: "ゼミ内優秀賞、学部長表彰",
     },
-    {
-        title: "Webデザインアワード",
-        year: "2023年",
-        prize: "優秀賞",
-    },
 ];
