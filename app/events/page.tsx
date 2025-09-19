@@ -82,17 +82,17 @@ const createTimelineItems = (): TimelineItem[] => {
 
 
 
-// プロジェクトの開始月～終了月の年月リストを生成
-function getYearMonthRange(start: Date, end: Date) {
-  const result: string[] = [];
-  let d = new Date(start.getFullYear(), start.getMonth(), 1);
-  const last = new Date(end.getFullYear(), end.getMonth(), 1);
-  while (d <= last) {
-    result.push(`${d.getFullYear()}年${String(d.getMonth() + 1).padStart(2, '0')}月`);
-    d.setMonth(d.getMonth() + 1);
-  }
-  return result;
-}
+// プロジェクトの開始月～終了月の年月リストを生成（未使用だが将来用のため保持）
+// function getYearMonthRange(start: Date, end: Date) {
+//   const result: string[] = [];
+//   let d = new Date(start.getFullYear(), start.getMonth(), 1);
+//   const last = new Date(end.getFullYear(), end.getMonth(), 1);
+//   while (d <= last) {
+//     result.push(`${d.getFullYear()}年${String(d.getMonth() + 1).padStart(2, '0')}月`);
+//     d.setMonth(d.getMonth() + 1);
+//   }
+//   return result;
+// }
 
 
 // 年月ごとにグループ化（イベントが存在する月、またはプロジェクトの開始月・終了月のみ）
@@ -142,7 +142,7 @@ function groupByYearMonthWithProjectEdge(items: TimelineItem[]) {
   return groups;
 }
 
-const timelineGroups = groupByYearMonthWithProjectEdge(createTimelineItems());
+// const timelineGroups = groupByYearMonthWithProjectEdge(createTimelineItems()); // 現在未使用
 
 export default function Events() {
   const [selectedItem, setSelectedItem] = useState<TimelineItem | null>(null);
