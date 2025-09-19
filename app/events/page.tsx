@@ -62,25 +62,6 @@ function assignProjectColumns(projects: Project[]) {
   return result;
 }
 
-// イベントとプロジェクトを統合してソート
-const createTimelineItems = (): TimelineItem[] => {
-  const eventItems: TimelineItem[] = events.map(event => ({
-    type: 'event' as const,
-    data: event,
-    sortDate: parseEventDate(event.date)
-  }));
-
-  const projectItems: TimelineItem[] = projects.map(project => ({
-    type: 'project' as const,
-    data: project,
-    sortDate: parseProjectDate(project.startDate)
-  }));
-
-  return [...eventItems, ...projectItems].sort((a, b) =>
-    b.sortDate.getTime() - a.sortDate.getTime()
-  );
-};
-
 
 
 // プロジェクトの開始月～終了月の年月リストを生成（未使用だが将来用のため保持）
@@ -95,55 +76,6 @@ const createTimelineItems = (): TimelineItem[] => {
 //   return result;
 // }
 
-
-// 年月ごとにグループ化（イベントが存在する月、またはプロジェクトの開始月・終了月のみ）
-function groupByYearMonthWithProjectEdge(items: TimelineItem[]) {
-  const eventMonths = new Set<string>();
-  const projectEdgeMonths = new Set<string>();
-  const projectEdgeMap: { [ym: string]: TimelineItem[] } = {};
-  const eventMap: { [ym: string]: TimelineItem[] } = {};
-
-  items.forEach(item => {
-    if (item.type === 'event') {
-      const date = parseEventDate((item.data as Event).date);
-      const ym = `${date.getFullYear()}/${String(date.getMonth() + 1).padStart(2, '0')}`;
-      eventMonths.add(ym);
-      if (!eventMap[ym]) eventMap[ym] = [];
-      eventMap[ym].push(item);
-    } else {
-      const project = item.data as Project;
-      const start = parseProjectDate(project.startDate);
-      const end = (project.endDate === '進行中' || !project.endDate)
-        ? new Date() : parseProjectDate(project.endDate);
-      const startYm = `${start.getFullYear()}/${String(start.getMonth() + 1).padStart(2, '0')}`;
-      const endYm = `${end.getFullYear()}/${String(end.getMonth() + 1).padStart(2, '0')}`;
-      projectEdgeMonths.add(startYm);
-      projectEdgeMonths.add(endYm);
-      if (!projectEdgeMap[startYm]) projectEdgeMap[startYm] = [];
-      if (!projectEdgeMap[endYm]) projectEdgeMap[endYm] = [];
-      projectEdgeMap[startYm].push({ ...item, _projectEdge: 'start' });
-      if (endYm !== startYm) {
-        projectEdgeMap[endYm].push({ ...item, _projectEdge: 'end' });
-      }
-    }
-  });
-
-  // 表示する年月 = イベントが存在する月 + プロジェクトの開始/終了月
-  const allMonths = Array.from(new Set([...eventMonths, ...projectEdgeMonths]));
-  // 新しい順
-  allMonths.sort((a, b) => b.localeCompare(a));
-
-  // 各月ごとにイベント・プロジェクトを分けて格納
-  const groups: [string, TimelineItem[]][] = allMonths.map(ym => {
-    const items: TimelineItem[] = [];
-    if (eventMap[ym]) items.push(...eventMap[ym]);
-    if (projectEdgeMap[ym]) items.push(...projectEdgeMap[ym]);
-    return [ym, items];
-  });
-  return groups;
-}
-
-// const timelineGroups = groupByYearMonthWithProjectEdge(createTimelineItems()); // 現在未使用
 
 export default function Events() {
   const [selectedItem, setSelectedItem] = useState<TimelineItem | null>(null);

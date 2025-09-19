@@ -61,7 +61,7 @@ export default function WorksPage() {
             <section className="section">
                 <h2 className="section-title">プロジェクト一覧</h2>
                 <div style={{ display: 'grid', gap: '2rem', maxWidth: '1000px', margin: '0 auto' }}>
-                    {projects.map((project, index) => (
+                    {projects.map((project) => (
                         <div
                             key={project.title}
                             style={{

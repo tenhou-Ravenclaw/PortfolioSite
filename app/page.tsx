@@ -1,5 +1,18 @@
 import { awards } from "../data/awards";
-import { events, projects } from "../data/event";
+import { events, projects, Event, Project } from "../data/event";
+
+// Activity型定義
+type EventActivity = Event & {
+  parsedDate: Date;
+  type: 'event';
+};
+
+type ProjectActivity = Project & {
+  parsedDate: Date;
+  type: 'project';
+};
+
+type Activity = EventActivity | ProjectActivity;
 
 export default function Home() {
   // 最新の活動を抽出・整理
@@ -33,7 +46,7 @@ export default function Home() {
   const recentActivities = getRecentActivities();
 
   // 役割/ステータスの色を取得
-  const getRoleColor = (activity: any) => {
+  const getRoleColor = (activity: Activity) => {
     if (activity.type === 'event') {
       switch (activity.role) {
         case 'イベントオーナー': return '#f59e0b';
@@ -52,7 +65,7 @@ export default function Home() {
   };
 
   // 役割/ステータスのテキストを取得
-  const getRoleText = (activity: any) => {
+  const getRoleText = (activity: Activity) => {
     if (activity.type === 'event') {
       return activity.role;
     } else {
@@ -66,7 +79,7 @@ export default function Home() {
   };
 
   // 日付フォーマット
-  const formatDate = (activity: any) => {
+  const formatDate = (activity: Activity) => {
     if (activity.type === 'event') {
       const date = activity.parsedDate;
       return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}`;
