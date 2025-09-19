@@ -1,4 +1,4 @@
-import { events } from "../../data/apps";
+import { events } from "../../data/event";
 
 export default function Events() {
   return (
