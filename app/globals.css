@@ -1,3 +1,62 @@
+.event-divider {
+  border: none;
+  border-top: 1px dashed #bbaaff;
+  margin: 1.1em 0 0.7em 0;
+  opacity: 0.6;
+}
+
+.event-meta {
+  margin-top: 0.2em;
+  padding-left: 0.1em;
+}
+
+
+
+.event-label {
+  color: var(--color-primary-hover);
+  font-weight: bold;
+  margin-right: 0.3em;
+  font-size: 1.08em;
+}
+
+.event-title {
+  font-size: 1.22rem;
+  font-weight: bold;
+  color: var(--color-primary-hover);
+  margin-bottom: 0.2em;
+}
+
+.event-date {
+  font-size: 0.99rem;
+  color: #888;
+  margin-bottom: 0.7em;
+}
+
+.event-desc {
+  font-size: 1.01rem;
+  color: #aaa;
+  font-weight: 400;
+  margin-bottom: 0.5em;
+}
+
+/* --- イベントカード追加情報 --- */
+.event-role,
+.event-learned {
+  font-size: 1.15rem;
+  color: #222;
+  font-weight: normal;
+  margin-top: 0.3em;
+  margin-bottom: 0.1em;
+  line-height: 1.7;
+  letter-spacing: 0.01em;
+}
+
+.event-label {
+  color: var(--color-primary-hover);
+  font-weight: bold;
+  margin-right: 0.2em;
+}
+
 html,
 body {
   scroll-behavior: smooth;
