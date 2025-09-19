@@ -1,3 +1,5 @@
+import { awards } from "../data/awards";
+
 export default function Home() {
   return (
     <>
@@ -12,6 +14,17 @@ export default function Home() {
         <section className="section">
           <h2 className="section-title">About</h2>
           <p className="section-desc"><a href="/about" className="link">もっと見る</a></p>
+        </section>
+        {/* Awardsセクション */}
+        <section className="section">
+          <h2 className="section-title">Awards</h2>
+          <ul style={{ margin: '0.5em 0 0 1.2em', padding: 0, color: '#555', fontSize: '1.05rem' }}>
+            {awards.map((award, idx) => (
+              <li key={idx}>
+                <strong>{award.year} {award.title}</strong> {award.prize}
+              </li>
+            ))}
+          </ul>
         </section>
         {/* Worksセクション */}
         <section className="section">
