@@ -11,7 +11,7 @@ export default function Home() {
           <h1 className="hero-title">Tenhou’s Portfolio Site</h1>
         </section>
         {/* Aboutセクション */}
-        <section className="section">
+        <section className="section" id="awards-section">
           <h2 className="section-title">About</h2>
           <p className="section-desc"><a href="/about" className="link">もっと見る</a></p>
         </section>
