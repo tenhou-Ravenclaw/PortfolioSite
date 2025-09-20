@@ -7,6 +7,28 @@ export type Event = {
     url?: string; // イベントページ等のURL（任意）
 };
 
+export type Project = {
+    title: string;
+    startDate: string; // 開始日
+    endDate: string; // 終了日（進行中の場合は空文字または'進行中'）
+    status: 'completed' | 'in-progress' | 'planned'; // プロジェクト状態
+    desc: string;
+    role: string;
+    technologies?: string[]; // 使用技術
+    achievements?: string[]; // 達成したこと
+    learned: string;
+    url?: string; // プロジェクトURL
+    github?: string; // GitHubリポジトリ
+};
+
+// タイムラインアイテムの統合型
+export type TimelineItem = {
+    type: 'event' | 'project';
+    data: Event | Project;
+    sortDate: Date; // ソート用日付
+    _projectEdge?: 'start' | 'end'; // プロジェクトの開始・終了月区別用（UI用）
+};
+
 export const events: Event[] = [
     {
         title: "プログラミングブートキャンプ",
@@ -128,4 +150,55 @@ export const events: Event[] = [
         role: "参加者",
         learned: ""
     },
+];
+
+// 長期プロジェクトのサンプルデータ
+export const projects: Project[] = [
+    {
+        title: "ポートフォリオサイト開発",
+        startDate: "2024年3月1日",
+        endDate: "2026年12月31日",
+        status: "in-progress",
+        desc: "Next.js と TypeScript を使用した個人ポートフォリオサイトの開発。レスポンシブデザインと SEO 対策を重視した設計。",
+        role: "フルスタック開発者",
+        technologies: ["Next.js", "TypeScript", "CSS", "Vercel"],
+        achievements: [
+            "レスポンシブデザインの実装",
+            "SEO最適化",
+            "継続的な機能追加とデザイン改善"
+        ],
+        learned: "React/Next.jsの深い理解、フロントエンド設計、継続的な開発プロセス",
+        github: "https://github.com/tenhou-Ravenclaw/PortfolioSite"
+    },
+    {
+        title: "AI学習支援システム",
+        startDate: "2025年5月14日",
+        endDate: "2025年10月5日",
+        status: "completed",
+        desc: "TechTrainのVibe Learningプロジェクトで開発したAI学習支援ツール。自然言語処理を活用した学習内容の分析と最適化。",
+        role: "AIエンジニア",
+        technologies: ["Python", "OpenAI API", "FastAPI", "React"],
+        achievements: [
+            "AIを活用した学習分析機能",
+            "ユーザーフレンドリーなUI設計",
+            "チーム開発での協調作業"
+        ],
+        learned: "AI API の活用、バックエンド開発、チームでのアジャイル開発",
+        url: "https://prtimes.jp/main/html/rd/p/000000110.000040741.html"
+    },
+    {
+        title: "IoTデバイス管理システム",
+        startDate: "2024年4月2日",
+        endDate: "2024年4月5日",
+        status: "completed",
+        desc: "M5Stackを使用したIoTアプリケーション。センサーデータの収集、可視化、リモート制御機能を実装。",
+        role: "IoTエンジニア",
+        technologies: ["M5Stack", "Arduino IDE", "WiFi", "センサー"],
+        achievements: [
+            "リアルタイムデータ収集",
+            "Webベースの制御インターフェース",
+            "短期間でのプロトタイプ完成"
+        ],
+        learned: "IoT開発の基礎、ハードウェアとソフトウェアの統合、迅速なプロトタイピング"
+    }
 ];

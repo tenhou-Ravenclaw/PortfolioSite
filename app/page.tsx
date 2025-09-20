@@ -19,7 +19,7 @@ export default function Home() {
         <section className="section" id="awards-section">
           <h2 className="section-title">Awards</h2>
           <ul className="awards-list">
-            {awards.map((award, idx) => (
+            {awards.map((award) => (
               <li key={`${award.year}-${award.title}`}>
                 <strong>{award.year} {award.title}</strong> {award.prize}
               </li>
