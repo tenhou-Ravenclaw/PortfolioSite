@@ -115,7 +115,9 @@ export default function Home() {
           <h2 className="section-title">About</h2>
           <div className="section-desc">
             <p style={{ marginBottom: '1.5rem' }}>
+              <strong>自己紹介</strong><br />
               フルスタック(を目指している)エンジニアです。<br />
+              フクロウが好きです。猛勤類です。<br />
               近畿大学情報学部実世界コンピューティングコースに在学中。<br />
               プログラミングは大学入学と同時に始めました。<br />
               Webアプリケーション開発を中心にハードウェアやサーバーなど、幅広く学んでいます。
