@@ -4,21 +4,26 @@
 import { useState } from "react";
 import { events, projects, Event, Project, TimelineItem } from "../../data/event";
 
-// 日付文字列から Date オブジェクトを作成するヘルパー関数
-function parseEventDate(dateString: string): Date {
-  const startDate = dateString.split('~')[0];
-  const match = startDate.match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
+// 共通の日付文字列パース関数
+function parseDateString(dateString: string): Date {
+  const match = dateString.match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
   if (match) {
     return new Date(parseInt(match[1]), parseInt(match[2]) - 1, parseInt(match[3]));
   }
   return new Date();
 }
 
+// 日付文字列から Date オブジェクトを作成するヘルパー関数
+function parseEventDate(dateString: string): Date {
+  const startDate = dateString.split('~')[0];
+  return parseDateString(startDate);
+}
+
 function parseProjectDate(dateString: string): Date {
   if (dateString === "進行中" || dateString === "") {
     return new Date();
   }
-  return parseEventDate(dateString);
+  return parseDateString(dateString);
 }
 
 // 年月リストを新しい順で生成（イベントまたはプロジェクトの開始/終了月がある月のみ）
