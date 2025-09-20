@@ -2,18 +2,19 @@
 
 import { projects } from "../../data/event";
 
+// Shared date parsing utility
+function parseDate(dateString: string): Date | null {
+    if (dateString === "進行中" || dateString === "") return null;
+    const match = dateString.match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
+    if (match) {
+        return new Date(parseInt(match[1]), parseInt(match[2]) - 1, parseInt(match[3]));
+    }
+    return null;
+}
+
 export default function WorksPage() {
     // プロジェクトの期間フォーマット
     const formatProjectPeriod = (startDate: string, endDate: string) => {
-        const parseDate = (dateString: string) => {
-            if (dateString === "進行中" || dateString === "") return null;
-            const match = dateString.match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
-            if (match) {
-                return new Date(parseInt(match[1]), parseInt(match[2]) - 1, parseInt(match[3]));
-            }
-            return null;
-        };
-
         const start = parseDate(startDate);
         const end = parseDate(endDate);
 
