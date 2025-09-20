@@ -157,6 +157,7 @@ export const projects: Project[] = [
     {
         title: "ポートフォリオサイト開発",
         startDate: "2024/03/01",
+        endDate: "2025/09/30",
         status: "in-progress",
         desc: "Next.js と TypeScript を使用した個人ポートフォリオサイトの開発。レスポンシブデザインと SEO 対策を重視した設計。",
         role: "フルスタック開発者",
@@ -201,3 +202,4 @@ export const projects: Project[] = [
         learned: "IoT開発の基礎、ハードウェアとソフトウェアの統合、迅速なプロトタイピング"
     }
 ];
+
