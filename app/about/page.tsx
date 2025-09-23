@@ -17,6 +17,16 @@ export default function AboutPage() {
             <section className="section">
                 <h2 className="section-title">略歴</h2>
                 <p className="section-desc">
+                    近畿大学 情報学部 実世界コンピューティングコース 2年。<br/>
+                    入学直後より医学部、文芸学部、経営学部と連携し小児向けアプリ開発を行う「KDIX.Connect」を立ち上げ、プロダクトマネージャーとして活動。<br />
+                    2024年11月には近畿大学情報学部内で学生団体「HackSphere」を立ち上げ、代表を務める。<br/>
+                    2025年3月よりWebエンジニアとして長期インターンに従事。,<br />
+                    現在イベント運営やプロダクト管理の傍ら「すべての技術に精通するプログラムマネージャー」を目指し、日々学習を進めている。
+                </p>
+            </section>
+            <section className="section">
+                <h2 className="section-title">経歴</h2>
+                <p className="section-desc">
                     岐阜県出身。2006年生まれ。<br />
                     2024年3月に鶯谷高等学校を卒業。<br />
                     2024年4月に近畿大学情報学部情報に入学。同時にKDIX.Connectを設立し、代表を務める。<br />
