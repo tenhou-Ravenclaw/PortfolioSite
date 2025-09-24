@@ -171,35 +171,33 @@ export const projects: Project[] = [
         github: "https://github.com/tenhou-Ravenclaw/PortfolioSite"
     },
     {
-        title: "AI学習支援システム",
-        startDate: "2025/05/14",
-        endDate: "2025/09/05",
-        status: "completed",
-        desc: "TechTrainのVibe Learningプロジェクトで開発したAI学習支援ツール。自然言語処理を活用した学習内容の分析と最適化。",
-        role: "AIエンジニア",
-        technologies: ["Python", "OpenAI API", "FastAPI", "React"],
+        title: "小児科用アプリ開発",
+        startDate: "2024/04/01",
+        endDate: "2025/09/30",
+        status: "in-progress",
+        desc: "JavaScript と Swift を使用した小児科向けアプリの開発。ユーザー体験とアクセシビリティを重視した設計。",
+        role: "プロダクトマネージャー",
+        technologies: ["JavaScript", "Swift", "Xcode"],
         achievements: [
-            "AIを活用した学習分析機能",
-            "ユーザーフレンドリーなUI設計",
-            "チーム開発での協調作業"
+            "実際の医療現場での導入",
+            "ユーザーフィードバックを基にした改善",
+            "チームでのアジャイル開発"
         ],
-        learned: "AI API の活用、バックエンド開発、チームでのアジャイル開発",
-        url: "https://prtimes.jp/main/html/rd/p/000000110.000040741.html"
+        learned: "React/Next.jsの深い理解、フロントエンド設計、継続的な開発プロセス",
     },
     {
-        title: "IoTデバイス管理システム",
-        startDate: "2024/04/02",
-        endDate: "2024/04/05",
-        status: "completed",
-        desc: "M5Stackを使用したIoTアプリケーション。センサーデータの収集、可視化、リモート制御機能を実装。",
-        role: "IoTエンジニア",
-        technologies: ["M5Stack", "Arduino IDE", "WiFi", "センサー"],
+        title: "HackSphere 運営",
+        startDate: "2024/11/01",
+        endDate: "2025/09/30",
+        status: "in-progress",
+        desc: "学生団体 HackSphere の設立と運営。イベント企画、メンバー管理、コミュニティ形成を担当。",
+        role: "代表",
         achievements: [
-            "リアルタイムデータ収集",
-            "Webベースの制御インターフェース",
-            "短期間でのプロトタイプ完成"
+            "団体設立とメンバー募集",
+            "複数の技術イベントの開催",
+            "地域コミュニティとの連携"
         ],
-        learned: "IoT開発の基礎、ハードウェアとソフトウェアの統合、迅速なプロトタイピング"
-    }
+        learned: "リーダーシップ、コミュニティ形成",
+    },
 ];
 
