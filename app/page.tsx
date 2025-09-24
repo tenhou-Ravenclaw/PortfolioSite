@@ -1,5 +1,8 @@
+"use client";
 import { awards } from "../data/awards";
 import { events, projects, Event, Project } from "../data/event";
+import { skills } from "../data/skills";
+import { useState } from "react";
 
 // Activity型定義
 type EventActivity = Event & {
@@ -15,6 +18,7 @@ type ProjectActivity = Project & {
 type Activity = EventActivity | ProjectActivity;
 
 export default function Home() {
+  const [modalSkill, setModalSkill] = useState<null | typeof skills[0]>(null);
   // 最新の活動を抽出・整理
   const getRecentActivities = () => {
     // イベントを日付でパース
@@ -251,7 +255,138 @@ export default function Home() {
         {/* Skillsセクション */}
         <section className="section" id="skills-section">
           <h2 className="section-title">Skills</h2>
-          <p className="section-desc"></p>
+          <h3 style={{ marginTop: '1.5rem', marginBottom: '0.5rem', fontSize: '1.1rem', color: '#7c3aed' }}>言語</h3>
+          <div className="skills-grid" style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '1.2rem',
+            marginBottom: '2.2rem',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+          }}>
+            {[...skills].filter(s => s.category === 'language').sort((a, b) => (b.level ?? 0) - (a.level ?? 0)).map(skill => (
+              <div
+                key={skill.name}
+                className="skill-badge"
+                style={{
+                  background: '#f8f6ff',
+                  borderRadius: '1.2rem',
+                  boxShadow: '0 2px 8px rgba(180,160,255,0.07)',
+                  padding: '1.1rem 0.5rem 0.7rem 0.5rem',
+                  textAlign: 'center',
+                  transition: 'transform 0.15s',
+                  cursor: skill.description ? 'pointer' : 'default',
+                  position: 'relative',
+                  flex: '1 1 calc((100% - 3.6rem) / 4)',
+                  maxWidth: 'calc((100% - 3.6rem) / 4)',
+                  minWidth: 0,
+                }}
+                onClick={() => skill.description && setModalSkill(skill)}
+                title={skill.description || ''}
+              >
+                <img src={skill.icon} alt={skill.name} style={{ width: 40, height: 40, marginBottom: 8 }} />
+                <div style={{ fontWeight: 600, fontSize: '1.05rem', marginBottom: 2 }}>{skill.name}</div>
+                {skill.level && (
+                  <div style={{ fontSize: '0.9rem', color: '#a78bfa', marginBottom: 2 }}>
+                    {'★'.repeat(skill.level)}{'☆'.repeat(5 - skill.level)}
+                  </div>
+                )}
+                {skill.years && (
+                  <div style={{ fontSize: '0.85rem', color: '#888' }}>{skill.years}</div>
+                )}
+              </div>
+            ))}
+          </div>
+          <h3 style={{ marginTop: '0.5rem', marginBottom: '0.5rem', fontSize: '1.1rem', color: '#7c3aed' }}>ツール</h3>
+          <div className="skills-grid" style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '1.2rem',
+            marginBottom: '1.2rem',
+            alignItems: 'center',
+            justifyContent: 'flex-start',
+          }}>
+            {[...skills].filter(s => s.category === 'tool').sort((a, b) => (b.level ?? 0) - (a.level ?? 0)).map(skill => (
+              <div
+                key={skill.name}
+                className="skill-badge"
+                style={{
+                  background: '#f8f6ff',
+                  borderRadius: '1.2rem',
+                  boxShadow: '0 2px 8px rgba(180,160,255,0.07)',
+                  padding: '1.1rem 0.5rem 0.7rem 0.5rem',
+                  textAlign: 'center',
+                  transition: 'transform 0.15s',
+                  cursor: skill.description ? 'pointer' : 'default',
+                  position: 'relative',
+                  flex: '1 1 calc((100% - 3.6rem) / 4)',
+                  maxWidth: 'calc((100% - 3.6rem) / 4)',
+                  minWidth: 0,
+                }}
+                onClick={() => skill.description && setModalSkill(skill)}
+                title={skill.description || ''}
+              >
+                <img src={skill.icon} alt={skill.name} style={{ width: 40, height: 40, marginBottom: 8 }} />
+                <div style={{ fontWeight: 600, fontSize: '1.05rem', marginBottom: 2 }}>{skill.name}</div>
+                {skill.level && (
+                  <div style={{ fontSize: '0.9rem', color: '#a78bfa', marginBottom: 2 }}>
+                    {'★'.repeat(skill.level)}{'☆'.repeat(5 - skill.level)}
+                  </div>
+                )}
+                {skill.years && (
+                  <div style={{ fontSize: '0.85rem', color: '#888' }}>{skill.years}</div>
+                )}
+              </div>
+            ))}
+            {/* スキル詳細モーダル */}
+            {modalSkill && (
+              <div style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                width: '100vw',
+                height: '100vh',
+                background: 'rgba(0,0,0,0.25)',
+                zIndex: 1000,
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+              }} onClick={() => setModalSkill(null)}>
+                <div style={{
+                  background: '#fff',
+                  borderRadius: '1.2rem',
+                  boxShadow: '0 4px 24px rgba(80,60,120,0.18)',
+                  padding: '2.2rem 2.2rem 1.5rem 2.2rem',
+                  minWidth: 280,
+                  maxWidth: '90vw',
+                  textAlign: 'center',
+                  position: 'relative',
+                }} onClick={e => e.stopPropagation()}>
+                  <img src={modalSkill.icon} alt={modalSkill.name} style={{ width: 56, height: 56, marginBottom: 12 }} />
+                  <div style={{ fontWeight: 700, fontSize: '1.2rem', marginBottom: 8 }}>{modalSkill.name}</div>
+                  {modalSkill.level && (
+                    <div style={{ fontSize: '1.05rem', color: '#a78bfa', marginBottom: 6 }}>
+                      {'★'.repeat(modalSkill.level)}{'☆'.repeat(5 - modalSkill.level)}
+                    </div>
+                  )}
+                  {modalSkill.years && (
+                    <div style={{ fontSize: '0.95rem', color: '#888', marginBottom: 8 }}>{modalSkill.years}</div>
+                  )}
+                  <div style={{ fontSize: '1rem', color: '#444', marginBottom: 10 }}>{modalSkill.description}</div>
+                  <button onClick={() => setModalSkill(null)} style={{
+                    position: 'absolute',
+                    top: 10,
+                    right: 18,
+                    background: 'none',
+                    border: 'none',
+                    fontSize: 22,
+                    color: '#aaa',
+                    cursor: 'pointer',
+                  }} aria-label="閉じる">×</button>
+                </div>
+              </div>
+            )}
+          </div>
         </section>
         {/* Contactセクション */}
         <section className="hero">
