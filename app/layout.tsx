@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Tenhou's Portfolio",
-  description: "",
+  description: "ぜひご覧ください！",
   icons: {
     icon: "/tenhouPortfolioIcon.png", // public配下のwebアイコンを指定
   },
@@ -23,12 +23,15 @@ export const metadata: Metadata = {
     title: "Tenhou's Portfolio",
     description: "ぜひご覧ください！",
     type: "website",
+    url: process.env.NODE_ENV === 'production' ? 'https://your-domain.com' : 'http://localhost:3000',
+    siteName: "Tenhou's Portfolio",
     images: [
       {
-        url: "/tenhouPortfolioIcon.png",
+        url: process.env.NODE_ENV === 'production' ? 'https://your-domain.com/tenhouPortfolioIcon.png' : 'http://localhost:3000/tenhouPortfolioIcon.png',
         width: 1024,
         height: 1024,
         alt: "Tenhou's Portfolio",
+        type: "image/png",
       },
     ],
   },
@@ -36,7 +39,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Tenhou's Portfolio",
     description: "ぜひご覧ください！",
-    images: ["/tenhouPortfolioIcon.png"],
+    images: [process.env.NODE_ENV === 'production' ? 'https://your-domain.com/tenhouPortfolioIcon.png' : 'http://localhost:3000/tenhouPortfolioIcon.png'],
   },
 };
 
