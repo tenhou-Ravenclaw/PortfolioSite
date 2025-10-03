@@ -49,7 +49,25 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ja">
+      <head>
+        {/* LINE対応のための追加メタタグ */}
+        <meta property="og:title" content="Tenhou's Portfolio" />
+        <meta property="og:description" content="ぜひご覧ください！" />
+        <meta property="og:image" content={process.env.NODE_ENV === 'production' ? 'https://your-domain.com/tenhouPortfolioIcon.png' : 'http://localhost:3000/tenhouPortfolioIcon.png'} />
+        <meta property="og:url" content={process.env.NODE_ENV === 'production' ? 'https://your-domain.com' : 'http://localhost:3000'} />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="Tenhou's Portfolio" />
+        <meta property="og:image:width" content="1024" />
+        <meta property="og:image:height" content="1024" />
+        <meta property="og:image:type" content="image/png" />
+
+        {/* Twitter Card (念のため) */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Tenhou's Portfolio" />
+        <meta name="twitter:description" content="ぜひご覧ください！" />
+        <meta name="twitter:image" content={process.env.NODE_ENV === 'production' ? 'https://your-domain.com/tenhouPortfolioIcon.png' : 'http://localhost:3000/tenhouPortfolioIcon.png'} />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
