@@ -15,13 +15,13 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Tenhou's Portfolio",
-  description: "天鳳のポートフォリオサイト - Web開発、プログラミング作品を紹介",
+  description: "",
   icons: {
     icon: "/tenhouPortfolioIcon.png", // public配下のwebアイコンを指定
   },
   openGraph: {
     title: "Tenhou's Portfolio",
-    description: "天鳳のポートフォリオサイト - Web開発、プログラミング作品を紹介",
+    description: "ぜひご覧ください！",
     type: "website",
     images: [
       {
@@ -35,7 +35,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Tenhou's Portfolio",
-    description: "天鳳のポートフォリオサイト - Web開発、プログラミング作品を紹介",
+    description: "ぜひご覧ください！",
     images: ["/tenhouPortfolioIcon.png"],
   },
 };
