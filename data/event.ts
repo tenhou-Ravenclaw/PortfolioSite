@@ -159,7 +159,7 @@ export const events: Event[] = [
     },
     {
         title: "Google直伝！爆速アイデア創出術を1日で体験！ in 神戸電子",
-        date: "2025/9/21",
+        date: "2025/09/21",
         desc: "Google直伝のアイデア創出術を学ぶワークショップに参加した。",
         url: "https://gdgkwansai.connpass.com/event/364754/",
         role: "運営",
@@ -167,14 +167,14 @@ export const events: Event[] = [
     },
     {
         title: "Google Community Summit",
-        date: "2025/9/26",
+        date: "2025/09/26",
         desc: "Google Community Summitに参加し、日本各地のGoogleコミュニティと交流した。また、LT登壇した。",
         role: "参加者、登壇者",
         learned: ""
     },
     {
         title: "GDGs Innovative Crosstalk 2025 DevFest UTokyo",
-        date: "2025/9/27",
+        date: "2025/09/27",
         desc: "GDGs Innovative Crosstalk 2025 DevFest UTokyoに参加し、チームでのアプリケーション開発に取り組んだ。",
         url: "https://gdgkwansai.connpass.com/event/364586/",
         role: "参加者",

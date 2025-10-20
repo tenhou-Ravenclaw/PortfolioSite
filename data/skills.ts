@@ -176,4 +176,13 @@ export const skills: Skill[] = [
         description: "アイデア出しに使用。Miroを見ろ。",
         category: 'tool',
     },
+    {
+        name: "Google Cloud Platform",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg",
+        level: 2,
+        years: "2025",
+        description: "JPHacks2025で初めて使用。GUIを使ったせいで5時間かかった。",
+        category: 'tool',
+    },
+
 ];
