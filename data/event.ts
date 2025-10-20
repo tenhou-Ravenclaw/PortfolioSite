@@ -150,6 +150,68 @@ export const events: Event[] = [
         role: "参加者",
         learned: ""
     },
+    {
+        title: "SPAJAM 2025",
+        date: "2025/09/13~2025/09/14",
+        desc: "SPAJAM 2025に参加し、チームでのアプリケーション開発に取り組んだ。",
+        role: "参加者",
+        learned: ""
+    },
+    {
+        title: "Google直伝！爆速アイデア創出術を1日で体験！ in 神戸電子",
+        date: "2025/9/21",
+        desc: "Google直伝のアイデア創出術を学ぶワークショップに参加した。",
+        url: "https://gdgkwansai.connpass.com/event/364754/",
+        role: "運営",
+        learned: ""
+    },
+    {
+        title: "Google Community Summit",
+        date: "2025/9/26",
+        desc: "Google Community Summitに参加し、日本各地のGoogleコミュニティと交流した。また、LT登壇した。",
+        role: "参加者、登壇者",
+        learned: ""
+    },
+    {
+        title: "GDGs Innovative Crosstalk 2025 DevFest UTokyo",
+        date: "2025/9/27",
+        desc: "GDGs Innovative Crosstalk 2025 DevFest UTokyoに参加し、チームでのアプリケーション開発に取り組んだ。",
+        url: "https://gdgkwansai.connpass.com/event/364586/",
+        role: "参加者",
+        learned: ""
+    },
+    {
+        title: "第3回プロトタイプフェス",
+        date: "2025/10/10~2025/10/11",
+        desc: "近畿大学デザイン・クリエイティブセンター主催の第3回プロトタイプフェスに出展者として参加した。",
+        url: "https://www.kindai.ac.jp/rd/research-center/design-creative/news_protfes_03.html",
+        role: "出展者",
+        learned: ""
+    },
+    {
+        title: "Horizon 初心者講習会",
+        date: "2025/10/12",
+        desc: "龍谷大学の学生団体Horizonが主催する初心者講習会にてwebの講習を行なった。",
+        url: "https://docs.google.com/presentation/d/1qS1JJ3vlwVcOvhA-sbKIs8LVpnoezNvyKLLO7KI1-wQ/edit?usp=sharing",
+        role: "登壇者",
+        learned: ""
+    },
+    {
+        title: "DevFest 2025 in Kwansai",
+        date: "2025/10/18",
+        desc: "DevFest 2025 in Kwansaiにスタッフとして参加した。",
+        url: "https://gdgkwansai.connpass.com/event/366115/",
+        role: "スタッフ",
+        learned: ""
+    },
+    {
+        title: "JPHacks 2025",
+        date: "2025/10/18~2025/10/26",
+        desc: "日本最大級のハッカソンに再挑戦した。",
+        url: "https://jphacks.com/information/open-2025/",
+        role: "参加者",
+        learned: ""
+    }
 ];
 
 // 長期プロジェクトのサンプルデータ
