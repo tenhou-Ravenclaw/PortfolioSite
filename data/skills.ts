@@ -184,5 +184,4 @@ export const skills: Skill[] = [
         description: "JPHacks2025で初めて使用。GUIを使ったせいで5時間かかった。",
         category: 'tool',
     },
-
 ];
