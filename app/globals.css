@@ -240,39 +240,35 @@ body {
 
 /* --- カラーパレット・UI変数 --- */
 :root {
-  --color-bg: #fff;
-  /* メインは白 */
-  --color-fg: #232136;
-  --color-primary: #a78bfa;
-  /* 薄紫 */
-  --color-primary-hover: #7c3aed;
-  /* 濃い紫 */
-  --color-accent: #e0e7ff;
-  /* ごく薄い紫 */
-  --color-border: #e0e7ff;
-  --color-star: #ffe066;
-  --color-moon: #f4e7d4;
-  --radius: 16px;
-  --shadow: 0 4px 24px 0 rgba(167, 139, 250, 0.08);
+  --color-bg: #f3f9ff;
+  --color-fg: #163049;
+  --color-primary: #6fc4ff;
+  --color-primary-hover: #2474c9;
+  --color-accent: rgba(255, 255, 255, 0.85);
+  --color-border: rgba(93, 157, 229, 0.45);
+  --color-grid-line: rgba(111, 196, 255, 0.25);
+  --color-lime: #c4ff82;
+  --radius: 18px;
+  --shadow: 0 20px 55px rgba(25, 72, 126, 0.18);
   --font-sans: var(--font-geist-sans, 'Geist', 'Arial', sans-serif);
   --font-mono: var(--font-geist-mono, 'Geist Mono', 'monospace');
-  --owl-bg: #e9f6ff;
-  --owl-bg-deep: #0d1b3d;
+  --owl-bg: #dff2ff;
+  --owl-bg-deep: #041b33;
   --owl-line: #7dd2ff;
   --owl-accent: #b6ff6d;
   --owl-deep: #1780d6;
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --color-bg: #232136;
-      --color-fg: #f7f6fd;
-      --color-primary: #c4b5fd;
-      --color-primary-hover: #a78bfa;
-      --color-accent: #f9c7e2;
-      --color-border: #393552;
-      --color-star: #ffe066;
-      --color-moon: #f4e7d4;
-      --owl-bg: #071020;
+      --color-bg: #071426;
+      --color-fg: #e0f0ff;
+      --color-primary: #8dd6ff;
+      --color-primary-hover: #b8e5ff;
+      --color-accent: rgba(10, 30, 50, 0.9);
+      --color-border: rgba(141, 214, 255, 0.35);
+      --color-grid-line: rgba(141, 214, 255, 0.2);
+      --color-lime: #dafd9e;
+      --owl-bg: #031020;
       --owl-bg-deep: #d7efff;
       --owl-line: #8bd7ff;
       --owl-accent: #d7ff95;
@@ -281,7 +277,7 @@ body {
   }
 
   body {
-    background: var(--color-bg);
+    background: radial-gradient(circle at 15% 10%, rgba(196, 255, 130, 0.25), transparent 40%), radial-gradient(circle at 85% 0%, rgba(111, 196, 255, 0.2), transparent 35%), var(--color-bg);
     color: var(--color-fg);
     font-family: var(--font-sans);
     margin: 0;
@@ -293,24 +289,67 @@ body {
 }
 
 .container {
-  max-width: 900px;
+  max-width: 980px;
   margin: 0 auto;
-  padding: 2rem 1rem;
-}
-
-.hero {
-  text-align: center;
-  margin-bottom: 3rem;
+  padding: 3rem 1.5rem 2rem;
   position: relative;
 }
 
+.hero {
+  position: relative;
+  margin-bottom: 3rem;
+  padding: 2.5rem;
+  border-radius: calc(var(--radius) + 10px);
+  border: 1px solid var(--color-border);
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.75));
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  text-align: center;
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero::before {
+  background-image:
+    linear-gradient(var(--color-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.6;
+}
+
+.hero::after {
+  background: radial-gradient(circle at 15% 30%, rgba(255, 255, 255, 0.8), transparent 45%),
+    radial-gradient(circle at 80% 20%, rgba(111, 196, 255, 0.35), transparent 35%);
+  mix-blend-mode: screen;
+}
+
+.hero:last-of-type {
+  padding: 1.5rem 0;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+.hero:last-of-type::before,
+.hero:last-of-type::after {
+  display: none;
+}
+
 .hero-title {
-  font-size: 2.7rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.04em;
-  color: var(--color-primary);
-  text-shadow: 0 2px 8px #e0e7ff;
+  position: relative;
+  font-size: clamp(2.4rem, 6vw, 3.3rem);
+  margin: 0;
+  color: var(--color-primary-hover);
+  text-align: center;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-shadow: 0 4px 18px rgba(34, 78, 128, 0.25);
 }
 
 .hero-sub {
@@ -320,14 +359,54 @@ body {
   letter-spacing: 0.02em;
 }
 
+.hero-sub--card {
+  color: rgba(22, 48, 73, 0.75);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 2rem 1.2rem;
+  }
+
+  .hero-title::before,
+  .hero-title::after {
+    display: none;
+  }
+
+  .hero-title {
+    letter-spacing: 0.08em;
+  }
+}
+
 
 .section {
   margin-bottom: 2.5rem;
   background: var(--color-accent);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 1.5rem 1.2rem;
+  padding: 1.8rem 1.5rem;
   border: 1px solid var(--color-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(var(--color-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px);
+  background-size: 42px 42px;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section > * {
+  position: relative;
+  z-index: 1;
 }
 
 .section-title {
@@ -375,14 +454,11 @@ body {
 /* 幾何学模様の背景装飾例（SVGやCanvasで拡張可） */
 .bg-geometry {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+  inset: 0;
   pointer-events: none;
-  z-index: 0;
-  background: repeating-linear-gradient(135deg, var(--color-accent) 0 2px, transparent 2px 40px);
-  opacity: 0.08;
+  background-image: linear-gradient(120deg, rgba(111, 196, 255, 0.08) 0%, transparent 40%),
+    linear-gradient(300deg, rgba(196, 255, 130, 0.12) 10%, transparent 60%);
+  opacity: 0.8;
 }
 
 /* --- Owl Splash --- */
@@ -400,6 +476,25 @@ body {
   overflow: hidden;
 }
 
+.owl-splash::before,
+.owl-splash::after {
+  content: "";
+  position: absolute;
+  inset: 6%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 28px;
+  pointer-events: none;
+}
+
+.owl-splash::after {
+  inset: 10%;
+  border-color: rgba(255, 255, 255, 0.2);
+  background-image: linear-gradient(var(--color-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px);
+  background-size: 58px 58px;
+  opacity: 0.45;
+}
+
 .owl-splash--leaving {
   opacity: 0;
   transform: scale(1.02);
@@ -408,16 +503,32 @@ body {
 
 .owl-splash__glow {
   position: absolute;
-  width: 50vmax;
-  height: 50vmax;
+  width: 54vmax;
+  height: 54vmax;
   background: radial-gradient(circle, rgba(182, 255, 109, 0.35), transparent 60%);
   animation: glowPulse 4s ease-in-out infinite;
 }
 
 .owl-splash__symbol {
   position: relative;
-  width: min(360px, 80vw);
-  padding: 2rem;
+  width: min(380px, 82vw);
+  padding: 2.2rem;
+  border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 30px 80px rgba(5, 17, 33, 0.35);
+}
+
+.owl-splash__symbol::before {
+  content: "PortFolio // Tenhou";
+  position: absolute;
+  top: 1rem;
+  left: -2.2rem;
+  writing-mode: vertical-rl;
+  letter-spacing: 0.3em;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.65);
 }
 
 .owl-symbol {

@@ -141,7 +141,7 @@ export default function OwlSplash({ onFinish }: OwlSplashProps) {
         <div className="dots dots--left" />
         <div className="dots dots--right" />
       </div>
-      <p className="owl-splash__caption">Tenhou Portfolio</p>
+      <p className="owl-splash__caption">Tenhou’s Portfolio</p>
     </div>
   );
 }
