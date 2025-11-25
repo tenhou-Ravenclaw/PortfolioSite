@@ -37,6 +37,8 @@ yarn-error.log*
 .vercel
 
 # typescript
-# typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# mysql data (if accidentally created)
+mysql-data/
