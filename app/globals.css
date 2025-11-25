@@ -256,6 +256,11 @@ body {
   --shadow: 0 4px 24px 0 rgba(167, 139, 250, 0.08);
   --font-sans: var(--font-geist-sans, 'Geist', 'Arial', sans-serif);
   --font-mono: var(--font-geist-mono, 'Geist Mono', 'monospace');
+  --owl-bg: #e9f6ff;
+  --owl-bg-deep: #0d1b3d;
+  --owl-line: #7dd2ff;
+  --owl-accent: #b6ff6d;
+  --owl-deep: #1780d6;
 
   @media (prefers-color-scheme: dark) {
     :root {
@@ -267,6 +272,11 @@ body {
       --color-border: #393552;
       --color-star: #ffe066;
       --color-moon: #f4e7d4;
+      --owl-bg: #071020;
+      --owl-bg-deep: #d7efff;
+      --owl-line: #8bd7ff;
+      --owl-accent: #d7ff95;
+      --owl-deep: #4fb0ff;
     }
   }
 
@@ -373,4 +383,226 @@ body {
   z-index: 0;
   background: repeating-linear-gradient(135deg, var(--color-accent) 0 2px, transparent 2px 40px);
   opacity: 0.08;
+}
+
+/* --- Owl Splash --- */
+.owl-splash {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.2)),
+    linear-gradient(135deg, var(--owl-bg) 0%, var(--color-bg) 80%);
+  z-index: 2000;
+  transition: opacity 0.55s ease, transform 0.55s ease;
+  overflow: hidden;
+}
+
+.owl-splash--leaving {
+  opacity: 0;
+  transform: scale(1.02);
+  pointer-events: none;
+}
+
+.owl-splash__glow {
+  position: absolute;
+  width: 50vmax;
+  height: 50vmax;
+  background: radial-gradient(circle, rgba(182, 255, 109, 0.35), transparent 60%);
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+.owl-splash__symbol {
+  position: relative;
+  width: min(360px, 80vw);
+  padding: 2rem;
+}
+
+.owl-symbol {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 8px 24px rgba(0, 50, 120, 0.15));
+}
+
+.owl-line {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: owlStroke 1.2s ease forwards;
+}
+
+.owl-line--mask {
+  animation-delay: 0.2s;
+}
+
+.owl-line--brow {
+  animation-duration: 1.6s;
+}
+
+.owl-eye {
+  stroke-dasharray: 340;
+  stroke-dashoffset: 340;
+  animation: owlStroke 1s ease forwards 0.3s;
+}
+
+.owl-eye--inner {
+  animation-delay: 0.45s;
+}
+
+.owl-beak {
+  opacity: 0;
+  transform-origin: center;
+  animation: beakPop 0.5s ease forwards 0.6s;
+}
+
+.owl-node {
+  opacity: 0;
+  animation: nodeBlink 1.2s ease-in-out infinite alternate;
+}
+
+.owl-node:nth-of-type(1) {
+  animation-delay: 0.3s;
+}
+
+.owl-node:nth-of-type(2) {
+  animation-delay: 0.45s;
+}
+
+.owl-swoosh {
+  opacity: 0;
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+  animation: swooshDraw 1s ease forwards 0.65s;
+}
+
+.scan-line {
+  position: absolute;
+  inset: 16% 10%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  animation: scanMove 1.8s ease infinite;
+  pointer-events: none;
+}
+
+.dots {
+  position: absolute;
+  width: 140px;
+  height: 40px;
+  background: radial-gradient(circle, var(--owl-accent) 30%, transparent 32%);
+  background-size: 16px 16px;
+  opacity: 0.35;
+  animation: dotDrift 2.4s ease-in-out infinite alternate;
+}
+
+.dots--left {
+  left: -24px;
+  top: 30%;
+}
+
+.dots--right {
+  right: -24px;
+  bottom: 22%;
+  animation-delay: 0.6s;
+}
+
+.owl-splash__caption {
+  margin-top: 1.2rem;
+  letter-spacing: 0.4em;
+  color: var(--owl-deep);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  animation: captionFade 0.6s ease forwards 0.5s;
+}
+
+@keyframes owlStroke {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes beakPop {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes nodeBlink {
+  0% {
+    opacity: 0.1;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 0.9;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes swooshDraw {
+  0% {
+    stroke-dashoffset: 260;
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes scanMove {
+  0% {
+    transform: translateY(-60%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.8;
+  }
+  70% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(60%);
+    opacity: 0;
+  }
+}
+
+@keyframes dotDrift {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(12px);
+  }
+}
+
+@keyframes captionFade {
+  from {
+    opacity: 0;
+    letter-spacing: 0.8em;
+  }
+  to {
+    opacity: 0.9;
+    letter-spacing: 0.4em;
+  }
+}
+
+@keyframes glowPulse {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.4;
+  }
 }
