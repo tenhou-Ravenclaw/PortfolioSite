@@ -240,38 +240,44 @@ body {
 
 /* --- カラーパレット・UI変数 --- */
 :root {
-  --color-bg: #fff;
-  /* メインは白 */
-  --color-fg: #232136;
-  --color-primary: #a78bfa;
-  /* 薄紫 */
-  --color-primary-hover: #7c3aed;
-  /* 濃い紫 */
-  --color-accent: #e0e7ff;
-  /* ごく薄い紫 */
-  --color-border: #e0e7ff;
-  --color-star: #ffe066;
-  --color-moon: #f4e7d4;
-  --radius: 16px;
-  --shadow: 0 4px 24px 0 rgba(167, 139, 250, 0.08);
+  --color-bg: #f3f9ff;
+  --color-fg: #163049;
+  --color-primary: #6fc4ff;
+  --color-primary-hover: #2474c9;
+  --color-accent: rgba(255, 255, 255, 0.85);
+  --color-border: rgba(93, 157, 229, 0.45);
+  --color-grid-line: rgba(111, 196, 255, 0.25);
+  --color-lime: #c4ff82;
+  --radius: 18px;
+  --shadow: 0 20px 55px rgba(25, 72, 126, 0.18);
   --font-sans: var(--font-geist-sans, 'Geist', 'Arial', sans-serif);
   --font-mono: var(--font-geist-mono, 'Geist Mono', 'monospace');
+  --owl-bg: #dff2ff;
+  --owl-bg-deep: #041b33;
+  --owl-line: #7dd2ff;
+  --owl-accent: #b6ff6d;
+  --owl-deep: #1780d6;
 
   @media (prefers-color-scheme: dark) {
     :root {
-      --color-bg: #232136;
-      --color-fg: #f7f6fd;
-      --color-primary: #c4b5fd;
-      --color-primary-hover: #a78bfa;
-      --color-accent: #f9c7e2;
-      --color-border: #393552;
-      --color-star: #ffe066;
-      --color-moon: #f4e7d4;
+      --color-bg: #071426;
+      --color-fg: #e0f0ff;
+      --color-primary: #8dd6ff;
+      --color-primary-hover: #b8e5ff;
+      --color-accent: rgba(10, 30, 50, 0.9);
+      --color-border: rgba(141, 214, 255, 0.35);
+      --color-grid-line: rgba(141, 214, 255, 0.2);
+      --color-lime: #dafd9e;
+      --owl-bg: #031020;
+      --owl-bg-deep: #d7efff;
+      --owl-line: #8bd7ff;
+      --owl-accent: #d7ff95;
+      --owl-deep: #4fb0ff;
     }
   }
 
   body {
-    background: var(--color-bg);
+    background: radial-gradient(circle at 15% 10%, rgba(196, 255, 130, 0.25), transparent 40%), radial-gradient(circle at 85% 0%, rgba(111, 196, 255, 0.2), transparent 35%), var(--color-bg);
     color: var(--color-fg);
     font-family: var(--font-sans);
     margin: 0;
@@ -283,24 +289,67 @@ body {
 }
 
 .container {
-  max-width: 900px;
+  max-width: 980px;
   margin: 0 auto;
-  padding: 2rem 1rem;
-}
-
-.hero {
-  text-align: center;
-  margin-bottom: 3rem;
+  padding: 3rem 1.5rem 2rem;
   position: relative;
 }
 
+.hero {
+  position: relative;
+  margin-bottom: 3rem;
+  padding: 2.5rem;
+  border-radius: calc(var(--radius) + 10px);
+  border: 1px solid var(--color-border);
+  background: linear-gradient(120deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.75));
+  box-shadow: var(--shadow);
+  overflow: hidden;
+  text-align: center;
+}
+
+.hero::before,
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.hero::before {
+  background-image:
+    linear-gradient(var(--color-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px);
+  background-size: 48px 48px;
+  opacity: 0.6;
+}
+
+.hero::after {
+  background: radial-gradient(circle at 15% 30%, rgba(255, 255, 255, 0.8), transparent 45%),
+    radial-gradient(circle at 80% 20%, rgba(111, 196, 255, 0.35), transparent 35%);
+  mix-blend-mode: screen;
+}
+
+.hero:last-of-type {
+  padding: 1.5rem 0;
+  border: none;
+  box-shadow: none;
+  background: transparent;
+}
+
+.hero:last-of-type::before,
+.hero:last-of-type::after {
+  display: none;
+}
+
 .hero-title {
-  font-size: 2.7rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
-  letter-spacing: 0.04em;
-  color: var(--color-primary);
-  text-shadow: 0 2px 8px #e0e7ff;
+  position: relative;
+  font-size: clamp(2.4rem, 6vw, 3.3rem);
+  margin: 0;
+  color: var(--color-primary-hover);
+  text-align: center;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  text-shadow: 0 4px 18px rgba(34, 78, 128, 0.25);
 }
 
 .hero-sub {
@@ -310,14 +359,49 @@ body {
   letter-spacing: 0.02em;
 }
 
+.hero-sub--card {
+  color: rgba(22, 48, 73, 0.75);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+@media (max-width: 640px) {
+  .hero {
+    padding: 2rem 1.2rem;
+  }
+
+  .hero-title {
+    letter-spacing: 0.08em;
+  }
+}
+
 
 .section {
   margin-bottom: 2.5rem;
   background: var(--color-accent);
   border-radius: var(--radius);
   box-shadow: var(--shadow);
-  padding: 1.5rem 1.2rem;
+  padding: 1.8rem 1.5rem;
   border: 1px solid var(--color-border);
+  position: relative;
+  overflow: hidden;
+}
+
+.section::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(var(--color-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px);
+  background-size: 42px 42px;
+  opacity: 0.3;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.section > * {
+  position: relative;
+  z-index: 1;
 }
 
 .section-title {
@@ -365,12 +449,266 @@ body {
 /* 幾何学模様の背景装飾例（SVGやCanvasで拡張可） */
 .bg-geometry {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
+  inset: 0;
   pointer-events: none;
-  z-index: 0;
-  background: repeating-linear-gradient(135deg, var(--color-accent) 0 2px, transparent 2px 40px);
-  opacity: 0.08;
+  background-image: linear-gradient(120deg, rgba(111, 196, 255, 0.08) 0%, transparent 40%),
+    linear-gradient(300deg, rgba(196, 255, 130, 0.12) 10%, transparent 60%);
+  opacity: 0.8;
+}
+
+/* --- Owl Splash --- */
+.owl-splash {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 25% 20%, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.2)),
+    linear-gradient(135deg, var(--owl-bg) 0%, var(--color-bg) 80%);
+  z-index: 2000;
+  transition: opacity 0.55s ease, transform 0.55s ease;
+  overflow: hidden;
+}
+
+.owl-splash::before,
+.owl-splash::after {
+  content: "";
+  position: absolute;
+  inset: 6%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 28px;
+  pointer-events: none;
+}
+
+.owl-splash::after {
+  inset: 10%;
+  border-color: rgba(255, 255, 255, 0.2);
+  background-image: linear-gradient(var(--color-grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-grid-line) 1px, transparent 1px);
+  background-size: 58px 58px;
+  opacity: 0.45;
+}
+
+.owl-splash--leaving {
+  opacity: 0;
+  transform: scale(1.02);
+  pointer-events: none;
+}
+
+.owl-splash__glow {
+  position: absolute;
+  width: 54vmax;
+  height: 54vmax;
+  background: radial-gradient(circle, rgba(182, 255, 109, 0.35), transparent 60%);
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+.owl-splash__symbol {
+  position: relative;
+  width: min(380px, 82vw);
+  padding: 2.2rem;
+  border-radius: 26px;
+  border: 1px solid rgba(255, 255, 255, 0.38);
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 30px 80px rgba(5, 17, 33, 0.35);
+}
+
+.owl-splash__symbol::before {
+  content: "PortFolio // Tenhou";
+  position: absolute;
+  top: 1rem;
+  left: -2.2rem;
+  writing-mode: vertical-rl;
+  letter-spacing: 0.3em;
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.65);
+}
+
+.owl-symbol {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 8px 24px rgba(0, 50, 120, 0.15));
+}
+
+.owl-line {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: owlStroke 1.2s ease forwards;
+}
+
+.owl-line--mask {
+  animation-delay: 0.2s;
+}
+
+.owl-line--brow {
+  animation-duration: 1.6s;
+}
+
+.owl-eye {
+  stroke-dasharray: 340;
+  stroke-dashoffset: 340;
+  animation: owlStroke 1s ease forwards 0.3s;
+}
+
+.owl-eye--inner {
+  animation-delay: 0.45s;
+}
+
+.owl-beak {
+  opacity: 0;
+  transform-origin: center;
+  animation: beakPop 0.5s ease forwards 0.6s;
+}
+
+.owl-node {
+  opacity: 0;
+  animation: nodeBlink 1.2s ease-in-out infinite alternate;
+}
+
+.owl-node:nth-of-type(1) {
+  animation-delay: 0.3s;
+}
+
+.owl-node:nth-of-type(2) {
+  animation-delay: 0.45s;
+}
+
+.owl-swoosh {
+  opacity: 0;
+  stroke-dasharray: 260;
+  stroke-dashoffset: 260;
+  animation: swooshDraw 1s ease forwards 0.65s;
+}
+
+.scan-line {
+  position: absolute;
+  inset: 16% 10%;
+  border-radius: 999px;
+  background: linear-gradient(180deg, transparent, rgba(255, 255, 255, 0.35), transparent);
+  animation: scanMove 1.8s ease infinite;
+  pointer-events: none;
+}
+
+.dots {
+  position: absolute;
+  width: 140px;
+  height: 40px;
+  background: radial-gradient(circle, var(--owl-accent) 30%, transparent 32%);
+  background-size: 16px 16px;
+  opacity: 0.35;
+  animation: dotDrift 2.4s ease-in-out infinite alternate;
+}
+
+.dots--left {
+  left: -24px;
+  top: 30%;
+}
+
+.dots--right {
+  right: -24px;
+  bottom: 22%;
+  animation-delay: 0.6s;
+}
+
+.owl-splash__caption {
+  margin-top: 1.2rem;
+  letter-spacing: 0.4em;
+  color: var(--owl-deep);
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  animation: captionFade 0.6s ease forwards 0.5s;
+}
+
+@keyframes owlStroke {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes beakPop {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes nodeBlink {
+  0% {
+    opacity: 0.1;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 0.9;
+    transform: scale(1.2);
+  }
+}
+
+@keyframes swooshDraw {
+  0% {
+    stroke-dashoffset: 260;
+    opacity: 0;
+  }
+  60% {
+    opacity: 1;
+  }
+  100% {
+    stroke-dashoffset: 0;
+    opacity: 1;
+  }
+}
+
+@keyframes scanMove {
+  0% {
+    transform: translateY(-60%);
+    opacity: 0;
+  }
+  30% {
+    opacity: 0.8;
+  }
+  70% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(60%);
+    opacity: 0;
+  }
+}
+
+@keyframes dotDrift {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(12px);
+  }
+}
+
+@keyframes captionFade {
+  from {
+    opacity: 0;
+    letter-spacing: 0.8em;
+  }
+  to {
+    opacity: 0.9;
+    letter-spacing: 0.4em;
+  }
+}
+
+@keyframes glowPulse {
+  0% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.9;
+  }
+  100% {
+    opacity: 0.4;
+  }
 }
