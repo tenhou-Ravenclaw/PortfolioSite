@@ -40,7 +40,7 @@ export default function OwlSplash({ onFinish }: OwlSplashProps) {
       window.clearTimeout(leaveTimer);
       window.clearTimeout(hideTimer);
     };
-  }, [onFinish]);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps -- onFinish is optional and not expected to change
 
   if (!isVisible) {
     return null;
