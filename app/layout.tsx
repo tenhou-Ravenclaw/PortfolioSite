@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Varela_Round, Great_Vibes, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 import GlobalNav from "./GlobalNav";
 import OwlSplash from "./components/OwlSplash";
@@ -12,6 +12,26 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+const varelaRound = Varela_Round({
+  variable: "--font-varela",
+  weight: "400",
+  subsets: ["latin"],
+});
+
+const greatVibes = Great_Vibes({
+  variable: "--font-great-vibes",
+  weight: "400",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const notoSansJp = Noto_Sans_JP({
+  variable: "--font-noto-jp",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  display: "swap",
 });
 
 export const metadata: Metadata = {
@@ -70,7 +90,7 @@ export default function RootLayout({
         <meta name="twitter:image" content={process.env.NODE_ENV === 'production' ? 'https://your-domain.com/tenhouPortfolioIcon.png' : 'http://localhost:3000/tenhouPortfolioIcon.png'} />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${varelaRound.variable} ${greatVibes.variable} ${notoSansJp.variable} antialiased`}
       >
         <OwlSplash />
         <GlobalNav />
