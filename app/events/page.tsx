@@ -152,9 +152,9 @@ export default function Events() {
                         }}
                       >
                         <div className="timeline-event-card__barcode" aria-hidden="true" />
-                        <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--color-fg)', marginBottom: 4 }}>{ev.title}</div>
-                        <div style={{ fontSize: 13, color: 'var(--color-fg)', opacity: 0.7, marginBottom: 2 }}>{ev.role}</div>
-                        <div style={{ fontSize: 13, color: 'var(--color-fg)', opacity: 0.8 }}>{ev.desc.length > 40 ? ev.desc.substring(0, 40) + '...' : ev.desc}</div>
+                        <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--color-ink)', marginBottom: 4 }}>{ev.title}</div>
+                        <div style={{ fontSize: 13, color: 'var(--color-ink)', opacity: 0.75, marginBottom: 2 }}>{ev.role}</div>
+                        <div style={{ fontSize: 13, color: 'var(--color-ink)', opacity: 0.85 }}>{ev.desc.length > 40 ? ev.desc.substring(0, 40) + '...' : ev.desc}</div>
                       </div>
                     ))}
                   </td>
@@ -178,9 +178,9 @@ export default function Events() {
                           }}
                         >
                           <div className="timeline-project-card__qr" aria-hidden="true" />
-                          <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--color-fg)', marginBottom: 4 }}>{block.project.title}</div>
-                          <div style={{ fontSize: 13, color: 'var(--color-fg)', opacity: 0.7, marginBottom: 2 }}>{block.project.role}</div>
-                          <div style={{ fontSize: 13, color: 'var(--color-fg)', opacity: 0.8, marginBottom: 2 }}>{block.project.desc.length > 40 ? block.project.desc.substring(0, 40) + '...' : block.project.desc}</div>
+                          <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--color-ink)', marginBottom: 4 }}>{block.project.title}</div>
+                          <div style={{ fontSize: 13, color: 'var(--color-ink)', opacity: 0.75, marginBottom: 2 }}>{block.project.role}</div>
+                          <div style={{ fontSize: 13, color: 'var(--color-ink)', opacity: 0.85, marginBottom: 2 }}>{block.project.desc.length > 40 ? block.project.desc.substring(0, 40) + '...' : block.project.desc}</div>
                           <div style={{ fontSize: 12, fontWeight: 700, color: block.project.status === 'completed' ? '#10b981' : block.project.status === 'in-progress' ? '#f59e0b' : '#6b7280' }}>{block.project.status === 'completed' ? '完了' : block.project.status === 'in-progress' ? '進行中' : '予定'}</div>
                         </div>
                       </td>

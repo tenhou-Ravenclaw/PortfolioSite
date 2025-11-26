@@ -1,5 +1,5 @@
 import Link from "next/link";
-import OwlGlyph from "./OwlGlyph";
+import Image from "next/image";
 
 type HeroSectionProps = {
   featuredBadges: string[];
@@ -16,8 +16,14 @@ const HeroSection = ({ featuredBadges }: HeroSectionProps) => {
   return (
     <section className="hero-v2">
       <div className="hero-v2__visual">
-        <OwlGlyph />
-        <span className="halftone-band" aria-hidden="true" />
+        <Image
+          src="/icon.JPG"
+          alt="Tenhou icon"
+          fill
+          priority
+          sizes="(min-width: 960px) 50vw, 100vw"
+          style={{ objectFit: "cover" }}
+        />
       </div>
       <div className="hero-v2__info">
         <span className="hero-v2__label">Portfolio</span>

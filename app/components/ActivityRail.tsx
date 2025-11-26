@@ -21,8 +21,22 @@ const ActivityRail = ({ activities }: ActivityRailProps) => {
               {activity.badge}
             </span>
           </div>
-          <div style={{ fontWeight: 700, marginBottom: "0.4rem", color: "rgba(10,10,10,0.9)" }}>{activity.title}</div>
-          <div style={{ fontSize: "0.9rem", color: "rgba(20, 20, 20, 0.8)", lineHeight: 1.4 }}>
+          <div
+            style={{
+              fontWeight: 700,
+              marginBottom: "0.4rem",
+              color: "#060b12", // 常に濃い文字色にしてカード背景とコントラストを確保
+            }}
+          >
+            {activity.title}
+          </div>
+          <div
+            style={{
+              fontSize: "0.9rem",
+              color: "rgba(15, 23, 42, 0.9)",
+              lineHeight: 1.6,
+            }}
+          >
             {activity.subtitle}
           </div>
         </div>
