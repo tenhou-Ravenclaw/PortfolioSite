@@ -17,6 +17,8 @@ type ProjectActivity = Project & {
 
 type Activity = EventActivity | ProjectActivity;
 
+const featuredBadges = ["MySQL", "Java", "Next.js", "PHP"];
+
 export default function Home() {
   const [modalSkill, setModalSkill] = useState<null | typeof skills[0]>(null);
   // 最新の活動を抽出・整理
@@ -111,8 +113,56 @@ export default function Home() {
       <main className="container" style={{ position: 'relative' }}>
         <div className="bg-geometry" />
         {/* Heroセクション */}
-        <section className="hero">
-          <h1 className="hero-title">Tenhou’s Portfolio Site</h1>
+        <section className="hero hero-card">
+          <div className="hero-card__grid">
+            <div className="hero-card__decor hero-card__decor--left" aria-hidden="true">
+              <span className="hero-chip">Portfolio</span>
+              <div className="hero-vertical-label">
+                <span>Tenhou</span>
+                <span>Portfolio</span>
+              </div>
+              <div className="hero-card__qr" />
+              <div className="hero-card__stamp hero-card__stamp--round">Engineer</div>
+              <div className="hero-card__stamp">Product Manager</div>
+            </div>
+
+            <div className="hero-card__content">
+              <div className="hero-heading" aria-hidden="true">
+                <div className="hero-heading__barcode" />
+              </div>
+              <h1 className="hero-title hero-title--accent">Tenhou’s Portfolio Site</h1>
+              <p className="hero-sub hero-sub--card">Soft/Hard Engineer · Product Manager · Student</p>
+              <div className="hero-pill-row">
+                {featuredBadges.map((badge) => (
+                  <span key={badge} className="hero-pill">{badge}</span>
+                ))}
+              </div>
+              <div className="hero-meta-grid">
+                <div>
+                  <span className="hero-meta-label">Accounts</span>
+                  <div className="hero-account-row">
+                    <span>@tenhou_0126</span>
+                    <span>github.com/tenhou-Ravenclaw</span>
+                  </div>
+                </div>
+                <div className="hero-signal" aria-hidden="true">
+                  <span />
+                  <span />
+                  <span />
+                </div>
+              </div>
+            </div>
+
+            <div className="hero-card__decor hero-card__decor--right" aria-hidden="true">
+              <div className="hero-card__barcode hero-card__barcode--thin" />
+              <div className="hero-card__dotgrid" />
+              <div className="hero-card__globe">
+                <div />
+                <div />
+                <div />
+              </div>
+            </div>
+          </div>
         </section>
         {/* Aboutセクション */}
         <section className="section">
