@@ -29,7 +29,7 @@ const greatVibes = Great_Vibes({
 
 const notoSansJp = Noto_Sans_JP({
   variable: "--font-noto-jp",
-  subsets: ["latin", "latin-ext", "japanese"],
+  subsets: ["latin"],
   weight: ["400", "500", "700"],
   display: "swap",
 });
