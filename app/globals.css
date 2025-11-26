@@ -50,9 +50,19 @@
 }
 
 
-html,
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 2rem;
+}
+
 body {
   scroll-behavior: smooth;
+}
+
+/* スクロールターゲットのマージン調整 */
+#awards-section,
+#skills-section {
+  scroll-margin-top: 2rem;
 }
 
 .nav-overlay {

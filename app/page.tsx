@@ -145,19 +145,21 @@ export default function Home() {
             </Link>
           </DataPanel>
 
-          <DataPanel title="Awards" tag="log" accent="blue">
-            <ul className="awards-stack">
-              {awards.map((award) => (
-                <li key={`${award.year}-${award.title}`}>
-                  <span className="awards-stack__year">{award.year}</span>
-                  <div>
-                    <strong>{award.title}</strong>
-                    <div className="awards-stack__prize">{award.prize}</div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </DataPanel>
+          <div id="awards-section">
+            <DataPanel title="Awards" tag="log" accent="blue">
+              <ul className="awards-stack">
+                {awards.map((award) => (
+                  <li key={`${award.year}-${award.title}`}>
+                    <span className="awards-stack__year">{award.year}</span>
+                    <div>
+                      <strong>{award.title}</strong>
+                      <div className="awards-stack__prize">{award.prize}</div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </DataPanel>
+          </div>
 
           <DataPanel
             title="Works"
@@ -206,9 +208,11 @@ export default function Home() {
             <ActivityRail activities={activityItems} />
           </DataPanel>
 
-          <DataPanel title="Skills" tag="console" accent="lime">
-            <SkillConsole skills={skills} />
-          </DataPanel>
+          <div id="skills-section">
+            <DataPanel title="Skills" tag="console" accent="lime">
+              <SkillConsole skills={skills} />
+            </DataPanel>
+          </div>
         </div>
       </main>
 
