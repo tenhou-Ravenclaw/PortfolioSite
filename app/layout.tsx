@@ -35,8 +35,14 @@ const notoSansJp = Noto_Sans_JP({
   display: "swap",
 });
 
+const getBaseUrl = () => {
+  if (process.env.VERCEL_ENV === 'production') return 'https://ten-hou.com';
+  if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
+  return 'http://localhost:3000';
+};
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NODE_ENV === 'production' ? 'https://ten-hou.com' : 'http://localhost:3000'),
+  metadataBase: new URL(getBaseUrl()),
   title: "Tenhou's Portfolio",
   description: "ぜひご覧ください！",
   icons: {
