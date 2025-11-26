@@ -115,37 +115,49 @@ export default function Events() {
   // UI
   return (
     <main className="container" style={{ minHeight: '70vh', paddingTop: '2rem' }}>
-      <h1 className="section-title">イベント・プロジェクト履歴</h1>
-      <div style={{ overflowX: 'auto', maxWidth: '1200px', margin: '2rem auto', padding: '1rem' }}>
-        <table style={{ borderCollapse: 'separate', borderSpacing: 0, width: '100%' }}>
-          <thead>
-            <tr>
-              <th style={{ minWidth: 100, textAlign: 'right', paddingRight: 16, fontWeight: 700, color: '#4f46e5', fontSize: 18 }}>年月</th>
-              <th style={{ minWidth: 220, textAlign: 'left', fontWeight: 700 }}>イベント</th>
-              {Array.from({ length: projectColCount }).map((_, colIdx) => (
-                <th key={colIdx} style={{ minWidth: 220, textAlign: 'left', fontWeight: 700 }}>{`プロジェクト${colIdx + 1}`}</th>
-              ))}
-            </tr>
-          </thead>
-          <tbody>
-            {ymList.map((ym, rowIdx) => (
-              <tr key={ym}>
-                {/* 年月軸 */}
-                <td style={{ textAlign: 'right', fontWeight: 700, color: '#4f46e5', background: 'white', borderRight: '2px solid #e5e7eb', verticalAlign: 'top', padding: '12px 16px 12px 0' }}>{ym}</td>
-                {/* イベント列 */}
-                <td style={{ background: 'white', borderRight: '2px solid #e5e7eb', verticalAlign: 'top', padding: '12px 8px' }}>
-                  {eventMap[ym]?.map((ev, i) => (
-                    <div key={i} style={{ marginBottom: 12, cursor: 'pointer', border: '1px solid #f3f4f6', borderRadius: 12, padding: '1rem', background: '#f9fafb', boxShadow: '0 2px 8px rgba(80,80,120,0.04)' }}
-                      onClick={() => setSelectedItem({ type: 'event', data: ev, sortDate: parseEventDate(ev.date) })}
-                      onMouseEnter={e => (e.currentTarget.style.backgroundColor = 'rgba(59,130,246,0.05)')}
-                      onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#f9fafb')}
-                    >
-                      <div style={{ fontWeight: 700, fontSize: 16, color: '#1f2937', marginBottom: 4 }}>{ev.title}</div>
-                      <div style={{ fontSize: 13, color: '#4b5563', marginBottom: 2 }}>{ev.role}</div>
-                      <div style={{ fontSize: 13, color: '#6b7280' }}>{ev.desc.length > 40 ? ev.desc.substring(0, 40) + '...' : ev.desc}</div>
-                    </div>
-                  ))}
-                </td>
+      <section className="hero hero--sub">
+        <h1 className="hero-title">イベント・プロジェクト履歴</h1>
+        <p className="hero-sub">タイムライン形式で活動履歴を表示</p>
+      </section>
+      <section className="section">
+        <div className="timeline-wrapper" style={{ overflowX: 'auto', maxWidth: '1200px', margin: '2rem auto', padding: '1rem', position: 'relative' }}>
+          <div className="timeline-grid" aria-hidden="true" />
+          <table style={{ borderCollapse: 'separate', borderSpacing: 0, width: '100%', position: 'relative', zIndex: 1 }}>
+            <thead>
+              <tr>
+                <th style={{ minWidth: 100, textAlign: 'right', paddingRight: 16, fontWeight: 700, color: 'var(--color-primary-hover)', fontSize: 18 }}>年月</th>
+                <th style={{ minWidth: 220, textAlign: 'left', fontWeight: 700, color: 'var(--color-fg)' }}>イベント</th>
+                {Array.from({ length: projectColCount }).map((_, colIdx) => (
+                  <th key={colIdx} style={{ minWidth: 220, textAlign: 'left', fontWeight: 700, color: 'var(--color-fg)' }}>{`プロジェクト${colIdx + 1}`}</th>
+                ))}
+              </tr>
+            </thead>
+            <tbody>
+              {ymList.map((ym, rowIdx) => (
+                <tr key={ym}>
+                  {/* 年月軸 */}
+                  <td style={{ textAlign: 'right', fontWeight: 700, color: 'var(--color-primary-hover)', background: 'var(--color-accent)', borderRight: '2px solid var(--color-border)', verticalAlign: 'top', padding: '12px 16px 12px 0' }}>{ym}</td>
+                  {/* イベント列 */}
+                  <td style={{ background: 'var(--color-accent)', borderRight: '2px solid var(--color-border)', verticalAlign: 'top', padding: '12px 8px' }}>
+                    {eventMap[ym]?.map((ev, i) => (
+                      <div key={i} className="timeline-event-card" style={{ marginBottom: 12, cursor: 'pointer', border: '1px solid var(--color-border)', borderRadius: 12, padding: '1rem', background: 'var(--color-accent)', boxShadow: 'var(--shadow)', position: 'relative' }}
+                        onClick={() => setSelectedItem({ type: 'event', data: ev, sortDate: parseEventDate(ev.date) })}
+                        onMouseEnter={e => {
+                          e.currentTarget.style.backgroundColor = 'rgba(111, 196, 255, 0.1)';
+                          e.currentTarget.style.transform = 'translateY(-2px)';
+                        }}
+                        onMouseLeave={e => {
+                          e.currentTarget.style.backgroundColor = 'var(--color-accent)';
+                          e.currentTarget.style.transform = 'translateY(0)';
+                        }}
+                      >
+                        <div className="timeline-event-card__barcode" aria-hidden="true" />
+                        <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--color-fg)', marginBottom: 4 }}>{ev.title}</div>
+                        <div style={{ fontSize: 13, color: 'var(--color-fg)', opacity: 0.7, marginBottom: 2 }}>{ev.role}</div>
+                        <div style={{ fontSize: 13, color: 'var(--color-fg)', opacity: 0.8 }}>{ev.desc.length > 40 ? ev.desc.substring(0, 40) + '...' : ev.desc}</div>
+                      </div>
+                    ))}
+                  </td>
                 {/* プロジェクト列（ガントチャート風） */}
                 {Array.from({ length: projectColCount }).map((_, colIdx) => {
                   // このセルに表示すべきプロジェクトブロックがあるか
@@ -153,15 +165,22 @@ export default function Events() {
                   if (block) {
                     const rowSpan = block.endIdx - block.startIdx + 1;
                     return (
-                      <td key={colIdx} rowSpan={rowSpan} style={{ background: 'white', verticalAlign: 'top', padding: '12px 8px', borderRight: '2px solid #e5e7eb', borderLeft: colIdx === 0 ? 'none' : '1px solid #e5e7eb' }}>
-                        <div style={{ cursor: 'pointer', border: '1px solid #f3f4f6', borderRadius: 12, padding: '1rem', background: '#fffbe6', boxShadow: '0 2px 8px rgba(255,184,28,0.08)' }}
+                      <td key={colIdx} rowSpan={rowSpan} style={{ background: 'var(--color-accent)', verticalAlign: 'top', padding: '12px 8px', borderRight: '2px solid var(--color-border)', borderLeft: colIdx === 0 ? 'none' : '1px solid var(--color-border)' }}>
+                        <div className="timeline-project-card" style={{ cursor: 'pointer', border: '1px solid var(--color-border)', borderRadius: 12, padding: '1rem', background: 'var(--color-accent)', boxShadow: 'var(--shadow)', position: 'relative' }}
                           onClick={() => setSelectedItem({ type: 'project', data: block.project, sortDate: parseProjectDate(block.project.startDate) })}
-                          onMouseEnter={e => (e.currentTarget.style.backgroundColor = 'rgba(255,184,28,0.13)')}
-                          onMouseLeave={e => (e.currentTarget.style.backgroundColor = '#fffbe6')}
+                          onMouseEnter={e => {
+                            e.currentTarget.style.backgroundColor = 'rgba(196, 255, 130, 0.15)';
+                            e.currentTarget.style.transform = 'translateY(-2px)';
+                          }}
+                          onMouseLeave={e => {
+                            e.currentTarget.style.backgroundColor = 'var(--color-accent)';
+                            e.currentTarget.style.transform = 'translateY(0)';
+                          }}
                         >
-                          <div style={{ fontWeight: 700, fontSize: 16, color: '#1f2937', marginBottom: 4 }}>{block.project.title}</div>
-                          <div style={{ fontSize: 13, color: '#4b5563', marginBottom: 2 }}>{block.project.role}</div>
-                          <div style={{ fontSize: 13, color: '#6b7280', marginBottom: 2 }}>{block.project.desc.length > 40 ? block.project.desc.substring(0, 40) + '...' : block.project.desc}</div>
+                          <div className="timeline-project-card__qr" aria-hidden="true" />
+                          <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--color-fg)', marginBottom: 4 }}>{block.project.title}</div>
+                          <div style={{ fontSize: 13, color: 'var(--color-fg)', opacity: 0.7, marginBottom: 2 }}>{block.project.role}</div>
+                          <div style={{ fontSize: 13, color: 'var(--color-fg)', opacity: 0.8, marginBottom: 2 }}>{block.project.desc.length > 40 ? block.project.desc.substring(0, 40) + '...' : block.project.desc}</div>
                           <div style={{ fontSize: 12, fontWeight: 700, color: block.project.status === 'completed' ? '#10b981' : block.project.status === 'in-progress' ? '#f59e0b' : '#6b7280' }}>{block.project.status === 'completed' ? '完了' : block.project.status === 'in-progress' ? '進行中' : '予定'}</div>
                         </div>
                       </td>
@@ -169,13 +188,14 @@ export default function Events() {
                   }
                   // 既にrowSpanで埋まっているセルは空
                   const isCovered = projectBlocks.some(pb => pb.col === colIdx && pb.startIdx < rowIdx && pb.endIdx >= rowIdx);
-                  return isCovered ? null : <td key={colIdx} style={{ background: 'white', borderRight: '2px solid #e5e7eb', borderLeft: colIdx === 0 ? 'none' : '1px solid #e5e7eb' }} />;
+                  return isCovered ? null : <td key={colIdx} style={{ background: 'var(--color-accent)', borderRight: '2px solid var(--color-border)', borderLeft: colIdx === 0 ? 'none' : '1px solid var(--color-border)' }} />;
                 })}
               </tr>
             ))}
           </tbody>
         </table>
       </div>
+      </section>
 
       {/* モーダル（従来通り） */}
       {selectedItem && (
@@ -197,7 +217,7 @@ export default function Events() {
         >
           <div
             style={{
-              background: 'white',
+              background: 'var(--color-accent)',
               borderRadius: '16px',
               padding: '2rem',
               maxWidth: '700px',
@@ -205,7 +225,8 @@ export default function Events() {
               maxHeight: '85vh',
               overflowY: 'auto',
               position: 'relative',
-              boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)'
+              boxShadow: 'var(--shadow)',
+              border: '1px solid var(--color-border)'
             }}
             onClick={(e) => e.stopPropagation()}
           >
@@ -231,13 +252,13 @@ export default function Events() {
               ×
             </button>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginBottom: '1rem', marginRight: '3rem' }}>
-              <h2 style={{ fontSize: '1.5rem', fontWeight: '700', color: '#1f2937', margin: 0 }}>
+              <h2 style={{ fontSize: '1.5rem', fontWeight: '700', color: 'var(--color-fg)', margin: 0 }}>
                 {selectedItem.data.title}
               </h2>
               <span style={{
                 fontSize: '0.8rem',
                 padding: '0.3rem 0.8rem',
-                background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                background: 'var(--color-primary)',
                 color: 'white',
                 borderRadius: '16px',
                 fontWeight: '500'
@@ -245,7 +266,7 @@ export default function Events() {
                 {selectedItem.type === 'event' ? 'イベント' : 'プロジェクト'}
               </span>
             </div>
-            <div style={{ fontSize: '0.95rem', color: '#6b7280', marginBottom: '1rem', fontWeight: '500' }}>
+            <div style={{ fontSize: '0.95rem', color: 'var(--color-fg)', opacity: 0.7, marginBottom: '1rem', fontWeight: '500' }}>
               {selectedItem.type === 'event'
                 ? (selectedItem.data as Event).date
                 : (() => {
@@ -269,18 +290,18 @@ export default function Events() {
                 {(selectedItem.data as Project).status === 'completed' ? '完了' : (selectedItem.data as Project).status === 'in-progress' ? '進行中' : '予定'}
               </div>
             )}
-            <div style={{ fontSize: '1rem', color: '#4b5563', lineHeight: '1.7', marginBottom: '1.5rem' }}>
+            <div style={{ fontSize: '1rem', color: 'var(--color-fg)', lineHeight: '1.7', marginBottom: '1.5rem' }}>
               {selectedItem.data.desc}
             </div>
             {selectedItem.type === 'project' && (selectedItem.data as Project).technologies && (
               <div style={{ marginBottom: '1.5rem' }}>
-                <span style={{ fontWeight: '600', color: '#374151' }}>使用技術：</span>
+                <span style={{ fontWeight: '600', color: 'var(--color-fg)' }}>使用技術：</span>
                 <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.5rem', marginTop: '0.5rem' }}>
                   {(selectedItem.data as Project).technologies!.map((tech, techIdx) => (
                     <span key={techIdx} style={{
                       fontSize: '0.8rem',
                       padding: '0.3rem 0.8rem',
-                      background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                      background: 'var(--color-primary)',
                       color: 'white',
                       borderRadius: '16px',
                       fontWeight: '500'
@@ -293,10 +314,10 @@ export default function Events() {
             )}
             {selectedItem.type === 'project' && (selectedItem.data as Project).achievements && (
               <div style={{ marginBottom: '1.5rem' }}>
-                <span style={{ fontWeight: '600', color: '#374151' }}>達成したこと：</span>
+                <span style={{ fontWeight: '600', color: 'var(--color-fg)' }}>達成したこと：</span>
                 <ul style={{ margin: '0.5rem 0 0 0', paddingLeft: '1.5rem' }}>
                   {(selectedItem.data as Project).achievements!.map((achievement, achIdx) => (
-                    <li key={achIdx} style={{ marginBottom: '0.5rem', color: '#4b5563', lineHeight: '1.5' }}>
+                    <li key={achIdx} style={{ marginBottom: '0.5rem', color: 'var(--color-fg)', opacity: 0.85, lineHeight: '1.5' }}>
                       {achievement}
                     </li>
                   ))}
@@ -304,17 +325,18 @@ export default function Events() {
               </div>
             )}
             <div style={{
-              backgroundColor: '#f9fafb',
+              backgroundColor: 'var(--color-bg)',
               borderRadius: '12px',
               padding: '1.5rem',
-              marginBottom: '1.5rem'
+              marginBottom: '1.5rem',
+              border: '1px solid var(--color-border)'
             }}>
-              <div style={{ marginBottom: '1rem' }}>
-                <span style={{ fontWeight: '600', color: '#374151' }}>立場：</span>{selectedItem.data.role}
+              <div style={{ marginBottom: '1rem', color: 'var(--color-fg)' }}>
+                <span style={{ fontWeight: '600' }}>立場：</span>{selectedItem.data.role}
               </div>
               {selectedItem.data.learned && (
-                <div>
-                  <span style={{ fontWeight: '600', color: '#374151' }}>学んだこと：</span>{selectedItem.data.learned}
+                <div style={{ color: 'var(--color-fg)', opacity: 0.85 }}>
+                  <span style={{ fontWeight: '600' }}>学んだこと：</span>{selectedItem.data.learned}
                 </div>
               )}
             </div>
@@ -326,12 +348,21 @@ export default function Events() {
                   rel="noopener noreferrer"
                   style={{
                     display: 'inline-block',
-                    background: 'linear-gradient(135deg, #374151 0%, #1f2937 100%)',
+                    background: 'var(--color-primary-hover)',
                     color: 'white',
                     padding: '0.75rem 1.5rem',
                     textDecoration: 'none',
                     borderRadius: '8px',
-                    fontWeight: '500'
+                    fontWeight: '500',
+                    transition: 'all 0.2s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'var(--color-primary)';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'var(--color-primary-hover)';
+                    e.currentTarget.style.transform = 'translateY(0)';
                   }}
                 >
                   GitHubを見る
@@ -344,12 +375,21 @@ export default function Events() {
                   rel="noopener noreferrer"
                   style={{
                     display: 'inline-block',
-                    background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+                    background: 'var(--color-primary)',
                     color: 'white',
                     padding: '0.75rem 1.5rem',
                     textDecoration: 'none',
                     borderRadius: '8px',
-                    fontWeight: '500'
+                    fontWeight: '500',
+                    transition: 'all 0.2s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.background = 'var(--color-primary-hover)';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.background = 'var(--color-primary)';
+                    e.currentTarget.style.transform = 'translateY(0)';
                   }}
                 >
                   {selectedItem.type === 'event' ? 'イベントページを見る' : 'プロジェクトページを見る'}

@@ -1,485 +1,235 @@
 "use client";
+import Link from "next/link";
 import { awards } from "../data/awards";
 import { events, projects, Event, Project } from "../data/event";
 import { skills } from "../data/skills";
-import { useState } from "react";
+import { useEffect } from "react";
+import HeroSection from "./components/HeroSection";
+import DataPanel from "./components/DataPanel";
+import ActivityRail, { Activity as ActivityRailItem } from "./components/ActivityRail";
+import SkillConsole from "./components/SkillConsole";
 
-// Activity型定義
 type EventActivity = Event & {
   parsedDate: Date;
-  type: 'event';
+  type: "event";
 };
 
 type ProjectActivity = Project & {
   parsedDate: Date;
-  type: 'project';
+  type: "project";
 };
 
 type Activity = EventActivity | ProjectActivity;
 
 const featuredBadges = ["MySQL", "Java", "Next.js", "PHP"];
 
+const getRecentActivities = (): Activity[] => {
+  const eventsWithDates = events.map((event) => {
+    const dateMatch = event.date.split("~")[0].match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
+    const date = dateMatch
+      ? new Date(parseInt(dateMatch[1]), parseInt(dateMatch[2]) - 1, parseInt(dateMatch[3]))
+      : new Date();
+    return { ...event, parsedDate: date, type: "event" as const };
+  });
+
+  const projectsWithDates = projects.map((project) => {
+    const dateMatch = project.startDate.match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
+    const date = dateMatch
+      ? new Date(parseInt(dateMatch[1]), parseInt(dateMatch[2]) - 1, parseInt(dateMatch[3]))
+      : new Date();
+    return { ...project, parsedDate: date, type: "project" as const };
+  });
+
+  return [...eventsWithDates, ...projectsWithDates]
+    .sort((a, b) => b.parsedDate.getTime() - a.parsedDate.getTime())
+    .slice(0, 6);
+};
+
+const getRoleColor = (activity: Activity) => {
+  if (activity.type === "event") {
+    switch (activity.role) {
+      case "イベントオーナー":
+        return "#facc15";
+      case "スタッフ":
+        return "#38bdfc";
+      case "参加者":
+      default:
+        return "#94a3b8";
+    }
+  }
+
+  switch (activity.status) {
+    case "completed":
+      return "#22c55e";
+    case "in-progress":
+      return "#f97316";
+    case "planned":
+    default:
+      return "#94a3b8";
+  }
+};
+
+const getRoleText = (activity: Activity) => {
+  if (activity.type === "event") {
+    return activity.role;
+  }
+
+  switch (activity.status) {
+    case "completed":
+      return "完了";
+    case "in-progress":
+      return "進行中";
+    case "planned":
+      return "予定";
+    default:
+      return activity.status;
+  }
+};
+
+const formatDate = (activity: Activity) => {
+  if (activity.type === "event") {
+    const date = activity.parsedDate;
+    return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, "0")}`;
+  }
+
+  const startDate = activity.parsedDate;
+  const startFormatted = `${startDate.getFullYear()}.${String(startDate.getMonth() + 1).padStart(2, "0")}`;
+
+  if (activity.endDate === "進行中" || activity.endDate === "") {
+    return `${startFormatted}-`;
+  }
+
+  const endMatch = activity.endDate.match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
+  if (endMatch) {
+    const endDate = new Date(parseInt(endMatch[1]), parseInt(endMatch[2]) - 1, parseInt(endMatch[3]));
+    const endFormatted = `${endDate.getFullYear()}.${String(endDate.getMonth() + 1).padStart(2, "0")}`;
+    return `${startFormatted}-${endFormatted}`;
+  }
+
+  return startFormatted;
+};
+
 export default function Home() {
-  const [modalSkill, setModalSkill] = useState<null | typeof skills[0]>(null);
-  // 最新の活動を抽出・整理
-  const getRecentActivities = () => {
-    // イベントを日付でパース
-    const eventsWithDates = events.map(event => {
-      const dateMatch = event.date.split('~')[0].match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
-      const date = dateMatch
-        ? new Date(parseInt(dateMatch[1]), parseInt(dateMatch[2]) - 1, parseInt(dateMatch[3]))
-        : new Date();
-      return { ...event, parsedDate: date, type: 'event' as const };
-    });
-
-    // プロジェクトを開始日でパース
-    const projectsWithDates = projects.map(project => {
-      const dateMatch = project.startDate.match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
-      const date = dateMatch
-        ? new Date(parseInt(dateMatch[1]), parseInt(dateMatch[2]) - 1, parseInt(dateMatch[3]))
-        : new Date();
-      return { ...project, parsedDate: date, type: 'project' as const };
-    });
-
-    // 全ての活動をマージして日付順にソート
-    const allActivities = [...eventsWithDates, ...projectsWithDates]
-      .sort((a, b) => b.parsedDate.getTime() - a.parsedDate.getTime())
-      .slice(0, 5); // 最新5件
-
-    return allActivities;
-  };
-
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+  }, []);
   const recentActivities = getRecentActivities();
+  const activityItems: ActivityRailItem[] = recentActivities.map((activity) => ({
+    title: activity.title,
+    subtitle: activity.type === "event" ? activity.desc : activity.desc,
+    timeline: formatDate(activity),
+    badge: getRoleText(activity),
+    color: getRoleColor(activity),
+  }));
 
-  // 役割/ステータスの色を取得
-  const getRoleColor = (activity: Activity) => {
-    if (activity.type === 'event') {
-      switch (activity.role) {
-        case 'イベントオーナー': return '#f59e0b';
-        case 'スタッフ': return '#3b82f6';
-        case '参加者': return '#6b7280';
-        default: return '#6b7280';
-      }
-    } else {
-      switch (activity.status) {
-        case 'completed': return '#10b981';
-        case 'in-progress': return '#f59e0b';
-        case 'planned': return '#6b7280';
-        default: return '#6b7280';
-      }
-    }
-  };
-
-  // 役割/ステータスのテキストを取得
-  const getRoleText = (activity: Activity) => {
-    if (activity.type === 'event') {
-      return activity.role;
-    } else {
-      switch (activity.status) {
-        case 'completed': return '完了';
-        case 'in-progress': return '進行中';
-        case 'planned': return '予定';
-        default: return activity.status;
-      }
-    }
-  };
-
-  // 日付フォーマット
-  const formatDate = (activity: Activity) => {
-    if (activity.type === 'event') {
-      const date = activity.parsedDate;
-      return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, '0')}`;
-    } else {
-      const startDate = activity.parsedDate;
-      const startFormatted = `${startDate.getFullYear()}.${String(startDate.getMonth() + 1).padStart(2, '0')}`;
-
-      if (activity.endDate === '進行中' || activity.endDate === '') {
-        return `${startFormatted}-`;
-      }
-
-      const endMatch = activity.endDate.match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
-      if (endMatch) {
-        const endDate = new Date(parseInt(endMatch[1]), parseInt(endMatch[2]) - 1, parseInt(endMatch[3]));
-        const endFormatted = `${endDate.getFullYear()}.${String(endDate.getMonth() + 1).padStart(2, '0')}`;
-        return `${startFormatted}-${endFormatted}`;
-      }
-      return startFormatted;
-    }
-  };
+  const completedOrPublicProjects = projects
+    .filter((project) => project.status === "completed" || project.github)
+    .slice(0, 3);
 
   return (
     <>
-
-      <main className="container" style={{ position: 'relative' }}>
-        <div className="bg-geometry" />
-        {/* Heroセクション */}
-        <section className="hero hero-card">
-          <div className="hero-card__grid">
-            <div className="hero-card__decor hero-card__decor--left" aria-hidden="true">
-              <span className="hero-chip">Portfolio</span>
-              <div className="hero-vertical-label">
-                <span>Tenhou</span>
-                <span>Portfolio</span>
-              </div>
-              <div className="hero-card__qr" />
-              <div className="hero-card__stamp hero-card__stamp--round">Engineer</div>
-              <div className="hero-card__stamp">Product Manager</div>
-            </div>
-
-            <div className="hero-card__content">
-              <div className="hero-heading" aria-hidden="true">
-                <div className="hero-heading__barcode" />
-              </div>
-              <h1 className="hero-title hero-title--accent">Tenhou’s Portfolio Site</h1>
-              <p className="hero-sub hero-sub--card">Soft/Hard Engineer · Product Manager · Student</p>
-              <div className="hero-pill-row">
-                {featuredBadges.map((badge) => (
-                  <span key={badge} className="hero-pill">{badge}</span>
-                ))}
-              </div>
-              <div className="hero-meta-grid">
-                <div>
-                  <span className="hero-meta-label">Accounts</span>
-                  <div className="hero-account-row">
-                    <span>@tenhou_0126</span>
-                    <span>github.com/tenhou-Ravenclaw</span>
-                  </div>
-                </div>
-                <div className="hero-signal" aria-hidden="true">
-                  <span />
-                  <span />
-                  <span />
-                </div>
-              </div>
-            </div>
-
-            <div className="hero-card__decor hero-card__decor--right" aria-hidden="true">
-              <div className="hero-card__barcode hero-card__barcode--thin" />
-              <div className="hero-card__dotgrid" />
-              <div className="hero-card__globe">
-                <div />
-                <div />
-                <div />
-              </div>
-            </div>
-          </div>
-        </section>
-        {/* Aboutセクション */}
-        <section className="section">
-          <h2 className="section-title">About</h2>
-          <div className="section-desc">
-            <p style={{ marginBottom: '1.5rem' }}>
-              <strong>自己紹介</strong><br />
-              フルスタック(を目指している)エンジニアです。<br />
-              フクロウが好きです。猛勤類です。<br />
-              近畿大学情報学部実世界コンピューティングコースに在学中。<br />
-              プログラミングは大学入学と同時に始めました。<br />
-              Webアプリケーション開発を中心にハードウェアやサーバーなど、幅広く学んでいます。
+      <main className="neo-container">
+        <HeroSection featuredBadges={featuredBadges} />
+        <div className="panel-grid">
+          <DataPanel title="About" tag="profile" accent="blue">
+            <p style={{ marginBottom: "1rem" }}>
+              フルスタック（を目指している）エンジニア。フクロウに人生を捧げる猛勤類。近畿大学情報学部 実世界コンピューティングコースに在籍し、
+              Web / ハードウェア / サーバの境界をまたぎながら、プロダクトの「手触り」を探求しています。
             </p>
-            <p><a href="/about" className="link">もっと見る</a></p>
-          </div>
-        </section>
-        {/* Awardsセクション */}
-        <section className="section" id="awards-section">
-          <h2 className="section-title">Awards</h2>
-          <ul className="awards-list">
-            {awards.map((award) => (
-              <li key={`${award.year}-${award.title}`}>
-                <strong>{award.year} {award.title}</strong> {award.prize}
-              </li>
-            ))}
-          </ul>
-        </section>
-        {/* Worksセクション */}
-        <section className="section">
-          <h2 className="section-title">Works</h2>
-          <div className="section-desc">
-            <div style={{ marginBottom: '1.5rem' }}>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                {projects
-                  .filter(project => project.status === 'completed' || project.github)
-                  .slice(0, 3)
-                  .map((project, index, array) => (
-                    <li
-                      key={project.title}
-                      style={{
-                        marginBottom: index === array.length - 1 ? 0 : '1rem',
-                        paddingBottom: index === array.length - 1 ? 0 : '1rem',
-                        borderBottom: index === array.length - 1 ? 'none' : '1px solid #f0f0f0'
-                      }}
+            <p style={{ marginBottom: "1rem" }}>
+              大学入学と同時にプログラミングを始め、コミュニティ運営やハッカソン、企業連携プロジェクトにも積極的に参加。
+              ハードとソフト、そして「人」をつなぐブリッジャーとして活動中。
+            </p>
+            <Link href="/about" className="link">
+              もっと見る
+            </Link>
+          </DataPanel>
+
+          <DataPanel title="Awards" tag="log" accent="blue">
+            <ul className="awards-stack">
+              {awards.map((award) => (
+                <li key={`${award.year}-${award.title}`}>
+                  <span className="awards-stack__year">{award.year}</span>
+                  <div>
+                    <strong>{award.title}</strong>
+                    <div className="awards-stack__prize">{award.prize}</div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </DataPanel>
+
+          <DataPanel
+            title="Works"
+            tag="projects"
+            accent="lime"
+            actions={
+              <Link href="/works" className="link">
+                View All
+              </Link>
+            }
+          >
+            <div className="works-stack">
+              {completedOrPublicProjects.map((project) => (
+                <div className="works-card" key={project.title}>
+                  <div className="works-card__head">
+                    <h3>{project.title}</h3>
+                    <span
+                      className={`works-chip works-chip--${project.status === "completed" ? "done" : "progress"}`}
                     >
-                      <div style={{ marginBottom: '0.5rem' }}>
-                        <strong style={{ fontSize: '1.1rem' }}>{project.title}</strong>
-                        <span style={{
-                          marginLeft: '0.5rem',
-                          fontSize: '0.8rem',
-                          color: project.status === 'completed' ? '#10b981' : '#f59e0b',
-                          fontWeight: '600'
-                        }}>
-                          {project.status === 'completed' ? '完了' : '進行中'}
-                        </span>
-                      </div>
-                      <p style={{
-                        margin: '0 0 0.5rem 0',
-                        color: '#6b7280',
-                        fontSize: '0.9rem',
-                        lineHeight: '1.5'
-                      }}>
-                        {project.desc.length > 100 ? project.desc.substring(0, 100) + '...' : project.desc}
-                      </p>
-                      {project.technologies && (
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.3rem', marginBottom: '0.5rem' }}>
-                          {project.technologies.slice(0, 4).map(tech => (
-                            <span
-                              key={tech}
-                              style={{
-                                fontSize: '0.75rem',
-                                padding: '0.2rem 0.5rem',
-                                background: '#f3f4f6',
-                                color: '#6b7280',
-                                borderRadius: '8px',
-                                fontWeight: '500'
-                              }}
-                            >
-                              {tech}
-                            </span>
-                          ))}
-                          {project.technologies.length > 4 && (
-                            <span style={{
-                              fontSize: '0.75rem',
-                              padding: '0.2rem 0.5rem',
-                              background: '#e5e7eb',
-                              color: '#6b7280',
-                              borderRadius: '8px',
-                              fontWeight: '500'
-                            }}>
-                              +{project.technologies.length - 4}
-                            </span>
-                          )}
-                        </div>
-                      )}
-                    </li>
-                  ))
-                }
-              </ul>
-            </div>
-            <p><a href="/works" className="link">すべての作品を見る</a></p>
-          </div>
-        </section>
-        {/* Eventsセクション */}
-        <section className="section">
-          <h2 className="section-title">Recent Activities</h2>
-          <div className="section-desc">
-            <div style={{ marginBottom: '1.5rem' }}>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0 }}>
-                {recentActivities.map((activity, index) => (
-                  <li
-                    key={`${activity.title}-${index}`}
-                    style={{
-                      marginBottom: index === recentActivities.length - 1 ? 0 : '0.8rem',
-                      paddingBottom: index === recentActivities.length - 1 ? 0 : '0.8rem',
-                      borderBottom: index === recentActivities.length - 1 ? 'none' : '1px solid #f0f0f0'
-                    }}
-                  >
-                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', flexWrap: 'wrap' }}>
-                      <div>
-                        <strong>{activity.title}</strong>
-                        <span style={{
-                          marginLeft: '0.5rem',
-                          fontSize: '0.85rem',
-                          color: getRoleColor(activity),
-                          fontWeight: '600'
-                        }}>
-                          {getRoleText(activity)}
-                        </span>
-                      </div>
-                      <span style={{ fontSize: '0.85rem', color: '#6b7280' }}>
-                        {formatDate(activity)}
-                      </span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <p><a href="/events" className="link">イベント・プロジェクト履歴をすべて見る</a></p>
-          </div>
-        </section>
-        {/* Skillsセクション */}
-        <section className="section" id="skills-section">
-          <h2 className="section-title">Skills</h2>
-          <h3 style={{ marginTop: '1.5rem', marginBottom: '0.5rem', fontSize: '1.1rem', color: '#7c3aed' }}>言語</h3>
-          <div className="skills-grid" style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '1.2rem',
-            marginBottom: '2.2rem',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-          }}>
-            {[...skills].filter(s => s.category === 'language').sort((a, b) => (b.level ?? 0) - (a.level ?? 0)).map(skill => (
-              <div
-                key={skill.name}
-                className="skill-badge"
-                style={{
-                  background: '#f8f6ff',
-                  borderRadius: '1.2rem',
-                  boxShadow: '0 2px 8px rgba(180,160,255,0.07)',
-                  padding: '1.1rem 0.5rem 0.7rem 0.5rem',
-                  textAlign: 'center',
-                  transition: 'transform 0.15s',
-                  cursor: skill.description ? 'pointer' : 'default',
-                  position: 'relative',
-                  flex: '1 1 calc((100% - 3.6rem) / 4)',
-                  maxWidth: 'calc((100% - 3.6rem) / 4)',
-                  minWidth: 0,
-                }}
-                onClick={() => skill.description && setModalSkill(skill)}
-                title={skill.description || ''}
-              >
-                <img src={skill.icon} alt={skill.name} style={{ width: 40, height: 40, marginBottom: 8 }} />
-                <div style={{ fontWeight: 600, fontSize: '1.05rem', marginBottom: 2 }}>{skill.name}</div>
-                {skill.level && (
-                  <div style={{ fontSize: '0.9rem', color: '#a78bfa', marginBottom: 2 }}>
-                    {'★'.repeat(skill.level)}{'☆'.repeat(5 - skill.level)}
+                      {project.status === "completed" ? "完了" : "進行中"}
+                    </span>
                   </div>
-                )}
-                {skill.years && (
-                  <div style={{ fontSize: '0.85rem', color: '#888' }}>{skill.years}</div>
-                )}
-              </div>
-            ))}
-          </div>
-          <h3 style={{ marginTop: '0.5rem', marginBottom: '0.5rem', fontSize: '1.1rem', color: '#7c3aed' }}>ツール</h3>
-          <div className="skills-grid" style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            gap: '1.2rem',
-            marginBottom: '1.2rem',
-            alignItems: 'center',
-            justifyContent: 'flex-start',
-          }}>
-            {[...skills].filter(s => s.category === 'tool').sort((a, b) => (b.level ?? 0) - (a.level ?? 0)).map(skill => (
-              <div
-                key={skill.name}
-                className="skill-badge"
-                style={{
-                  background: '#f8f6ff',
-                  borderRadius: '1.2rem',
-                  boxShadow: '0 2px 8px rgba(180,160,255,0.07)',
-                  padding: '1.1rem 0.5rem 0.7rem 0.5rem',
-                  textAlign: 'center',
-                  transition: 'transform 0.15s',
-                  cursor: skill.description ? 'pointer' : 'default',
-                  position: 'relative',
-                  flex: '1 1 calc((100% - 3.6rem) / 4)',
-                  maxWidth: 'calc((100% - 3.6rem) / 4)',
-                  minWidth: 0,
-                }}
-                onClick={() => skill.description && setModalSkill(skill)}
-                title={skill.description || ''}
-              >
-                <img src={skill.icon} alt={skill.name} style={{ width: 40, height: 40, marginBottom: 8 }} />
-                <div style={{ fontWeight: 600, fontSize: '1.05rem', marginBottom: 2 }}>{skill.name}</div>
-                {skill.level && (
-                  <div style={{ fontSize: '0.9rem', color: '#a78bfa', marginBottom: 2 }}>
-                    {'★'.repeat(skill.level)}{'☆'.repeat(5 - skill.level)}
-                  </div>
-                )}
-                {skill.years && (
-                  <div style={{ fontSize: '0.85rem', color: '#888' }}>{skill.years}</div>
-                )}
-              </div>
-            ))}
-            {/* スキル詳細モーダル */}
-            {modalSkill && (
-              <div style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                width: '100vw',
-                height: '100vh',
-                background: 'rgba(0,0,0,0.25)',
-                zIndex: 1000,
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }} onClick={() => setModalSkill(null)}>
-                <div style={{
-                  background: '#fff',
-                  borderRadius: '1.2rem',
-                  boxShadow: '0 4px 24px rgba(80,60,120,0.18)',
-                  padding: '2.2rem 2.2rem 1.5rem 2.2rem',
-                  minWidth: 280,
-                  maxWidth: '90vw',
-                  textAlign: 'center',
-                  position: 'relative',
-                }} onClick={e => e.stopPropagation()}>
-                  <img src={modalSkill.icon} alt={modalSkill.name} style={{ width: 56, height: 56, marginBottom: 12 }} />
-                  <div style={{ fontWeight: 700, fontSize: '1.2rem', marginBottom: 8 }}>{modalSkill.name}</div>
-                  {modalSkill.level && (
-                    <div style={{ fontSize: '1.05rem', color: '#a78bfa', marginBottom: 6 }}>
-                      {'★'.repeat(modalSkill.level)}{'☆'.repeat(5 - modalSkill.level)}
+                  <p>{project.desc.length > 140 ? `${project.desc.substring(0, 140)}…` : project.desc}</p>
+                  {project.technologies && (
+                    <div className="works-tags">
+                      {project.technologies.slice(0, 4).map((tech) => (
+                        <span key={tech}>{tech}</span>
+                      ))}
                     </div>
                   )}
-                  {modalSkill.years && (
-                    <div style={{ fontSize: '0.95rem', color: '#888', marginBottom: 8 }}>{modalSkill.years}</div>
-                  )}
-                  <div style={{ fontSize: '1rem', color: '#444', marginBottom: 10 }}>{modalSkill.description}</div>
-                  <button onClick={() => setModalSkill(null)} style={{
-                    position: 'absolute',
-                    top: 10,
-                    right: 18,
-                    background: 'none',
-                    border: 'none',
-                    fontSize: 22,
-                    color: '#aaa',
-                    cursor: 'pointer',
-                  }} aria-label="閉じる">×</button>
                 </div>
-              </div>
-            )}
-          </div>
-        </section>
-        {/* Contactセクション */}
-        <section className="hero">
+              ))}
+            </div>
+          </DataPanel>
+
+          <DataPanel
+            title="Recent Activities"
+            tag="timeline"
+            accent="blue"
+            actions={
+              <Link href="/events" className="link">
+                イベント一覧
+              </Link>
+            }
+          >
+            <ActivityRail activities={activityItems} />
+          </DataPanel>
+
+          <DataPanel title="Skills" tag="console" accent="lime">
+            <SkillConsole skills={skills} />
+          </DataPanel>
+        </div>
+      </main>
+
+      <footer className="neo-footer">
+        <div className="neo-footer__links">
+          <a href="https://x.com/tenhou_0126" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
+            X
+          </a>
+          <a href="https://github.com/tenhou-Ravenclaw" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+            GITHUB
+          </a>
           <a
-            href="https://forms.gle/mgff1SAhDBBkF4AG8"
+            href="https://www.linkedin.com/in/彩翔-藤田-595a16352"
             target="_blank"
             rel="noopener noreferrer"
-            className="contact-btn"
+            aria-label="LinkedIn"
           >
-            Contact
-          </a>
-        </section>
-      </main>
-      {/* --- SNSフッター --- */}
-      <footer style={{
-        width: '100%',
-        background: 'rgba(245,240,255,0.85)',
-        color: '#444',
-        textAlign: 'center',
-        padding: '1.2rem 0 0.5rem 0',
-        marginTop: '2rem',
-        fontSize: '1rem',
-        borderTop: '1px solid #e0d6f7',
-      }}>
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '1.5rem', marginBottom: '0.5rem' }}>
-          {/* X（旧Twitter） */}
-          <a href="https://x.com/tenhou_0126" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)" style={{ display: 'inline-block', width: 28, height: 28 }}>
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M20.66 3.84h-3.18l-4.13 5.6-4.13-5.6H3.34l5.98 8.1-6.32 8.66h3.18l4.47-6.12 4.47 6.12h3.18l-6.32-8.66 5.98-8.1z" fill="#444" /></svg>
-          </a>
-          {/* GitHub */}
-          <a href="https://github.com/tenhou-Ravenclaw" target="_blank" rel="noopener noreferrer" aria-label="GitHub" style={{ display: 'inline-block', width: 28, height: 28 }}>
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.32 6.84 9.67.5.09.68-.22.68-.48 0-.24-.01-.87-.01-1.7-2.78.62-3.37-1.36-3.37-1.36-.45-1.18-1.1-1.5-1.1-1.5-.9-.63.07-.62.07-.62 1 .07 1.53 1.05 1.53 1.05.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.37-2.22-.26-4.56-1.14-4.56-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.7 0 0 .84-.28 2.75 1.05A9.38 9.38 0 0 1 12 6.84c.85.004 1.7.12 2.5.34 1.9-1.33 2.74-1.05 2.74-1.05.55 1.4.2 2.44.1 2.7.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.94.68 1.9 0 1.37-.01 2.47-.01 2.8 0 .26.18.57.69.47A10.01 10.01 0 0 0 22 12.26C22 6.58 17.52 2 12 2z" fill="#444" /></svg>
-          </a>
-          {/* LinkedIn */}
-          <a href="https://www.linkedin.com/in/彩翔-藤田-595a16352" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" style={{ display: 'inline-block', width: 28, height: 28 }}>
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M19 0h-14c-2.76 0-5 2.24-5 5v14c0 2.76 2.24 5 5 5h14c2.76 0 5-2.24 5-5v-14c0-2.76-2.24-5-5-5zm-11 19h-3v-9h3v9zm-1.5-10.28c-.97 0-1.75-.79-1.75-1.75s.78-1.75 1.75-1.75 1.75.79 1.75 1.75-.78 1.75-1.75 1.75zm15.5 10.28h-3v-4.5c0-1.08-.02-2.47-1.5-2.47-1.5 0-1.73 1.17-1.73 2.39v4.58h-3v-9h2.88v1.23h.04c.4-.75 1.38-1.54 2.84-1.54 3.04 0 3.6 2 3.6 4.59v4.72z" fill="#444" /></svg>
+            LINKEDIN
           </a>
         </div>
-        <div style={{ fontSize: '0.95rem', color: '#888' }}>
-          &copy; {new Date().getFullYear()} Tenhou Ravenclaw
-        </div>
+        <div className="neo-footer__copy">&copy; {new Date().getFullYear()} Tenhou Ravenclaw</div>
       </footer>
     </>
   );
