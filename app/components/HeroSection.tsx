@@ -5,12 +5,51 @@ type HeroSectionProps = {
   featuredBadges: string[];
 };
 
-const accountLinks = [
-  { label: "Portfolio", href: "/", caption: "tenhou.journey" },
-  { label: "GitHub", href: "https://github.com/tenhou-Ravenclaw", caption: "@tenhou" },
-  { label: "LinkedIn", href: "https://www.linkedin.com/in/彩翔-藤田-595a16352", caption: "Fujita Ayato" },
-  { label: "X", href: "https://x.com/tenhou_0126", caption: "@tenhou_0126" },
+type AccountLink = {
+  label: string;
+  href: string;
+  caption: string;
+  // ポートフォリオ用のローカルアイコン
+  localIcon?: string;
+  // それ以外はドメインから自動取得
+  faviconDomain?: string;
+};
+
+const accountLinks: AccountLink[] = [
+  {
+    label: "Portfolio",
+    href: "/",
+    caption: "tenhou.journey",
+    localIcon: "/tenhouPortfolioIcon.png",
+  },
+  {
+    label: "GitHub",
+    href: "https://github.com/tenhou-Ravenclaw",
+    caption: "@tenhou",
+    faviconDomain: "github.com",
+  },
+  {
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/彩翔-藤田-595a16352",
+    caption: "Fujita Ayato",
+    faviconDomain: "linkedin.com",
+  },
+  {
+    label: "X",
+    href: "https://x.com/tenhou_0126",
+    caption: "@tenhou_0126",
+    faviconDomain: "x.com",
+  },
 ];
+
+const resolveAccountIconSrc = (account: AccountLink) => {
+  if (account.localIcon) return account.localIcon;
+  if (account.faviconDomain) {
+    // Google の favicon API から取得
+    return `https://www.google.com/s2/favicons?sz=64&domain=${account.faviconDomain}`;
+  }
+  return null;
+};
 
 const HeroSection = ({ featuredBadges }: HeroSectionProps) => {
   return (
@@ -42,15 +81,28 @@ const HeroSection = ({ featuredBadges }: HeroSectionProps) => {
           モダンなプロダクトとヒト・モノづくりを繋ぐハイブリッドエンジニアです。
         </p>
         <div className="hero-v2__accounts">
-          {accountLinks.map((account) => (
-            <Link key={account.label} href={account.href} target="_blank" className="qr-badge">
-              <span className="qr-badge__label">{account.label}</span>
-              <div className="qr-badge__code" aria-hidden="true" />
-              <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.85rem" }}>
-                {account.caption}
-              </span>
-            </Link>
-          ))}
+          {accountLinks.map((account) => {
+            const iconSrc = resolveAccountIconSrc(account);
+            return (
+              <Link key={account.label} href={account.href} target="_blank" className="qr-badge">
+                <span className="qr-badge__label">{account.label}</span>
+                <div className="qr-badge__code" aria-hidden="true">
+                  {iconSrc && (
+                    <Image
+                      src={iconSrc}
+                      alt={`${account.label} logo`}
+                      width={48}
+                      height={48}
+                      style={{ width: 48, height: 48, display: "block" }}
+                    />
+                  )}
+                </div>
+                <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.85rem" }}>
+                  {account.caption}
+                </span>
+              </Link>
+            );
+          })}
         </div>
         <div className="hero-v2__contact">
           <Link
