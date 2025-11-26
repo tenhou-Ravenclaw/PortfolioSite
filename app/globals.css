@@ -636,11 +636,6 @@ body {
     padding: 2rem 1.2rem;
   }
 
-  .hero-title::before,
-  .hero-title::after {
-    display: none;
-  }
-
   .hero-title {
     letter-spacing: 0.08em;
   }
