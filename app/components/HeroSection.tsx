@@ -97,7 +97,13 @@ const HeroSection = ({ featuredBadges }: HeroSectionProps) => {
                     />
                   )}
                 </div>
-                <span style={{ fontFamily: "var(--font-mono)", fontSize: "0.85rem" }}>
+                <span
+                  style={{
+                    fontFamily: "var(--font-mono)",
+                    fontSize: "0.85rem",
+                    color: "rgba(15, 23, 42, 0.95)",
+                  }}
+                >
                   {account.caption}
                 </span>
               </Link>
