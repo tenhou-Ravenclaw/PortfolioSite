@@ -101,7 +101,7 @@ const HeroSection = ({ featuredBadges }: HeroSectionProps) => {
                   style={{
                     fontFamily: "var(--font-mono)",
                     fontSize: "0.85rem",
-                    color: "rgba(15, 23, 42, 0.95)",
+                    color: "var(--color-ink)",
                   }}
                 >
                   {account.caption}

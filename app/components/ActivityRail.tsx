@@ -25,7 +25,7 @@ const ActivityRail = ({ activities }: ActivityRailProps) => {
             style={{
               fontWeight: 700,
               marginBottom: "0.4rem",
-              color: "#060b12", // 常に濃い文字色にしてカード背景とコントラストを確保
+              color: "var(--color-ink)",
             }}
           >
             {activity.title}
@@ -33,7 +33,7 @@ const ActivityRail = ({ activities }: ActivityRailProps) => {
           <div
             style={{
               fontSize: "0.9rem",
-              color: "rgba(15, 23, 42, 0.9)",
+              color: "var(--color-ink-soft)",
               lineHeight: 1.6,
             }}
           >
