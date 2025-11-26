@@ -66,6 +66,33 @@ export default function AboutPage() {
             <section className="section section-card">
                 <div className="section-card__decor section-card__decor--left" aria-hidden="true">
                     <div className="vertical-label">
+                        <span>価値観</span>
+                    </div>
+                </div>
+                <div className="section-card__content">
+                    <h2 className="section-title">Values</h2>
+                    <div className="values-grid">
+                        <div className="value-item">
+                            <h3>Bridge the Gap</h3>
+                            <p>ハードウェアとソフトウェア、人と技術。異なる領域を繋ぐ「架け橋」として、新しい価値を生み出します。</p>
+                        </div>
+                        <div className="value-item">
+                            <h3>Playful Engineering</h3>
+                            <p>「楽しむこと」こそが最大の原動力。遊び心を忘れず、触れる人の心を動かすプロダクトを作ります。</p>
+                        </div>
+                        <div className="value-item">
+                            <h3>Owl's Wisdom</h3>
+                            <p>知恵の象徴であるフクロウのように、常に学び続け、深い洞察と広い視野で課題に向き合います。</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="section-card__decor section-card__decor--right" aria-hidden="true">
+                    <div className="card-dotgrid" />
+                </div>
+            </section>
+            <section className="section section-card">
+                <div className="section-card__decor section-card__decor--left" aria-hidden="true">
+                    <div className="vertical-label">
                         <span>趣味</span>
                     </div>
                 </div>

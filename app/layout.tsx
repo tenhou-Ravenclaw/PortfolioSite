@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Varela_Round, Great_Vibes, Noto_Sans_JP } from "next
 import "./globals.css";
 import GlobalNav from "./GlobalNav";
 import OwlSplash from "./components/OwlSplash";
+import ClickEffect from "./components/ClickEffect";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -35,6 +36,7 @@ const notoSansJp = Noto_Sans_JP({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NODE_ENV === 'production' ? 'https://ten-hou.com' : 'http://localhost:3000'),
   title: "Tenhou's Portfolio",
   description: "ぜひご覧ください！",
   icons: {
@@ -44,11 +46,11 @@ export const metadata: Metadata = {
     title: "Tenhou's Portfolio",
     description: "ぜひご覧ください！",
     type: "website",
-    url: process.env.NODE_ENV === 'production' ? 'https://your-domain.com' : 'http://localhost:3000',
+    url: '/',
     siteName: "Tenhou's Portfolio",
     images: [
       {
-        url: process.env.NODE_ENV === 'production' ? 'https://your-domain.com/tenhouPortfolioIcon.png' : 'http://localhost:3000/tenhouPortfolioIcon.png',
+        url: '/tenhouPortfolioIcon.png',
         width: 1024,
         height: 1024,
         alt: "Tenhou's Portfolio",
@@ -60,7 +62,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Tenhou's Portfolio",
     description: "ぜひご覧ください！",
-    images: [process.env.NODE_ENV === 'production' ? 'https://your-domain.com/tenhouPortfolioIcon.png' : 'http://localhost:3000/tenhouPortfolioIcon.png'],
+    images: ['/tenhouPortfolioIcon.png'],
   },
 };
 
@@ -71,28 +73,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <head>
-        {/* LINE対応のための追加メタタグ */}
-        <meta property="og:title" content="Tenhou's Portfolio" />
-        <meta property="og:description" content="ぜひご覧ください！" />
-        <meta property="og:image" content={process.env.NODE_ENV === 'production' ? 'https://your-domain.com/tenhouPortfolioIcon.png' : 'http://localhost:3000/tenhouPortfolioIcon.png'} />
-        <meta property="og:url" content={process.env.NODE_ENV === 'production' ? 'https://your-domain.com' : 'http://localhost:3000'} />
-        <meta property="og:type" content="website" />
-        <meta property="og:site_name" content="Tenhou's Portfolio" />
-        <meta property="og:image:width" content="1024" />
-        <meta property="og:image:height" content="1024" />
-        <meta property="og:image:type" content="image/png" />
-
-        {/* Twitter Card (念のため) */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Tenhou's Portfolio" />
-        <meta name="twitter:description" content="ぜひご覧ください！" />
-        <meta name="twitter:image" content={process.env.NODE_ENV === 'production' ? 'https://your-domain.com/tenhouPortfolioIcon.png' : 'http://localhost:3000/tenhouPortfolioIcon.png'} />
-      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${varelaRound.variable} ${greatVibes.variable} ${notoSansJp.variable} antialiased`}
       >
         <OwlSplash />
+        <ClickEffect />
         <GlobalNav />
         {children}
       </body>
