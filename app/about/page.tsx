@@ -81,7 +81,7 @@ export default function AboutPage() {
                             <p>「楽しむこと」こそが最大の原動力。遊び心を忘れず、触れる人の心を動かすプロダクトを作ります。</p>
                         </div>
                         <div className="value-item">
-                            <h3>Owl's Wisdom</h3>
+                            <h3>Owl&apos;s Wisdom</h3>
                             <p>知恵の象徴であるフクロウのように、常に学び続け、深い洞察と広い視野で課題に向き合います。</p>
                         </div>
                     </div>
