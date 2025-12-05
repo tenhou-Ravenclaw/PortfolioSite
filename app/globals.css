@@ -2080,6 +2080,12 @@ body {
   100% { transform: translate(-50%, -50%) scale(5); opacity: 0; }
 }
 
+/* Respect reduced motion preferences for click ripple effect */
+@media (prefers-reduced-motion: reduce) {
+  .click-ripple {
+    display: none;
+  }
+}
 /* --- Aboutページ Valuesセクション用 --- */
 .values-grid {
   display: grid;
