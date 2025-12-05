@@ -133,8 +133,8 @@ export default function Home() {
         <div className="panel-grid">
           <DataPanel title="About" tag="profile" accent="blue">
             <p style={{ marginBottom: "1rem" }}>
-              フルスタック（を目指している）エンジニア。フクロウに人生を捧げる猛勤類。近畿大学情報学部 実世界コンピューティングコースに在籍し、
-              Web / ハードウェア / サーバの境界をまたぎながら、プロダクトの「手触り」を探求しています。
+              フルスタック（を目指している）エンジニア。フクロウに人生を捧げる猛勤類。近畿大学情報学部 実世界コンピューティングコースに在籍し、<br />
+              Web / ハードウェア / サーバの境界をまたぎながら、人の役に立つプロダクトの制作をしている。
             </p>
             <p style={{ marginBottom: "1rem" }}>
               大学入学と同時にプログラミングを始め、コミュニティ運営やハッカソン、企業連携プロジェクトにも積極的に参加。
@@ -145,19 +145,21 @@ export default function Home() {
             </Link>
           </DataPanel>
 
-          <DataPanel title="Awards" tag="log" accent="blue">
-            <ul className="awards-stack">
-              {awards.map((award) => (
-                <li key={`${award.year}-${award.title}`}>
-                  <span className="awards-stack__year">{award.year}</span>
-                  <div>
-                    <strong>{award.title}</strong>
-                    <div className="awards-stack__prize">{award.prize}</div>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </DataPanel>
+          <div id="awards-section">
+            <DataPanel title="Awards" tag="log" accent="blue">
+              <ul className="awards-stack">
+                {awards.map((award) => (
+                  <li key={`${award.year}-${award.title}`}>
+                    <span className="awards-stack__year">{award.year}</span>
+                    <div>
+                      <strong>{award.title}</strong>
+                      <div className="awards-stack__prize">{award.prize}</div>
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </DataPanel>
+          </div>
 
           <DataPanel
             title="Works"
@@ -206,9 +208,11 @@ export default function Home() {
             <ActivityRail activities={activityItems} />
           </DataPanel>
 
-          <DataPanel title="Skills" tag="console" accent="lime">
-            <SkillConsole skills={skills} />
-          </DataPanel>
+          <div id="skills-section">
+            <DataPanel title="Skills" tag="console" accent="lime">
+              <SkillConsole skills={skills} />
+            </DataPanel>
+          </div>
         </div>
       </main>
 

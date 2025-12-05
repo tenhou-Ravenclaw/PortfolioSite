@@ -68,7 +68,7 @@ const HeroSection = ({ featuredBadges }: HeroSectionProps) => {
         <span className="hero-v2__label">Portfolio</span>
         <div className="hero-v2__name-jp">藤田 彩翔</div>
         <div className="hero-v2__name-en">Ayato Fujita</div>
-        <div className="hero-v2__role">Soft / Hard Engineer ・ Product Manager</div>
+        <div className="hero-v2__role">Soft / Hard Engineer <br /> Product Manager</div>
         <div className="hero-v2__badges">
           {featuredBadges.map((badge) => (
             <span className="hero-v2__badge" key={badge}>
@@ -77,7 +77,7 @@ const HeroSection = ({ featuredBadges }: HeroSectionProps) => {
           ))}
         </div>
         <p className="hero-v2__quote">
-          Do it with ease, without noise, and with elegance.  
+          Do it with ease, without noise, and with elegance.  <br />
           モダンなプロダクトとヒト・モノづくりを繋ぐハイブリッドエンジニアです。
         </p>
         <div className="hero-v2__accounts">
@@ -101,7 +101,7 @@ const HeroSection = ({ featuredBadges }: HeroSectionProps) => {
                   style={{
                     fontFamily: "var(--font-mono)",
                     fontSize: "0.85rem",
-                    color: "rgba(15, 23, 42, 0.95)",
+                    color: "var(--color-ink)",
                   }}
                 >
                   {account.caption}

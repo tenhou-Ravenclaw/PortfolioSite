@@ -18,10 +18,11 @@ const SkillConsole = ({ skills }: SkillConsoleProps) => {
             className={`skill-chip ${selected?.name === skill.name ? "skill-chip--active" : ""}`}
             onClick={() => setSelected(skill)}
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={skill.icon} alt={skill.name} width={36} height={36} />
             <span style={{ fontWeight: 600 }}>{skill.name}</span>
             {skill.level && (
-              <span style={{ fontSize: "0.8rem", color: "rgba(10, 10, 10, 0.85)", fontWeight: 700 }}>
+              <span style={{ fontSize: "0.8rem", color: "var(--color-ink)", fontWeight: 700 }}>
                 Lv.{skill.level}
               </span>
             )}
