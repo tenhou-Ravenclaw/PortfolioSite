@@ -15,9 +15,13 @@ export default function ClickEffect() {
       document.body.appendChild(ripple);
       
       // アニメーション終了後に削除
-      ripple.addEventListener("animationend", () => {
+      const cleanup = () => {
+        ripple.removeEventListener("animationend", cleanup);
         ripple.remove();
-      });
+      };
+      ripple.addEventListener("animationend", cleanup);
+      // Fallback cleanup after animation duration
+      setTimeout(cleanup, 600); // slightly longer than 0.5s animation
     };
 
     window.addEventListener("click", handleClick);
