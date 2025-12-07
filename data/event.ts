@@ -177,7 +177,7 @@ export const events: Event[] = [
         date: "2025/09/27",
         desc: "GDGs Innovative Crosstalk 2025 DevFest UTokyoに参加し、チームでのアプリケーション開発に取り組んだ。",
         url: "https://gdgkwansai.connpass.com/event/364586/",
-        role: "参加者",
+        role: "スタッフ",
         learned: ""
     },
     {
@@ -211,7 +211,23 @@ export const events: Event[] = [
         url: "https://jphacks.com/information/open-2025/",
         role: "参加者",
         learned: ""
-    }
+    },
+    {
+        title: "JPHacks 2025 Award Day",
+        date: "2025/10/26",
+        desc: "",
+        url: "https://jphacks.com/information/result-report2025/",
+        role: "参加者",
+        learned: ""
+    },
+    {
+        title: "技育博 2025 vol.5",
+        date: "2025/11/08",
+        desc: "技育博 2025 vol.5に参加した。",
+        url: "https://x.com/geek_pjt/status/1997626012792979558?s=20",
+        role: "参加者",
+        learned: ""
+    },
 ];
 
 // 長期プロジェクトのサンプルデータ
