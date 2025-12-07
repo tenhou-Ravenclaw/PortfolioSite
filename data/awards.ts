@@ -20,4 +20,14 @@ export const awards: Award[] = [
         year: "2025年",
         prize: "Hack Day Audience Award",
     },
+    {
+        title: "JPHacks 2025 Award Day",
+        year: "2025年",
+        prize: "イノベーター認定、審査員特別賞",
+    },
+    {
+        title: "技育博 2025 vol.5",
+        year: "2025年",
+        prize: "企業賞（株式会社CyberAgent）",
+    },
 ];
