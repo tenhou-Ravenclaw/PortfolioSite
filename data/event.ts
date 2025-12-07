@@ -177,7 +177,7 @@ export const events: Event[] = [
         date: "2025/09/27",
         desc: "GDGs Innovative Crosstalk 2025 DevFest UTokyoに参加し、チームでのアプリケーション開発に取り組んだ。",
         url: "https://gdgkwansai.connpass.com/event/364586/",
-        role: "参加者",
+        role: "スタッフ",
         learned: ""
     },
     {
