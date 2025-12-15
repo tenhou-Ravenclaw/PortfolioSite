@@ -148,7 +148,7 @@ export default function Home() {
           <div id="awards-section">
             <DataPanel title="Awards" tag="log" accent="blue">
               <ul className="awards-stack">
-                {[...awards].reverse().map((award) => (
+                {awards.map((award) => (
                   <li key={`${award.year}-${award.title}`}>
                     <span className="awards-stack__year">{award.year}</span>
                     <div>
