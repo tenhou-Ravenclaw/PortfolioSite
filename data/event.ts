@@ -228,6 +228,14 @@ export const events: Event[] = [
         role: "参加者",
         learned: ""
     },
+    {
+        title: "KYOTO PLATEAU HACK 2025",
+        date: "2025/11/13~2025/11/14",
+        desc: "KYOTO PLATEAU HACK 2025に参加した。",
+        url: "https://www.craftstadium.com/hackathon/kyoto-plateau-hack-2025",
+        role: "参加者",
+        learned: ""
+    }
 ];
 
 // 長期プロジェクトのサンプルデータ

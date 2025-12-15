@@ -184,4 +184,12 @@ export const skills: Skill[] = [
         description: "JPHacks2025で初めて使用。GUIを使ったせいで5時間かかった。",
         category: 'tool',
     },
+    {
+        name: "PLATEAU",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/plateau/plateau-original.svg",
+        level: 2,
+        years: "2025",
+        description: "KYOTO PLATEAU HACK 2025で使用。3D都市モデルを扱うためのツールキット。",
+        category: 'tool',
+    }
 ];

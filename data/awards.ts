@@ -30,4 +30,9 @@ export const awards: Award[] = [
         year: "2025年",
         prize: "企業賞（株式会社CyberAgent）",
     },
+    {
+        title: "KYOTO PLATEAU HACK 2025",
+        year: "2025年",
+        prize: "ボッチソン賞・京都市役所賞",
+    }
 ];
