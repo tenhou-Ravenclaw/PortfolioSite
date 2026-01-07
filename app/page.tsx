@@ -132,8 +132,7 @@ export default function Home() {
         <HeroSection featuredBadges={featuredBadges} />
         <div className="panel-grid">
           <DataPanel title="About" tag="profile" accent="blue">
-            フルスタック(を目指している)エンジニア。<br />
-            フクロウが大好き。<br />
+            フルスタック(を目指している)エンジニア。フクロウが大好き。<br />
             近畿大学情報学部実世界コンピューティングコースに在学中。<br />
             プログラミングは大学入学と同時に始めた。<br />
             Webアプリケーション開発を中心にハードウェアやサーバーなど、幅広く学んでいる。<br />
