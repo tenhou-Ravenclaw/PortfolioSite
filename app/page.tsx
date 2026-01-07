@@ -132,14 +132,12 @@ export default function Home() {
         <HeroSection featuredBadges={featuredBadges} />
         <div className="panel-grid">
           <DataPanel title="About" tag="profile" accent="blue">
-            <p style={{ marginBottom: "1rem" }}>
-              フルスタック（を目指している）エンジニア。フクロウに人生を捧げる猛勤類。近畿大学情報学部 実世界コンピューティングコースに在籍し、<br />
-              Web / ハードウェア / サーバの境界をまたぎながら、人の役に立つプロダクトの制作をしている。
-            </p>
-            <p style={{ marginBottom: "1rem" }}>
-              大学入学と同時にプログラミングを始め、コミュニティ運営やハッカソン、企業連携プロジェクトにも積極的に参加。
-              ハードとソフト、そして「人」をつなぐブリッジャーとして活動中。
-            </p>
+            フルスタック(を目指している)エンジニア。<br />
+            フクロウが大好き。<br />
+            近畿大学情報学部実世界コンピューティングコースに在学中。<br />
+            プログラミングは大学入学と同時に始めた。<br />
+            Webアプリケーション開発を中心にハードウェアやサーバーなど、幅広く学んでいる。<br />
+            最近のマイブームはキーボード設計。頑張って作業効率を上げている。
             <Link href="/about" className="link">
               もっと見る
             </Link>
