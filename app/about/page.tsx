@@ -76,7 +76,7 @@ export default function AboutPage() {
                     <h2 className="section-title">Values</h2>
                     <div className="values-grid">
                         <div className="value-item">
-                            <h3>技術の背後にある『意図』を読む。</h3>
+                            <h3>構文より、構造を。</h3>
                             <p>AWSの権限設計から組織論を学ぶように、技術を単なるツールとしてではなく、社会やビジネスを動かす「構造」として捉えている。
                                 表面的な実装にとどまらず、システムの本質的なあるべき姿を設計している。</p>
                         </div>
