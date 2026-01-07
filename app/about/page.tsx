@@ -59,7 +59,6 @@ export default function AboutPage() {
                         2025年5月、GDG Greater Kwansai のオーガナイザーに就任。<br />
                         2025年8月、Alpha+ Project PgMコースに生徒として参加。<br />
                         2025年10月、株式会社パワーエックスに長期インターンシップとして入社。<br />
-                        
                     </p>
                 </div>
                 <div className="section-card__decor section-card__decor--right" aria-hidden="true">
