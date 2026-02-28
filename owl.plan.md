@@ -6,7 +6,7 @@
    - 右 40% : `InfoColumn`（漢字氏名＋英字氏名＋肩書＋アカウント列＋「Do it with ease...」のスローガン）。
    - 背景は 0.5px のシアン線グリッド、角にバーコード・グローブ・Wi-Fi アイコンを絶対配置。
 2. **Data Modules**
-   - About/Awards/Works/Recent/Skills を `DataPanel` で統一。ヘッダに `◎ SECTION NAME`、右上にバーコード、左下に QR/ラベル。
+   - About/Awards/Artifacts/Recent/Skills を `DataPanel` で統一。ヘッダに `◎ SECTION NAME`、右上にバーコード、左下に QR/ラベル。
    - パネル間はハーフトーン帯やラインを挟み、名刺のレイヤー感を再現。
 3. **Footer**
    - 左端に QR 群、右端にサイン（`Ayato Fujita` のスクリプト体）を薄く重ねる。

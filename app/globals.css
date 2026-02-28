@@ -760,13 +760,13 @@ body {
   }
 }
 
-.works-stack {
+.artifacts-stack {
   display: flex;
   flex-direction: column;
   gap: 1.5rem;
 }
 
-.works-card {
+.artifacts-card {
   padding: 1.2rem 1.4rem;
   border-radius: 20px;
   background: rgba(255, 255, 255, 0.95);
@@ -774,41 +774,41 @@ body {
   box-shadow: 0 10px 30px rgba(25, 72, 126, 0.12);
 }
 
-.works-card__head {
+.artifacts-card__head {
   display: flex;
   justify-content: space-between;
   align-items: center;
   gap: 1rem;
 }
 
-.works-card__head h3 {
+.artifacts-card__head h3 {
   margin: 0;
   font-size: 1.2rem;
   color: var(--color-ink);
 }
 
-.works-card p {
+.artifacts-card p {
   margin: 0.6rem 0 0.8rem;
   color: var(--color-ink-soft);
   line-height: 1.6;
 }
 
 @media (max-width: 0px) {
-  .works-card {
+  .artifacts-card {
     background: rgba(5, 15, 25, 0.9);
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.35);
   }
 
-  .works-card__head h3 {
+  .artifacts-card__head h3 {
     color: #f8fbff;
   }
 
-  .works-card p {
+  .artifacts-card p {
     color: rgba(233, 244, 255, 0.85);
   }
 }
 
-.works-chip {
+.artifacts-chip {
   font-size: 0.75rem;
   text-transform: uppercase;
   letter-spacing: 0.2em;
@@ -817,22 +817,22 @@ body {
   border: 1px solid currentColor;
 }
 
-.works-chip--done {
+.artifacts-chip--done {
   color: #22c55e;
 }
 
-.works-chip--progress {
+.artifacts-chip--progress {
   color: #f97316;
 }
 
-.works-tags {
+.artifacts-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 0.4rem;
   font-size: 0.8rem;
 }
 
-.works-tags span {
+.artifacts-tags span {
   padding: 0.2rem 0.7rem;
   border-radius: 999px;
   background: rgba(56, 189, 252, 0.12);

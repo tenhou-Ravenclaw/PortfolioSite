@@ -159,29 +159,29 @@ export default function Home() {
           </div>
 
           <DataPanel
-            title="Works"
+            title="Artifacts"
             tag="projects"
             accent="lime"
             actions={
-              <Link href="/works" className="link">
+              <Link href="/artifacts" className="link">
                 View All
               </Link>
             }
           >
-            <div className="works-stack">
+            <div className="artifacts-stack">
               {completedOrPublicProjects.map((project) => (
-                <div className="works-card" key={project.title}>
-                  <div className="works-card__head">
+                <div className="artifacts-card" key={project.title}>
+                  <div className="artifacts-card__head">
                     <h3>{project.title}</h3>
                     <span
-                      className={`works-chip works-chip--${project.status === "completed" ? "done" : "progress"}`}
+                      className={`artifacts-chip artifacts-chip--${project.status === "completed" ? "done" : "progress"}`}
                     >
                       {project.status === "completed" ? "完了" : "進行中"}
                     </span>
                   </div>
                   <p>{project.desc.length > 140 ? `${project.desc.substring(0, 140)}…` : project.desc}</p>
                   {project.technologies && (
-                    <div className="works-tags">
+                    <div className="artifacts-tags">
                       {project.technologies.slice(0, 4).map((tech) => (
                         <span key={tech}>{tech}</span>
                       ))}
