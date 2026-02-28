@@ -12,6 +12,7 @@ type AccountLink = {
   localIcon?: string;
   faviconDomain?: string;
   svgIcon?: "mail";
+  external?: boolean;
 };
 
 const MailIcon = () => (
@@ -56,6 +57,7 @@ const accountLinks: AccountLink[] = [
     href: "https://forms.gle/mgff1SAhDBBkF4AG8",
     caption: "お問い合わせ",
     svgIcon: "mail",
+    external: true,
   },
 ];
 
@@ -101,7 +103,14 @@ const HeroSection = ({ featuredBadges }: HeroSectionProps) => {
             const iconSrc = resolveAccountIconSrc(account);
             const isSvgIcon = account.svgIcon === "mail";
             return (
-              <Link key={account.label} href={account.href} target="_blank" rel="noopener noreferrer" className="qr-badge">
+              <Link
+                key={account.label}
+                href={account.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="qr-badge"
+                aria-label={account.external ? `${account.label}（別サイトで開きます）` : undefined}
+              >
                 <span className="qr-badge__label">{account.label}</span>
                 <div className="qr-badge__code" aria-hidden="true">
                   {isSvgIcon && <MailIcon />}
@@ -124,19 +133,14 @@ const HeroSection = ({ featuredBadges }: HeroSectionProps) => {
                 >
                   {account.caption}
                 </span>
+                {account.external && (
+                  <span className="qr-badge__external-note">外部サイトで開きます</span>
+                )}
               </Link>
             );
           })}
         </div>
         <div className="hero-v2__contact">
-          <Link
-            href="https://forms.gle/mgff1SAhDBBkF4AG8"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hero-v2__cta"
-          >
-            Contact
-          </Link>
           <div style={{ fontSize: "0.9rem", color: "var(--color-ink)", fontWeight: 600 }}>
             近畿大学情報学部 実世界コンピューティングコース / Osaka, Japan
           </div>

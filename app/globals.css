@@ -211,6 +211,17 @@ body {
   color: var(--color-primary-hover);
 }
 
+.nav-link--external {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25em;
+}
+
+.nav-link-external-icon {
+  font-size: 0.85em;
+  opacity: 0.85;
+}
+
 @media (max-width: 0px) {
   .nav-link {
     color: #eef8ff;
@@ -593,6 +604,20 @@ body {
   letter-spacing: 0.3em;
   color: #3b82f6;
   text-transform: uppercase;
+}
+
+.qr-badge__external-icon {
+  font-size: 0.9em;
+  opacity: 0.9;
+}
+
+.qr-badge__external-note {
+  display: block;
+  font-size: 0.7rem;
+  color: var(--color-ink);
+  opacity: 0.85;
+  margin-top: 0.25rem;
+  letter-spacing: 0.02em;
 }
 
 .qr-badge__code {

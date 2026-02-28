@@ -38,7 +38,9 @@ export default function GlobalNav() {
                 <Link href="/events" className="nav-link" onClick={closeMenu}>Events</Link>
                 <Link href="/#awards-section" className="nav-link" onClick={closeMenu}>Awards</Link>
                 <Link href="/#skills-section" className="nav-link" onClick={closeMenu}>Skills</Link>
-                <a href="https://forms.gle/mgff1SAhDBBkF4AG8" target="_blank" rel="noopener noreferrer" className="nav-link">Contact</a>
+                <a href="https://forms.gle/mgff1SAhDBBkF4AG8" target="_blank" rel="noopener noreferrer" className="nav-link nav-link--external" aria-label="Contact（外部サイトで開きます）">
+                    Contact <span className="nav-link-external-icon" aria-hidden="true">↗</span>
+                </a>
             </div>
         </nav>
     );
