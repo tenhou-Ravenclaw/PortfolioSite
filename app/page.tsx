@@ -131,7 +131,7 @@ export default function Home() {
       <main className="neo-container">
         <HeroSection featuredBadges={featuredBadges} />
         <div className="panel-grid">
-          <DataPanel title="About" accent="blue">
+          <DataPanel title="about me" accent="blue">
             フルスタック(を目指している)エンジニア。フクロウが大好き。<br />
             近畿大学情報学部実世界コンピューティングコースに在学中。<br />
             プログラミングは大学入学と同時に始めた。<br />

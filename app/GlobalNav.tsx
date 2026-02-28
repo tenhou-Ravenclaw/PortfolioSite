@@ -33,7 +33,7 @@ export default function GlobalNav() {
                     <span>&times;</span>
                 </button>
                 <Link href="/" className="nav-link" onClick={closeMenu}>Home</Link>
-                <Link href="/about" className="nav-link" onClick={closeMenu}>About</Link>
+                <Link href="/about" className="nav-link" onClick={closeMenu}>about me</Link>
                 <Link href="/artifacts" className="nav-link" onClick={closeMenu}>Artifacts</Link>
                 <Link href="/events" className="nav-link" onClick={closeMenu}>Events</Link>
                 <Link href="/#awards-section" className="nav-link" onClick={closeMenu}>Awards</Link>
