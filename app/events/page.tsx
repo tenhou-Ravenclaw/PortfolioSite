@@ -272,8 +272,9 @@ export default function Events() {
               <span style={{
                 fontSize: '0.8rem',
                 padding: '0.3rem 0.8rem',
-                background: 'var(--color-primary)',
-                color: 'white',
+                background: 'rgba(56, 189, 252, 0.1)',
+                color: 'var(--color-primary-ink)',
+                border: '1px solid rgba(56, 189, 252, 0.2)',
                 borderRadius: '16px',
                 fontWeight: '500'
               }}>
@@ -327,8 +328,9 @@ export default function Events() {
                     <span key={techIdx} style={{
                       fontSize: '0.8rem',
                       padding: '0.3rem 0.8rem',
-                      background: 'var(--color-primary)',
-                      color: 'white',
+                      background: 'rgba(56, 189, 252, 0.1)',
+                      color: 'var(--color-primary-ink)',
+                      border: '1px solid rgba(56, 189, 252, 0.2)',
                       borderRadius: '16px',
                       fontWeight: '500'
                     }}>
@@ -374,7 +376,7 @@ export default function Events() {
                   rel="noopener noreferrer"
                   style={{
                     display: 'inline-block',
-                    background: 'var(--color-primary-hover)',
+                    background: 'var(--color-primary-ink)',
                     color: 'white',
                     padding: '0.75rem 1.5rem',
                     textDecoration: 'none',
@@ -383,11 +385,11 @@ export default function Events() {
                     transition: 'all 0.2s ease'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'var(--color-primary)';
+                    e.currentTarget.style.background = 'var(--color-primary-hover)';
                     e.currentTarget.style.transform = 'translateY(-2px)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'var(--color-primary-hover)';
+                    e.currentTarget.style.background = 'var(--color-primary-ink)';
                     e.currentTarget.style.transform = 'translateY(0)';
                   }}
                 >
@@ -401,7 +403,7 @@ export default function Events() {
                   rel="noopener noreferrer"
                   style={{
                     display: 'inline-block',
-                    background: 'var(--color-primary)',
+                    background: 'var(--color-primary-ink)',
                     color: 'white',
                     padding: '0.75rem 1.5rem',
                     textDecoration: 'none',
@@ -414,7 +416,7 @@ export default function Events() {
                     e.currentTarget.style.transform = 'translateY(-2px)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'var(--color-primary)';
+                    e.currentTarget.style.background = 'var(--color-primary-ink)';
                     e.currentTarget.style.transform = 'translateY(0)';
                   }}
                 >
