@@ -5,6 +5,8 @@ export type Event = {
     role: string; // 参加者・運営者など
     learned: string; // 学んだこと
     url?: string; // イベントページ等のURL（任意）
+    isHighlighted?: boolean; // 注目イベントかどうか
+    awards?: string[]; // 受賞歴
 };
 
 export type Project = {
@@ -19,6 +21,8 @@ export type Project = {
     learned: string;
     url?: string; // プロジェクトURL
     github?: string; // GitHubリポジトリ
+    isHighlighted?: boolean; // 注目プロジェクトかどうか
+    awards?: string[]; // 受賞歴
 };
 
 // タイムラインアイテムの統合型
@@ -35,7 +39,9 @@ export const events: Event[] = [
         date: "2024/04/02~2024/04/05",
         desc: "大学のオリエンテーションである「プログラミングブートキャンプ」に参加し、個人でM5Stackを使用したIoTアプリケーションを開発。",
         role: "参加者",
-        learned: "IoT開発の基礎、M5Stackの活用法、短期間でのプロトタイピング、チーム外との技術交流の大切さ"
+        learned: "IoT開発の基礎、M5Stackの活用法、短期間でのプロトタイピング、チーム外との技術交流の大切さ",
+        isHighlighted: true,
+        awards: ["ゼミ内優秀賞", "学部長表彰"]
     },
     {
         title: "TGL-college",
@@ -49,7 +55,9 @@ export const events: Event[] = [
         date: "2024/08/25~2024/09/01",
         desc: "電算研が主催するハッカソンに参加し、チーム開発を初体験。",
         role: "参加者",
-        learned: "チーム開発の基礎、役割分担、コミュニケーションの重要性、短期間でのアイデア実装"
+        learned: "チーム開発の基礎、役割分担、コミュニケーションの重要性、短期間でのアイデア実装",
+        isHighlighted: true,
+        awards: ["企業賞(TGL株式会社)"]
     },
     {
         title: "シンポジウム",
@@ -155,7 +163,9 @@ export const events: Event[] = [
         date: "2025/09/13~2025/09/14",
         desc: "SPAJAM 2025に参加し、チームでのアプリケーション開発に取り組んだ。",
         role: "参加者",
-        learned: ""
+        learned: "",
+        isHighlighted: true,
+        awards: ["予選大会優秀賞"]
     },
     {
         title: "Google直伝！爆速アイデア創出術を1日で体験！ in 神戸電子",
@@ -210,7 +220,9 @@ export const events: Event[] = [
         desc: "日本最大級のハッカソンに再挑戦した。",
         url: "https://jphacks.com/information/open-2025/",
         role: "参加者",
-        learned: ""
+        learned: "",
+        isHighlighted: true,
+        awards: ["Hack Day Audience Award"]
     },
     {
         title: "JPHacks 2025 Award Day",
@@ -218,7 +230,9 @@ export const events: Event[] = [
         desc: "",
         url: "https://jphacks.com/information/result-report2025/",
         role: "参加者",
-        learned: ""
+        learned: "",
+        isHighlighted: true,
+        awards: ["イノベーター認定", "審査員特別賞"]
     },
     {
         title: "技育博 2025 vol.5",
@@ -226,7 +240,9 @@ export const events: Event[] = [
         desc: "技育博 2025 vol.5に参加した。",
         url: "https://x.com/geek_pjt/status/1997626012792979558?s=20",
         role: "参加者",
-        learned: ""
+        learned: "",
+        isHighlighted: true,
+        awards: ["企業賞（株式会社CyberAgent）"]
     },
     {
         title: "KYOTO PLATEAU HACK 2025",
@@ -234,7 +250,9 @@ export const events: Event[] = [
         desc: "KYOTO PLATEAU HACK 2025に参加した。",
         url: "https://www.craftstadium.com/hackathon/kyoto-plateau-hack-2025",
         role: "参加者",
-        learned: ""
+        learned: "",
+        isHighlighted: true,
+        awards: ["ボッチソン賞", "京都市役所賞"]
     }
 ];
 
