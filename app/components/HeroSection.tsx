@@ -9,18 +9,35 @@ type AccountLink = {
   label: string;
   href: string;
   caption: string;
-  // ポートフォリオ用のローカルアイコン
   localIcon?: string;
-  // それ以外はドメインから自動取得
   faviconDomain?: string;
+  svgIcon?: "mail";
 };
+
+const MailIcon = () => (
+  <svg
+    width={48}
+    height={48}
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="var(--color-ink)"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    aria-hidden
+    style={{ display: "block" }}
+  >
+    <rect x="2" y="4" width="20" height="16" rx="2" />
+    <path d="m22 6-10 7L2 6" />
+  </svg>
+);
 
 const accountLinks: AccountLink[] = [
   {
-    label: "Portfolio",
-    href: "/",
-    caption: "tenhou.journey",
-    localIcon: "/tenhouPortfolioIcon.png",
+    label: "LinkedIn",
+    href: "https://www.linkedin.com/in/彩翔-藤田-595a16352",
+    caption: "Fujita Ayato",
+    faviconDomain: "linkedin.com",
   },
   {
     label: "GitHub",
@@ -29,23 +46,22 @@ const accountLinks: AccountLink[] = [
     faviconDomain: "github.com",
   },
   {
-    label: "LinkedIn",
-    href: "https://www.linkedin.com/in/彩翔-藤田-595a16352",
-    caption: "Fujita Ayato",
-    faviconDomain: "linkedin.com",
-  },
-  {
     label: "X",
     href: "https://x.com/tenhou_0126",
     caption: "@tenhou_0126",
     faviconDomain: "x.com",
   },
+  {
+    label: "Contact me",
+    href: "https://forms.gle/mgff1SAhDBBkF4AG8",
+    caption: "お問い合わせ",
+    svgIcon: "mail",
+  },
 ];
 
-const resolveAccountIconSrc = (account: AccountLink) => {
+const resolveAccountIconSrc = (account: AccountLink): string | null => {
   if (account.localIcon) return account.localIcon;
   if (account.faviconDomain) {
-    // Google の favicon API から取得
     return `https://www.google.com/s2/favicons?sz=64&domain=${account.faviconDomain}`;
   }
   return null;
@@ -83,11 +99,13 @@ const HeroSection = ({ featuredBadges }: HeroSectionProps) => {
         <div className="hero-v2__accounts">
           {accountLinks.map((account) => {
             const iconSrc = resolveAccountIconSrc(account);
+            const isSvgIcon = account.svgIcon === "mail";
             return (
-              <Link key={account.label} href={account.href} target="_blank" className="qr-badge">
+              <Link key={account.label} href={account.href} target="_blank" rel="noopener noreferrer" className="qr-badge">
                 <span className="qr-badge__label">{account.label}</span>
                 <div className="qr-badge__code" aria-hidden="true">
-                  {iconSrc && (
+                  {isSvgIcon && <MailIcon />}
+                  {!isSvgIcon && iconSrc && (
                     <Image
                       src={iconSrc}
                       alt={`${account.label} logo`}
