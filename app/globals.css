@@ -659,7 +659,9 @@ body {
 .data-panel::before {
   content: "";
   position: absolute;
-  inset: 12% 0 auto 0;
+  top: 4.8rem;
+  left: 0;
+  right: 0;
   height: 20px;
   background: radial-gradient(circle at left, rgba(196, 255, 88, 0.4), transparent 60%);
   opacity: 0.7;
