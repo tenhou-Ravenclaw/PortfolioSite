@@ -21,15 +21,33 @@ const MailIcon = () => (
     height={48}
     viewBox="0 0 24 24"
     fill="none"
-    stroke="var(--color-ink)"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
     aria-hidden
     style={{ display: "block" }}
+    className="hero-contact-icon"
   >
-    <rect x="2" y="4" width="20" height="16" rx="2" />
-    <path d="m22 6-10 7L2 6" />
+    <defs>
+      <linearGradient id="hero-mail-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+        <stop offset="0%" stopColor="var(--color-primary, #38bdf8)" />
+        <stop offset="100%" stopColor="var(--color-accent, #6366f1)" />
+      </linearGradient>
+    </defs>
+    <path
+      d="M3 8l9 6 9-6v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8z"
+      fill="url(#hero-mail-gradient)"
+      fillOpacity="0.2"
+      stroke="url(#hero-mail-gradient)"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M3 8l9-5 9 5"
+      fill="none"
+      stroke="url(#hero-mail-gradient)"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
   </svg>
 );
 
