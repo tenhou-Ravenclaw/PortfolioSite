@@ -12,11 +12,12 @@ export default function AboutPage() {
                 <div className="section-card__content">
                     <h2 className="section-title">プロフィール</h2>
                     <p className="section-desc">
-                        フルスタック(を目指している)エンジニアです。<br />
-                        フクロウが好きです。猛勤類です。<br />
+                        フルスタック(を目指している)エンジニア。<br />
+                        フクロウが大好き。<br />
                         近畿大学情報学部実世界コンピューティングコースに在学中。<br />
-                        プログラミングは大学入学と同時に始めました。<br />
-                        Webアプリケーション開発を中心にハードウェアやサーバーなど、幅広く学んでいます。<br />
+                        プログラミングは大学入学と同時に始めた。<br />
+                        Webアプリケーション開発を中心にハードウェアやサーバーなど、幅広く学んでいる。<br />
+                        最近のマイブームはキーボード設計。頑張って作業効率を上げている。
                     </p>
                 </div>
                 <div className="section-card__decor section-card__decor--right" aria-hidden="true">
@@ -57,6 +58,7 @@ export default function AboutPage() {
                         2025年3月、株式会社スマレジに長期インターンシップとして入社。<br />
                         2025年5月、GDG Greater Kwansai のオーガナイザーに就任。<br />
                         2025年8月、Alpha+ Project PgMコースに生徒として参加。<br />
+                        2025年10月、株式会社パワーエックスに長期インターンシップとして入社。<br />
                     </p>
                 </div>
                 <div className="section-card__decor section-card__decor--right" aria-hidden="true">
@@ -73,16 +75,19 @@ export default function AboutPage() {
                     <h2 className="section-title">Values</h2>
                     <div className="values-grid">
                         <div className="value-item">
-                            <h3>Bridge the Gap</h3>
-                            <p>ハードウェアとソフトウェア、人と技術。異なる領域を繋ぐ「架け橋」として、新しい価値を生み出します。</p>
+                            <h3>構文より、構造を。</h3>
+                            <p>AWSの権限設計から組織論を学ぶように、技術を単なるツールとしてではなく、社会やビジネスを動かす「構造」として捉えている。
+                                表面的な実装にとどまらず、システムの本質的なあるべき姿を設計している。</p>
                         </div>
                         <div className="value-item">
-                            <h3>Playful Engineering</h3>
-                            <p>「楽しむこと」こそが最大の原動力。遊び心を忘れず、触れる人の心を動かすプロダクトを作ります。</p>
+                            <h3>完璧さより、最適解を。</h3>
+                            <p>目的達成のために、あえて「直さない」勇気を持つ。
+                                技術的な自己満足よりも、ユーザーにとっての解決速度やコストメリット（ROI）を最優先し、泥臭い手段でも最短距離で成果を出す。</p>
                         </div>
                         <div className="value-item">
-                            <h3>Owl&apos;s Wisdom</h3>
-                            <p>知恵の象徴であるフクロウのように、常に学び続け、深い洞察と広い視野で課題に向き合います。</p>
+                            <h3>手段を選ばず、形にする。</h3>
+                            <p>データベースが必要なければJSONで済ませるような、身軽で柔軟な技術選定を行っている。
+                                ハード・ソフト・インフラの境界を意識せず、その時の課題に最も適した道具を組み合わせて、素早くプロトタイプを作り上げている。</p>
                         </div>
                     </div>
                 </div>
