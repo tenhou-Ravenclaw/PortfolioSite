@@ -263,12 +263,11 @@ export const projects: Project[] = [
         startDate: "2024/03/01",
         endDate: "2025/09/30",
         status: "in-progress",
-        desc: "Next.js と TypeScript を使用した個人ポートフォリオサイトの開発。レスポンシブデザインと SEO 対策を重視した設計。",
+        desc: "Next.js と TypeScript を使用した個人ポートフォリオサイトの開発。レスポンシブデザインを重視した設計。",
         role: "フルスタック開発者",
         technologies: ["Next.js", "TypeScript", "CSS", "Vercel"],
         achievements: [
             "レスポンシブデザインの実装",
-            "SEO最適化",
             "継続的な機能追加とデザイン改善"
         ],
         learned: "React/Next.jsの深い理解、フロントエンド設計、継続的な開発プロセス",
