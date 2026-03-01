@@ -12,7 +12,7 @@ function parseDate(dateString: string): Date | null {
     return null;
 }
 
-export default function WorksPage() {
+export default function ArtifactsPage() {
     // プロジェクトの期間フォーマット
     const formatProjectPeriod = (startDate: string, endDate: string) => {
         const start = parseDate(startDate);
@@ -54,14 +54,14 @@ export default function WorksPage() {
         <main className="container" style={{ position: 'relative' }}>
             <div className="bg-geometry" />
             <section className="hero hero--sub">
-                <h1 className="hero-title">Works</h1>
+                <h1 className="hero-title">Artifacts</h1>
                 <p className="hero-sub">技術的な制作物・プロジェクト実績</p>
             </section>
 
             {/* プロジェクト一覧 */}
             <section className="section">
                 <h2 className="section-title">プロジェクト一覧</h2>
-                
+
                 {/* 完了プロジェクト */}
                 {projects.filter(p => p.status === 'completed').length > 0 && (
                     <div style={{ marginBottom: '3rem' }}>

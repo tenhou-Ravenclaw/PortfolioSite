@@ -140,7 +140,7 @@ export default function Events() {
                   {/* イベント列 */}
                   <td style={{ background: 'var(--color-accent)', borderRight: '2px solid var(--color-border)', verticalAlign: 'top', padding: '12px 8px' }}>
                     {eventMap[ym]?.map((ev, i) => (
-                      <div key={i} className="timeline-event-card" style={{ marginBottom: 12, cursor: 'pointer', border: '1px solid var(--color-border)', borderRadius: 12, padding: '1rem', background: 'var(--color-accent)', boxShadow: 'var(--shadow)', position: 'relative' }}
+                      <div key={i} className="timeline-event-card" style={{ marginBottom: 12, cursor: 'pointer', border: ev.isHighlighted ? '2px solid #fbbf24' : '1px solid var(--color-border)', borderRadius: 12, padding: '1rem', background: 'var(--color-accent)', boxShadow: ev.isHighlighted ? '0 4px 12px rgba(251, 191, 36, 0.15)' : 'var(--shadow)', position: 'relative' }}
                         onClick={() => setSelectedItem({ type: 'event', data: ev, sortDate: parseEventDate(ev.date) })}
                         onMouseEnter={e => {
                           e.currentTarget.style.backgroundColor = 'rgba(111, 196, 255, 0.1)';
@@ -151,8 +151,15 @@ export default function Events() {
                           e.currentTarget.style.transform = 'translateY(0)';
                         }}
                       >
+                        {ev.isHighlighted && (
+                          <div style={{ position: 'absolute', top: -8, right: -8, zIndex: 2, background: 'var(--color-accent)', borderRadius: '50%', padding: 2, border: '1px solid #fbbf24' }}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" stroke="#d97706" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                            </svg>
+                          </div>
+                        )}
                         <div className="timeline-event-card__barcode" aria-hidden="true" />
-                        <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--color-ink)', marginBottom: 4 }}>{ev.title}</div>
+                        <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--color-ink)', marginBottom: 4, paddingRight: ev.isHighlighted ? 16 : 0 }}>{ev.title}</div>
                         <div style={{ fontSize: 13, color: 'var(--color-ink)', opacity: 0.75, marginBottom: 2 }}>{ev.role}</div>
                         <div style={{ fontSize: 13, color: 'var(--color-ink)', opacity: 0.85 }}>{ev.desc.length > 40 ? ev.desc.substring(0, 40) + '...' : ev.desc}</div>
                       </div>
@@ -166,7 +173,7 @@ export default function Events() {
                     const rowSpan = block.endIdx - block.startIdx + 1;
                     return (
                       <td key={colIdx} rowSpan={rowSpan} style={{ background: 'var(--color-accent)', verticalAlign: 'top', padding: '12px 8px', borderRight: '2px solid var(--color-border)', borderLeft: colIdx === 0 ? 'none' : '1px solid var(--color-border)' }}>
-                        <div className="timeline-project-card" style={{ cursor: 'pointer', border: '1px solid var(--color-border)', borderRadius: 12, padding: '1rem', background: 'var(--color-accent)', boxShadow: 'var(--shadow)', position: 'relative' }}
+                        <div className="timeline-project-card" style={{ cursor: 'pointer', border: block.project.isHighlighted ? '2px solid #fbbf24' : '1px solid var(--color-border)', borderRadius: 12, padding: '1rem', background: 'var(--color-accent)', boxShadow: block.project.isHighlighted ? '0 4px 12px rgba(251, 191, 36, 0.15)' : 'var(--shadow)', position: 'relative' }}
                           onClick={() => setSelectedItem({ type: 'project', data: block.project, sortDate: parseProjectDate(block.project.startDate) })}
                           onMouseEnter={e => {
                             e.currentTarget.style.backgroundColor = 'rgba(196, 255, 130, 0.15)';
@@ -177,8 +184,15 @@ export default function Events() {
                             e.currentTarget.style.transform = 'translateY(0)';
                           }}
                         >
+                          {block.project.isHighlighted && (
+                            <div style={{ position: 'absolute', top: -8, right: -8, zIndex: 2, background: 'var(--color-accent)', borderRadius: '50%', padding: 2, border: '1px solid #fbbf24' }}>
+                              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="#fbbf24" stroke="#d97706" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" />
+                              </svg>
+                            </div>
+                          )}
                           <div className="timeline-project-card__qr" aria-hidden="true" />
-                          <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--color-ink)', marginBottom: 4 }}>{block.project.title}</div>
+                          <div style={{ fontWeight: 700, fontSize: 16, color: 'var(--color-ink)', marginBottom: 4, paddingRight: block.project.isHighlighted ? 16 : 0 }}>{block.project.title}</div>
                           <div style={{ fontSize: 13, color: 'var(--color-ink)', opacity: 0.75, marginBottom: 2 }}>{block.project.role}</div>
                           <div style={{ fontSize: 13, color: 'var(--color-ink)', opacity: 0.85, marginBottom: 2 }}>{block.project.desc.length > 40 ? block.project.desc.substring(0, 40) + '...' : block.project.desc}</div>
                           <div style={{ fontSize: 12, fontWeight: 700, color: block.project.status === 'completed' ? '#10b981' : block.project.status === 'in-progress' ? '#f59e0b' : '#6b7280' }}>{block.project.status === 'completed' ? '完了' : block.project.status === 'in-progress' ? '進行中' : '予定'}</div>
@@ -258,8 +272,9 @@ export default function Events() {
               <span style={{
                 fontSize: '0.8rem',
                 padding: '0.3rem 0.8rem',
-                background: 'var(--color-primary)',
-                color: 'white',
+                background: 'rgba(56, 189, 252, 0.1)',
+                color: 'var(--color-primary-ink)',
+                border: '1px solid rgba(56, 189, 252, 0.2)',
                 borderRadius: '16px',
                 fontWeight: '500'
               }}>
@@ -293,6 +308,18 @@ export default function Events() {
             <div style={{ fontSize: '1rem', color: 'var(--color-fg)', lineHeight: '1.7', marginBottom: '1.5rem' }}>
               {selectedItem.data.desc}
             </div>
+            {selectedItem.data.awards && selectedItem.data.awards.length > 0 && (
+              <div style={{ marginBottom: '1.5rem' }}>
+                <span style={{ fontWeight: '600', color: 'var(--color-fg)' }}>受賞：</span>
+                <ul style={{ margin: '0.5rem 0 0 0', paddingLeft: '1.5rem' }}>
+                  {selectedItem.data.awards.map((award, idx) => (
+                    <li key={idx} style={{ marginBottom: '0.5rem', color: '#d97706', fontWeight: '700', lineHeight: '1.5' }}>
+                      {award}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
             {selectedItem.type === 'project' && (selectedItem.data as Project).technologies && (
               <div style={{ marginBottom: '1.5rem' }}>
                 <span style={{ fontWeight: '600', color: 'var(--color-fg)' }}>使用技術：</span>
@@ -301,8 +328,9 @@ export default function Events() {
                     <span key={techIdx} style={{
                       fontSize: '0.8rem',
                       padding: '0.3rem 0.8rem',
-                      background: 'var(--color-primary)',
-                      color: 'white',
+                      background: 'rgba(56, 189, 252, 0.1)',
+                      color: 'var(--color-primary-ink)',
+                      border: '1px solid rgba(56, 189, 252, 0.2)',
                       borderRadius: '16px',
                       fontWeight: '500'
                     }}>
@@ -348,7 +376,7 @@ export default function Events() {
                   rel="noopener noreferrer"
                   style={{
                     display: 'inline-block',
-                    background: 'var(--color-primary-hover)',
+                    background: 'var(--color-primary-ink)',
                     color: 'white',
                     padding: '0.75rem 1.5rem',
                     textDecoration: 'none',
@@ -357,11 +385,11 @@ export default function Events() {
                     transition: 'all 0.2s ease'
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'var(--color-primary)';
+                    e.currentTarget.style.background = 'var(--color-primary-hover)';
                     e.currentTarget.style.transform = 'translateY(-2px)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'var(--color-primary-hover)';
+                    e.currentTarget.style.background = 'var(--color-primary-ink)';
                     e.currentTarget.style.transform = 'translateY(0)';
                   }}
                 >
@@ -375,7 +403,7 @@ export default function Events() {
                   rel="noopener noreferrer"
                   style={{
                     display: 'inline-block',
-                    background: 'var(--color-primary)',
+                    background: 'var(--color-primary-ink)',
                     color: 'white',
                     padding: '0.75rem 1.5rem',
                     textDecoration: 'none',
@@ -388,7 +416,7 @@ export default function Events() {
                     e.currentTarget.style.transform = 'translateY(-2px)';
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'var(--color-primary)';
+                    e.currentTarget.style.background = 'var(--color-primary-ink)';
                     e.currentTarget.style.transform = 'translateY(0)';
                   }}
                 >

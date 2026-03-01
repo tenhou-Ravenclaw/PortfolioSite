@@ -131,7 +131,7 @@ export default function Home() {
       <main className="neo-container">
         <HeroSection featuredBadges={featuredBadges} />
         <div className="panel-grid">
-          <DataPanel title="About" tag="profile" accent="blue">
+          <DataPanel title="about me" accent="blue">
             フルスタック(を目指している)エンジニア。フクロウが大好き。<br />
             近畿大学情報学部実世界コンピューティングコースに在学中。<br />
             プログラミングは大学入学と同時に始めた。<br />
@@ -143,7 +143,7 @@ export default function Home() {
           </DataPanel>
 
           <div id="awards-section">
-            <DataPanel title="Awards" tag="log" accent="blue">
+            <DataPanel title="Awards" accent="blue">
               <ul className="awards-stack">
                 {awards.map((award) => (
                   <li key={`${award.year}-${award.title}`}>
@@ -159,29 +159,28 @@ export default function Home() {
           </div>
 
           <DataPanel
-            title="Works"
-            tag="projects"
+            title="Artifacts"
             accent="lime"
             actions={
-              <Link href="/works" className="link">
+              <Link href="/artifacts" className="link">
                 View All
               </Link>
             }
           >
-            <div className="works-stack">
+            <div className="artifacts-stack">
               {completedOrPublicProjects.map((project) => (
-                <div className="works-card" key={project.title}>
-                  <div className="works-card__head">
+                <div className="artifacts-card" key={project.title}>
+                  <div className="artifacts-card__head">
                     <h3>{project.title}</h3>
                     <span
-                      className={`works-chip works-chip--${project.status === "completed" ? "done" : "progress"}`}
+                      className={`artifacts-chip artifacts-chip--${project.status === "completed" ? "done" : "progress"}`}
                     >
                       {project.status === "completed" ? "完了" : "進行中"}
                     </span>
                   </div>
                   <p>{project.desc.length > 140 ? `${project.desc.substring(0, 140)}…` : project.desc}</p>
                   {project.technologies && (
-                    <div className="works-tags">
+                    <div className="artifacts-tags">
                       {project.technologies.slice(0, 4).map((tech) => (
                         <span key={tech}>{tech}</span>
                       ))}
@@ -194,7 +193,6 @@ export default function Home() {
 
           <DataPanel
             title="Recent Activities"
-            tag="timeline"
             accent="blue"
             actions={
               <Link href="/events" className="link">
@@ -206,7 +204,7 @@ export default function Home() {
           </DataPanel>
 
           <div id="skills-section">
-            <DataPanel title="Skills" tag="console" accent="lime">
+            <DataPanel title="Skills" accent="lime">
               <SkillConsole skills={skills} />
             </DataPanel>
           </div>

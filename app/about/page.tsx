@@ -3,7 +3,7 @@ export default function AboutPage() {
         <main className="container" style={{ position: 'relative' }}>
             <div className="bg-geometry" />
             <section className="hero hero--sub">
-                <h1 className="hero-title">About</h1>
+                <h1 className="hero-title">about me</h1>
             </section>
             <section className="section section-card">
                 <div className="section-card__decor section-card__decor--left" aria-hidden="true">
