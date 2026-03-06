@@ -1,3 +1,5 @@
+import Script from "next/script";
+
 export default function AboutPage() {
     return (
         <main className="container" style={{ position: 'relative' }}>
@@ -68,6 +70,27 @@ export default function AboutPage() {
             <section className="section section-card">
                 <div className="section-card__decor section-card__decor--left" aria-hidden="true">
                     <div className="vertical-label">
+                        <span>資格</span>
+                    </div>
+                </div>
+                <div className="section-card__content">
+                    <h2 className="section-title">資格</h2>
+                    <div style={{ marginTop: "1.5rem", display: "flex", justifyContent: "center" }}>
+                        <div
+                            data-iframe-width="400"
+                            data-iframe-height="270"
+                            data-share-badge-id="f901cb7a-5a52-4c5f-8729-eabff3be7df1"
+                            data-share-badge-host="https://www.credly.com"
+                        />
+                    </div>
+                </div>
+                <div className="section-card__decor section-card__decor--right" aria-hidden="true">
+                    <div className="card-dotgrid" />
+                </div>
+            </section>
+            <section className="section section-card">
+                <div className="section-card__decor section-card__decor--left" aria-hidden="true">
+                    <div className="vertical-label">
                         <span>価値観</span>
                     </div>
                 </div>
@@ -111,6 +134,7 @@ export default function AboutPage() {
                     <div className="card-barcode card-barcode--thin" />
                 </div>
             </section>
+            <Script src="https://cdn.credly.com/assets/utilities/embed.js" async />
 
         </main>
     );
