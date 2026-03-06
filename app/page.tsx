@@ -1,135 +1,37 @@
-"use client";
 import Link from "next/link";
-import { awards } from "../data/awards";
 import { certifications } from "../data/certifications";
-import { events, projects, Event, Project } from "../data/event";
+import { events, projects } from "../data/event";
 import { skills } from "../data/skills";
-import { useEffect } from "react";
+import { getRecentActivities, getRoleColor, getRoleText, formatActivityDate } from "../lib/activity";
 import HeroSection from "./components/HeroSection";
 import DataPanel from "./components/DataPanel";
 import ActivityRail, { Activity as ActivityRailItem } from "./components/ActivityRail";
 import SkillConsole from "./components/SkillConsole";
 import CredlyBadge from "./components/CredlyBadge";
-
-type EventActivity = Event & {
-  parsedDate: Date;
-  type: "event";
-};
-
-type ProjectActivity = Project & {
-  parsedDate: Date;
-  type: "project";
-};
-
-type Activity = EventActivity | ProjectActivity;
+import ScrollRestorer from "./components/ScrollRestorer";
 
 const featuredBadges = ["MySQL", "Java", "Next.js", "PHP"];
-
-const getRecentActivities = (): Activity[] => {
-  const eventsWithDates = events.map((event) => {
-    const dateMatch = event.date.split("~")[0].match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
-    const date = dateMatch
-      ? new Date(parseInt(dateMatch[1]), parseInt(dateMatch[2]) - 1, parseInt(dateMatch[3]))
-      : new Date();
-    return { ...event, parsedDate: date, type: "event" as const };
-  });
-
-  const projectsWithDates = projects.map((project) => {
-    const dateMatch = project.startDate.match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
-    const date = dateMatch
-      ? new Date(parseInt(dateMatch[1]), parseInt(dateMatch[2]) - 1, parseInt(dateMatch[3]))
-      : new Date();
-    return { ...project, parsedDate: date, type: "project" as const };
-  });
-
-  return [...eventsWithDates, ...projectsWithDates]
-    .sort((a, b) => b.parsedDate.getTime() - a.parsedDate.getTime())
-    .slice(0, 6);
-};
-
-const getRoleColor = (activity: Activity) => {
-  if (activity.type === "event") {
-    switch (activity.role) {
-      case "イベントオーナー":
-        return "#facc15";
-      case "スタッフ":
-        return "#38bdfc";
-      case "参加者":
-      default:
-        return "#94a3b8";
-    }
-  }
-
-  switch (activity.status) {
-    case "completed":
-      return "#22c55e";
-    case "in-progress":
-      return "#f97316";
-    case "planned":
-    default:
-      return "#94a3b8";
-  }
-};
-
-const getRoleText = (activity: Activity) => {
-  if (activity.type === "event") {
-    return activity.role;
-  }
-
-  switch (activity.status) {
-    case "completed":
-      return "完了";
-    case "in-progress":
-      return "進行中";
-    case "planned":
-      return "予定";
-    default:
-      return activity.status;
-  }
-};
-
-const formatDate = (activity: Activity) => {
-  if (activity.type === "event") {
-    const date = activity.parsedDate;
-    return `${date.getFullYear()}.${String(date.getMonth() + 1).padStart(2, "0")}`;
-  }
-
-  const startDate = activity.parsedDate;
-  const startFormatted = `${startDate.getFullYear()}.${String(startDate.getMonth() + 1).padStart(2, "0")}`;
-
-  if (activity.endDate === "進行中" || activity.endDate === "") {
-    return `${startFormatted}-`;
-  }
-
-  const endMatch = activity.endDate.match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
-  if (endMatch) {
-    const endDate = new Date(parseInt(endMatch[1]), parseInt(endMatch[2]) - 1, parseInt(endMatch[3]));
-    const endFormatted = `${endDate.getFullYear()}.${String(endDate.getMonth() + 1).padStart(2, "0")}`;
-    return `${startFormatted}-${endFormatted}`;
-  }
-
-  return startFormatted;
-};
+const HOME_PROJECTS_COUNT = 3;
+const TAG_DISPLAY_LIMIT = 4;
+const DESC_TRUNCATE_LENGTH = 140;
 
 export default function Home() {
-  useEffect(() => {
-    window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-  }, []);
   const recentActivities = getRecentActivities();
   const activityItems: ActivityRailItem[] = recentActivities.map((activity) => ({
     title: activity.title,
-    subtitle: activity.type === "event" ? activity.desc : activity.desc,
-    timeline: formatDate(activity),
+    subtitle: activity.desc,
+    timeline: formatActivityDate(activity),
     badge: getRoleText(activity),
     color: getRoleColor(activity),
   }));
 
   const completedOrPublicProjects = projects
     .filter((project) => project.status === "completed" || project.github)
-    .slice(0, 3);
+    .slice(0, HOME_PROJECTS_COUNT);
 
   return (
     <>
+      <ScrollRestorer />
       <main className="neo-container">
         <HeroSection featuredBadges={featuredBadges} />
         <div className="panel-grid">
@@ -147,21 +49,26 @@ export default function Home() {
           <div id="awards-section">
             <DataPanel title="Awards" accent="blue">
               <ul className="awards-stack">
-                {awards.map((award) => (
-                  <li key={`${award.year}-${award.title}`}>
-                    <span className="awards-stack__year">{award.year}</span>
-                    <div>
-                      <strong>{award.title}</strong>
-                      <div className="awards-stack__prize">{award.prize}</div>
-                    </div>
-                  </li>
-                ))}
+                {events
+                  .filter((ev) => ev.awards && ev.awards.length > 0)
+                  .map((ev) => {
+                    const year = ev.date.match(/^(\d{4})/)?.[1] ?? "";
+                    return (
+                      <li key={ev.title}>
+                        <span className="awards-stack__year">{year}年</span>
+                        <div>
+                          <strong>{ev.title}</strong>
+                          <div className="awards-stack__prize">{ev.awards!.join("、")}</div>
+                        </div>
+                      </li>
+                    );
+                  })}
               </ul>
             </DataPanel>
           </div>
 
           <div id="certifications-section">
-            <DataPanel title="資格" accent="blue" actions={<Link href="/about" className="link">もっと見る</Link>}>
+            <DataPanel title="Certifications" accent="blue" actions={<Link href="/about" className="link">もっと見る</Link>}>
               <CredlyBadge certifications={certifications} iframeWidth={350} />
             </DataPanel>
           </div>
@@ -186,10 +93,10 @@ export default function Home() {
                       {project.status === "completed" ? "完了" : "進行中"}
                     </span>
                   </div>
-                  <p>{project.desc.length > 140 ? `${project.desc.substring(0, 140)}…` : project.desc}</p>
+                  <p>{project.desc.length > DESC_TRUNCATE_LENGTH ? `${project.desc.substring(0, DESC_TRUNCATE_LENGTH)}…` : project.desc}</p>
                   {project.technologies && (
                     <div className="artifacts-tags">
-                      {project.technologies.slice(0, 4).map((tech) => (
+                      {project.technologies.slice(0, TAG_DISPLAY_LIMIT).map((tech) => (
                         <span key={tech}>{tech}</span>
                       ))}
                     </div>
@@ -218,26 +125,6 @@ export default function Home() {
           </div>
         </div>
       </main>
-
-      <footer className="neo-footer">
-        <div className="neo-footer__links">
-          <a href="https://x.com/tenhou_0126" target="_blank" rel="noopener noreferrer" aria-label="X (Twitter)">
-            X
-          </a>
-          <a href="https://github.com/tenhou-Ravenclaw" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-            GITHUB
-          </a>
-          <a
-            href="https://www.linkedin.com/in/彩翔-藤田-595a16352"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-          >
-            LINKEDIN
-          </a>
-        </div>
-        <div className="neo-footer__copy">&copy; {new Date().getFullYear()} Tenhou Ravenclaw</div>
-      </footer>
     </>
   );
 }

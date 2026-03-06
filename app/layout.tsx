@@ -4,6 +4,7 @@ import "./globals.css";
 import GlobalNav from "./GlobalNav";
 import OwlSplash from "./components/OwlSplash";
 import ClickEffect from "./components/ClickEffect";
+import Footer from "./components/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -86,6 +87,7 @@ export default function RootLayout({
         <ClickEffect />
         <GlobalNav />
         {children}
+        <Footer />
       </body>
     </html>
   );
