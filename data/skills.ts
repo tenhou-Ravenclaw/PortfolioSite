@@ -2,7 +2,7 @@ export type Skill = {
     name: string;
     icon: string; // SVGまたは画像パス
     level?: number; // 1~5など
-    years?: string; // 経験年数
+    years?: string; // 学習開始年
     description?: string; // ホバー時の説明
     category: 'language' | 'tool'; // 言語 or ツール
 };
@@ -114,7 +114,7 @@ export const skills: Skill[] = [
     },
     {
         name: "Discord",
-        icon: "https://cdn.discordapp.com/embed/avatars/0.png",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/discord/discord-original.svg",
         level: 5,
         years: "2020",
         description: "コミュニティや開発連絡で活用。だいたい友達とはDiscordだよね。",
@@ -142,7 +142,7 @@ export const skills: Skill[] = [
         level: 4,
         years: "2024",
         description: "基本的なクエリの作成、データベース設計の経験あり。大体これ使っとけばいいんだから。",
-        category: 'language',
+        category: 'tool',
     },
     {
         name: "Swift",

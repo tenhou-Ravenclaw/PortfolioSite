@@ -1,3 +1,6 @@
+import { certifications } from "../../data/certifications";
+import CredlyBadge from "../components/CredlyBadge";
+
 export default function AboutPage() {
     return (
         <main className="container" style={{ position: 'relative' }}>
@@ -68,6 +71,20 @@ export default function AboutPage() {
             <section className="section section-card">
                 <div className="section-card__decor section-card__decor--left" aria-hidden="true">
                     <div className="vertical-label">
+                        <span>資格</span>
+                    </div>
+                </div>
+                <div className="section-card__content">
+                    <h2 className="section-title">資格</h2>
+                    <CredlyBadge certifications={certifications} iframeWidth={350} />
+                </div>
+                <div className="section-card__decor section-card__decor--right" aria-hidden="true">
+                    <div className="card-dotgrid" />
+                </div>
+            </section>
+            <section className="section section-card">
+                <div className="section-card__decor section-card__decor--left" aria-hidden="true">
+                    <div className="vertical-label">
                         <span>価値観</span>
                     </div>
                 </div>
@@ -111,7 +128,6 @@ export default function AboutPage() {
                     <div className="card-barcode card-barcode--thin" />
                 </div>
             </section>
-
         </main>
     );
 }

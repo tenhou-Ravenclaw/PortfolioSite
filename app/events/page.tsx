@@ -3,28 +3,7 @@
 
 import { useState } from "react";
 import { events, projects, Event, Project, TimelineItem } from "../../data/event";
-
-// 共通の日付文字列パース関数
-function parseDateString(dateString: string): Date {
-  const match = dateString.match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
-  if (match) {
-    return new Date(parseInt(match[1]), parseInt(match[2]) - 1, parseInt(match[3]));
-  }
-  return new Date();
-}
-
-// 日付文字列から Date オブジェクトを作成するヘルパー関数
-function parseEventDate(dateString: string): Date {
-  const startDate = dateString.split('~')[0];
-  return parseDateString(startDate);
-}
-
-function parseProjectDate(dateString: string): Date {
-  if (dateString === "進行中" || dateString === "") {
-    return new Date();
-  }
-  return parseDateString(dateString);
-}
+import { parseEventDate, parseProjectDate } from "../../lib/date";
 
 // 年月リストを新しい順で生成（イベントまたはプロジェクトの開始/終了月がある月のみ）
 function getTimelineYearMonthList(events: Event[], projects: Project[]) {
@@ -142,14 +121,6 @@ export default function Events() {
                     {eventMap[ym]?.map((ev, i) => (
                       <div key={i} className="timeline-event-card" style={{ marginBottom: 12, cursor: 'pointer', border: ev.isHighlighted ? '2px solid #fbbf24' : '1px solid var(--color-border)', borderRadius: 12, padding: '1rem', background: 'var(--color-accent)', boxShadow: ev.isHighlighted ? '0 4px 12px rgba(251, 191, 36, 0.15)' : 'var(--shadow)', position: 'relative' }}
                         onClick={() => setSelectedItem({ type: 'event', data: ev, sortDate: parseEventDate(ev.date) })}
-                        onMouseEnter={e => {
-                          e.currentTarget.style.backgroundColor = 'rgba(111, 196, 255, 0.1)';
-                          e.currentTarget.style.transform = 'translateY(-2px)';
-                        }}
-                        onMouseLeave={e => {
-                          e.currentTarget.style.backgroundColor = 'var(--color-accent)';
-                          e.currentTarget.style.transform = 'translateY(0)';
-                        }}
                       >
                         {ev.isHighlighted && (
                           <div style={{ position: 'absolute', top: -8, right: -8, zIndex: 2, background: 'var(--color-accent)', borderRadius: '50%', padding: 2, border: '1px solid #fbbf24' }}>
@@ -175,14 +146,6 @@ export default function Events() {
                       <td key={colIdx} rowSpan={rowSpan} style={{ background: 'var(--color-accent)', verticalAlign: 'top', padding: '12px 8px', borderRight: '2px solid var(--color-border)', borderLeft: colIdx === 0 ? 'none' : '1px solid var(--color-border)' }}>
                         <div className="timeline-project-card" style={{ cursor: 'pointer', border: block.project.isHighlighted ? '2px solid #fbbf24' : '1px solid var(--color-border)', borderRadius: 12, padding: '1rem', background: 'var(--color-accent)', boxShadow: block.project.isHighlighted ? '0 4px 12px rgba(251, 191, 36, 0.15)' : 'var(--shadow)', position: 'relative' }}
                           onClick={() => setSelectedItem({ type: 'project', data: block.project, sortDate: parseProjectDate(block.project.startDate) })}
-                          onMouseEnter={e => {
-                            e.currentTarget.style.backgroundColor = 'rgba(196, 255, 130, 0.15)';
-                            e.currentTarget.style.transform = 'translateY(-2px)';
-                          }}
-                          onMouseLeave={e => {
-                            e.currentTarget.style.backgroundColor = 'var(--color-accent)';
-                            e.currentTarget.style.transform = 'translateY(0)';
-                          }}
                         >
                           {block.project.isHighlighted && (
                             <div style={{ position: 'absolute', top: -8, right: -8, zIndex: 2, background: 'var(--color-accent)', borderRadius: '50%', padding: 2, border: '1px solid #fbbf24' }}>
@@ -374,24 +337,7 @@ export default function Events() {
                   href={(selectedItem.data as Project).github!}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{
-                    display: 'inline-block',
-                    background: 'var(--color-primary-ink)',
-                    color: 'white',
-                    padding: '0.75rem 1.5rem',
-                    textDecoration: 'none',
-                    borderRadius: '8px',
-                    fontWeight: '500',
-                    transition: 'all 0.2s ease'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'var(--color-primary-hover)';
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'var(--color-primary-ink)';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                  }}
+                  className="neo-modal-btn"
                 >
                   GitHubを見る
                 </a>
@@ -401,24 +347,7 @@ export default function Events() {
                   href={selectedItem.data.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{
-                    display: 'inline-block',
-                    background: 'var(--color-primary-ink)',
-                    color: 'white',
-                    padding: '0.75rem 1.5rem',
-                    textDecoration: 'none',
-                    borderRadius: '8px',
-                    fontWeight: '500',
-                    transition: 'all 0.2s ease'
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.background = 'var(--color-primary-hover)';
-                    e.currentTarget.style.transform = 'translateY(-2px)';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.background = 'var(--color-primary-ink)';
-                    e.currentTarget.style.transform = 'translateY(0)';
-                  }}
+                  className="neo-modal-btn"
                 >
                   {selectedItem.type === 'event' ? 'イベントページを見る' : 'プロジェクトページを見る'}
                 </a>
