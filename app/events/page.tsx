@@ -3,11 +3,7 @@
 
 import { useState } from "react";
 import { events, projects, Event, Project, TimelineItem } from "../../data/event";
-import { parseDateString as parseDateStringLib, parseEventDate, parseProjectDate } from "../../lib/date";
-
-function parseDateString(dateString: string): Date {
-  return parseDateStringLib(dateString) ?? new Date();
-}
+import { parseEventDate, parseProjectDate } from "../../lib/date";
 
 // 年月リストを新しい順で生成（イベントまたはプロジェクトの開始/終了月がある月のみ）
 function getTimelineYearMonthList(events: Event[], projects: Project[]) {

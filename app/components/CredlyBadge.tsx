@@ -20,14 +20,17 @@ type CredlyBadgeProps = {
  */
 export default function CredlyBadge({ certifications, iframeWidth = 300, style }: CredlyBadgeProps) {
   useEffect(() => {
+    const existing = document.querySelector<HTMLScriptElement>(
+      `script[src="${CREDLY_EMBED_URL}"]`
+    );
+    if (existing) return;
+
     const script = document.createElement("script");
     script.src = CREDLY_EMBED_URL;
     script.async = true;
     document.body.appendChild(script);
 
-    return () => {
-      script.remove();
-    };
+    return () => { script.remove(); };
   }, []);
 
   return (
