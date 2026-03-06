@@ -1,4 +1,5 @@
-import Script from "next/script";
+import { certifications } from "../../data/certifications";
+import CredlyBadge from "../components/CredlyBadge";
 
 export default function AboutPage() {
     return (
@@ -75,14 +76,7 @@ export default function AboutPage() {
                 </div>
                 <div className="section-card__content">
                     <h2 className="section-title">資格</h2>
-                    <div style={{ marginTop: "1.5rem", display: "flex", justifyContent: "center" }}>
-                        <div
-                            data-iframe-width="400"
-                            data-iframe-height="270"
-                            data-share-badge-id="f901cb7a-5a52-4c5f-8729-eabff3be7df1"
-                            data-share-badge-host="https://www.credly.com"
-                        />
-                    </div>
+                    <CredlyBadge certifications={certifications} iframeWidth={350} />
                 </div>
                 <div className="section-card__decor section-card__decor--right" aria-hidden="true">
                     <div className="card-dotgrid" />
@@ -134,8 +128,6 @@ export default function AboutPage() {
                     <div className="card-barcode card-barcode--thin" />
                 </div>
             </section>
-            <Script src="https://cdn.credly.com/assets/utilities/embed.js" async />
-
         </main>
     );
 }

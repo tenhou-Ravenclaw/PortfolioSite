@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
-import Script from "next/script";
 import { awards } from "../data/awards";
+import { certifications } from "../data/certifications";
 import { events, projects, Event, Project } from "../data/event";
 import { skills } from "../data/skills";
 import { useEffect } from "react";
@@ -9,6 +9,7 @@ import HeroSection from "./components/HeroSection";
 import DataPanel from "./components/DataPanel";
 import ActivityRail, { Activity as ActivityRailItem } from "./components/ActivityRail";
 import SkillConsole from "./components/SkillConsole";
+import CredlyBadge from "./components/CredlyBadge";
 
 type EventActivity = Event & {
   parsedDate: Date;
@@ -161,14 +162,7 @@ export default function Home() {
 
           <div id="certifications-section">
             <DataPanel title="資格" accent="blue" actions={<Link href="/about" className="link">もっと見る</Link>}>
-              <div style={{ marginTop: "1.5rem", display: "flex", justifyContent: "center" }}>
-                <div
-                  data-iframe-width="400"
-                  data-iframe-height="270"
-                  data-share-badge-id="f901cb7a-5a52-4c5f-8729-eabff3be7df1"
-                  data-share-badge-host="https://www.credly.com"
-                />
-              </div>
+              <CredlyBadge certifications={certifications} iframeWidth={350} />
             </DataPanel>
           </div>
 
@@ -224,8 +218,6 @@ export default function Home() {
           </div>
         </div>
       </main>
-
-      <Script src="https://cdn.credly.com/assets/utilities/embed.js" strategy="lazyOnload" />
 
       <footer className="neo-footer">
         <div className="neo-footer__links">
