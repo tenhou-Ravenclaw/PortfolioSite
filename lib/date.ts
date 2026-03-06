@@ -3,9 +3,10 @@
  * パースできない場合は null を返す。
  */
 export function parseDateString(dateString: string): Date | null {
-  const match = dateString.match(/(\d{4})\/(\d{1,2})\/(\d{1,2})/);
+  const trimmed = dateString.trim();
+  const match = trimmed.match(/^(\d{4})\/(\d{1,2})\/(\d{1,2})$/);
   if (!match) return null;
-  return new Date(parseInt(match[1]), parseInt(match[2]) - 1, parseInt(match[3]));
+  return new Date(parseInt(match[1], 10), parseInt(match[2], 10) - 1, parseInt(match[3], 10));
 }
 
 /**
@@ -14,7 +15,7 @@ export function parseDateString(dateString: string): Date | null {
  */
 export function parseEventDate(dateString: string): Date {
   const startPart = dateString.split("~")[0];
-  return parseDateString(startPart) ?? new Date();
+  return parseDateString(startPart) ?? new Date(0);
 }
 
 /**
@@ -23,7 +24,7 @@ export function parseEventDate(dateString: string): Date {
  */
 export function parseProjectDate(dateString: string): Date {
   if (dateString === "進行中" || dateString === "") return new Date();
-  return parseDateString(dateString) ?? new Date();
+  return parseDateString(dateString) ?? new Date(0);
 }
 
 /**

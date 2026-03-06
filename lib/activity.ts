@@ -24,7 +24,7 @@ export function getRecentActivities(): Activity[] {
 
   const projectsWithDates: ProjectActivity[] = projects.map((project) => ({
     ...project,
-    parsedDate: parseDateString(project.startDate) ?? new Date(),
+    parsedDate: parseDateString(project.startDate) ?? new Date(0),
     type: "project" as const,
   }));
 

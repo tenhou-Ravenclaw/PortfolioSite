@@ -199,6 +199,10 @@ function ProjectCard({ project }: ProjectCardProps) {
 }
 
 export default function ArtifactsPage() {
+    const completedProjects = projects.filter(p => p.status === 'completed');
+    const inProgressProjects = projects.filter(p => p.status === 'in-progress');
+    const plannedProjects = projects.filter(p => p.status === 'planned');
+
     return (
         <main className="container" style={{ position: 'relative' }}>
             <div className="bg-geometry" />
@@ -210,11 +214,11 @@ export default function ArtifactsPage() {
             <section className="section">
                 <h2 className="section-title">プロジェクト一覧</h2>
 
-                {projects.filter(p => p.status === 'completed').length > 0 && (
+                {completedProjects.length > 0 && (
                     <div style={{ marginBottom: '3rem' }}>
                         <h3 className="section-subtitle" style={{ marginBottom: '1.5rem', fontSize: '1.2rem', color: 'var(--color-primary-hover)' }}>完了</h3>
                         <div style={{ display: 'grid', gap: '2rem', maxWidth: '1000px', margin: '0 auto' }}>
-                            {projects.filter(p => p.status === 'completed').map((project) => (
+                            {completedProjects.map((project) => (
                                 <div key={project.title} className="project-card">
                                     <div className="project-card__decor project-card__decor--left" aria-hidden="true">
                                         <div className="card-qr" />
@@ -231,11 +235,11 @@ export default function ArtifactsPage() {
                     </div>
                 )}
 
-                {projects.filter(p => p.status === 'in-progress').length > 0 && (
+                {inProgressProjects.length > 0 && (
                     <div style={{ marginBottom: '3rem' }}>
                         <h3 className="section-subtitle" style={{ marginBottom: '1.5rem', fontSize: '1.2rem', color: 'var(--color-primary-hover)' }}>進行中</h3>
                         <div style={{ display: 'grid', gap: '2rem', maxWidth: '1000px', margin: '0 auto' }}>
-                            {projects.filter(p => p.status === 'in-progress').map((project) => (
+                            {inProgressProjects.map((project) => (
                                 <div key={project.title} className="project-card">
                                     <div className="project-card__decor project-card__decor--left" aria-hidden="true">
                                         <div className="vertical-label">
@@ -254,11 +258,11 @@ export default function ArtifactsPage() {
                     </div>
                 )}
 
-                {projects.filter(p => p.status === 'planned').length > 0 && (
+                {plannedProjects.length > 0 && (
                     <div style={{ marginBottom: '3rem' }}>
                         <h3 className="section-subtitle" style={{ marginBottom: '1.5rem', fontSize: '1.2rem', color: 'var(--color-primary-hover)' }}>予定</h3>
                         <div style={{ display: 'grid', gap: '2rem', maxWidth: '1000px', margin: '0 auto' }}>
-                            {projects.filter(p => p.status === 'planned').map((project) => (
+                            {plannedProjects.map((project) => (
                                 <div key={project.title} className="project-card">
                                     <div className="project-card__decor project-card__decor--left" aria-hidden="true">
                                         <div className="card-barcode" />
