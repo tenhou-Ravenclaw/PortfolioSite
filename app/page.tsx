@@ -3,7 +3,7 @@ import { certifications } from "@/data/certifications";
 import { events, projects } from "@/data/events";
 import { skills } from "@/data/skills";
 import { getRecentActivities, getRoleColor, getRoleText, formatActivityDate } from "@/lib/activity";
-import { parseEventDate } from "@/lib/date";
+import { parseEventDate, formatYearMonth } from "@/lib/date";
 import HeroSection from "@/components/sections/HeroSection";
 import DataPanel from "@/components/sections/DataPanel";
 import ActivityRail, { Activity as ActivityRailItem } from "@/components/sections/ActivityRail";
@@ -50,14 +50,12 @@ export default function Home() {
               <ul className="awards-stack">
                 {events
                   .filter((ev) => ev.awards && ev.awards.length > 0)
-                  .sort((a, b) => parseEventDate(b.date).getTime() - parseEventDate(a.date).getTime())
+                  .toSorted((a, b) => parseEventDate(b.date).getTime() - parseEventDate(a.date).getTime())
                   .map((ev) => {
-                    const match = ev.date.match(/^(\d{4})\/(\d{1,2})/);
-                    const year = match?.[1] ?? "";
-                    const month = match?.[2] ?? "";
+                    const ym = formatYearMonth(parseEventDate(ev.date));
                     return (
                       <li key={ev.title}>
-                        <span className="awards-stack__year">{year}.{month}</span>
+                        <span className="awards-stack__year">{ym}</span>
                         <div>
                           <strong>{ev.title}</strong>
                           <div className="awards-stack__prize">{ev.awards!.join("、")}</div>
