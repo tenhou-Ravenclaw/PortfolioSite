@@ -2156,37 +2156,54 @@ body {
 }
 /* --- Aboutページ Valuesセクション用 --- */
 .values-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 1.5rem;
-  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 1.5rem;
 }
 
 .value-item {
-  padding: 1.2rem;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--color-border);
-  border-radius: 16px;
-  transition: transform 0.2s;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.8rem;
+  padding: 1.6rem 1.4rem;
+  border-top: 1px solid var(--color-border);
 }
 
-.value-item:hover {
-  transform: translateY(-4px);
-  background: rgba(56, 189, 252, 0.05);
+.value-item:last-child {
+  border-bottom: 1px solid var(--color-border);
+}
+
+.value-item__num {
+  font-family: var(--font-mono);
+  font-size: 2.4rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--color-primary);
+  opacity: 0.6;
+  flex-shrink: 0;
+  width: 3.2rem;
+  text-align: right;
+  user-select: none;
+}
+
+.value-item__body {
+  flex: 1;
 }
 
 .value-item h3 {
   color: var(--color-primary-hover);
-  margin-bottom: 0.6rem;
-  font-size: 1.1rem;
+  margin: 0 0 0.5rem 0;
+  font-size: 1.05rem;
   font-family: var(--font-mono);
+  letter-spacing: 0.02em;
 }
 
 .value-item p {
-  font-size: 0.95rem;
-  line-height: 1.6;
+  font-size: 0.92rem;
+  line-height: 1.75;
   color: var(--color-fg);
-  opacity: 0.9;
+  opacity: 0.8;
   margin: 0;
 }
 
