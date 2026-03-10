@@ -114,7 +114,7 @@ export const skills: Skill[] = [
         category: 'tool',
     },
     {
-        name: "MarkDown",
+        name: "Markdown",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/markdown/markdown-original.svg",
         level: 4,
         years: "2024",
