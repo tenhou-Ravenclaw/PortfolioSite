@@ -25,9 +25,7 @@ export default function Home() {
     color: getRoleColor(activity),
   }));
 
-  const completedOrPublicProjects = projects
-    .filter((project) => project.status === "completed" || project.github)
-    .slice(0, HOME_PROJECTS_COUNT);
+  const completedOrPublicProjects = projects.slice(0, HOME_PROJECTS_COUNT);
 
   return (
     <>
