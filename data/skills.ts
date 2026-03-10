@@ -1,11 +1,4 @@
-export type Skill = {
-    name: string;
-    icon: string; // SVGまたは画像パス
-    level?: number; // 1~5など
-    years?: string; // 学習開始年
-    description?: string; // ホバー時の説明
-    category: 'language' | 'tool'; // 言語 or ツール
-};
+import type { Skill } from "@/types";
 
 export const skills: Skill[] = [
     {

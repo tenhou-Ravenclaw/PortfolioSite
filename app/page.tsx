@@ -1,14 +1,14 @@
 import Link from "next/link";
-import { certifications } from "../data/certifications";
-import { events, projects } from "../data/event";
-import { skills } from "../data/skills";
-import { getRecentActivities, getRoleColor, getRoleText, formatActivityDate } from "../lib/activity";
-import HeroSection from "./components/HeroSection";
-import DataPanel from "./components/DataPanel";
-import ActivityRail, { Activity as ActivityRailItem } from "./components/ActivityRail";
-import SkillConsole from "./components/SkillConsole";
-import CredlyBadge from "./components/CredlyBadge";
-import ScrollRestorer from "./components/ScrollRestorer";
+import { certifications } from "@/data/certifications";
+import { events, projects } from "@/data/events";
+import { skills } from "@/data/skills";
+import { getRecentActivities, getRoleColor, getRoleText, formatActivityDate } from "@/lib/activity";
+import HeroSection from "@/components/sections/HeroSection";
+import DataPanel from "@/components/sections/DataPanel";
+import ActivityRail, { Activity as ActivityRailItem } from "@/components/sections/ActivityRail";
+import SkillConsole from "@/components/sections/SkillConsole";
+import CredlyBadge from "@/components/ui/CredlyBadge";
+import ScrollRestorer from "@/components/ui/ScrollRestorer";
 
 const featuredBadges = ["MySQL", "Java", "Next.js", "PHP"];
 const HOME_PROJECTS_COUNT = 3;

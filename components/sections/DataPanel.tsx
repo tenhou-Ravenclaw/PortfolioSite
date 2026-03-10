@@ -24,4 +24,3 @@ const DataPanel = ({ title, tag, accent = "blue", actions, children }: DataPanel
 };
 
 export default DataPanel;
-

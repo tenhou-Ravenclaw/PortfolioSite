@@ -93,4 +93,3 @@ const OwlGlyph = () => (
 );
 
 export default OwlGlyph;
-

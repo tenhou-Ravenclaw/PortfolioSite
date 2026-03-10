@@ -47,4 +47,3 @@ const ActivityRail = ({ activities }: ActivityRailProps) => {
 
 export type { Activity };
 export default ActivityRail;
-

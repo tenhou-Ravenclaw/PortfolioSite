@@ -169,4 +169,3 @@ const HeroSection = ({ featuredBadges }: HeroSectionProps) => {
 };
 
 export default HeroSection;
-

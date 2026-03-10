@@ -54,9 +54,7 @@ export default function OwlSplash({ onFinish }: OwlSplashProps) {
           className="owl-symbol"
           viewBox="0 0 320 220"
           fill="none"
-          
         >
-          
           <defs>
             <linearGradient id="owl-swoosh" x1="40" y1="0" x2="280" y2="220">
               <stop offset="0%" stopColor={owlPalette.base} stopOpacity="0" />
@@ -141,8 +139,7 @@ export default function OwlSplash({ onFinish }: OwlSplashProps) {
         <div className="dots dots--left" />
         <div className="dots dots--right" />
       </div>
-      <p className="owl-splash__caption">Tenhou’s Portfolio</p>
+      <p className="owl-splash__caption">Tenhou&apos;s Portfolio</p>
     </div>
   );
 }
-

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Skill } from "../../data/skills";
+import type { Skill } from "@/types";
 
 type SkillConsoleProps = {
   skills: Skill[];
@@ -52,4 +52,3 @@ const SkillConsole = ({ skills }: SkillConsoleProps) => {
 };
 
 export default SkillConsole;
-

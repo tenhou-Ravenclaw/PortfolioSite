@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Varela_Round, Great_Vibes, Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
-import GlobalNav from "./GlobalNav";
-import OwlSplash from "./components/OwlSplash";
-import ClickEffect from "./components/ClickEffect";
-import Footer from "./components/Footer";
+import GlobalNav from "@/components/layout/GlobalNav";
+import OwlSplash from "@/components/ui/OwlSplash";
+import ClickEffect from "@/components/ui/ClickEffect";
+import Footer from "@/components/layout/Footer";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

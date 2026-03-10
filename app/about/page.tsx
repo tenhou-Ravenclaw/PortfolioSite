@@ -1,5 +1,5 @@
-import { certifications } from "../../data/certifications";
-import CredlyBadge from "../components/CredlyBadge";
+import { certifications } from "@/data/certifications";
+import CredlyBadge from "@/components/ui/CredlyBadge";
 
 export default function AboutPage() {
     return (

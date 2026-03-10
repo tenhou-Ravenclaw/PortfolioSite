@@ -1,4 +1,5 @@
-import { Event, Project, events, projects } from "../data/event";
+import type { Event, Project } from "@/types";
+import { events, projects } from "@/data/events";
 import { parseEventDate, parseDateString, formatYearMonth } from "./date";
 
 export type EventActivity = Event & {
