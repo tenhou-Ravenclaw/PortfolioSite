@@ -233,7 +233,7 @@ export const events: Event[] = [
     },
     {
         title: "Horizon Development Conference",
-        date: "2026/02/6",
+        date: "2026/02/06",
         desc: "Horizon Development Conferenceに参加した。",
         url: "https://ryukokuhorizon.connpass.com/event/378352/",
         role: "出展者",

@@ -126,7 +126,7 @@ export const skills: Skill[] = [
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
         level: 4,
         years: "2024",
-        description: "普段使いのエディタ。だいたいGithub Copilotを使ってコーディングしてる。",
+        description: "普段使いのエディタ。だいたいGitHub Copilotを使ってコーディングしてる。",
         category: 'tool',
     },
     {

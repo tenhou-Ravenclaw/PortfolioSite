@@ -104,7 +104,7 @@ const HeroSection = ({ featuredBadges }: HeroSectionProps) => {
         <span className="hero-v2__label">Portfolio</span>
         <div className="hero-v2__name-jp">藤田 彩翔</div>
         <div className="hero-v2__name-en">Ayato Fujita</div>
-        <div className="hero-v2__role">Soft / Hard Engineer <br /> Product Manager</div>
+        <div className="hero-v2__role">Software / Hardware Engineer <br /> Product Manager</div>
         <div className="hero-v2__badges">
           {featuredBadges.map((badge) => (
             <span className="hero-v2__badge" key={badge}>
