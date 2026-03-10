@@ -29,9 +29,7 @@ export default function AboutPage() {
             </section>
             <section className="section section-card">
                 <div className="section-card__decor section-card__decor--left" aria-hidden="true">
-                    <div className="vertical-label">
-                        <span>略歴</span>
-                    </div>
+                    <div className="card-barcode" />
                 </div>
                 <div className="section-card__content">
                     <h2 className="section-title">略歴</h2>
@@ -70,9 +68,7 @@ export default function AboutPage() {
             </section>
             <section className="section section-card">
                 <div className="section-card__decor section-card__decor--left" aria-hidden="true">
-                    <div className="vertical-label">
-                        <span>資格</span>
-                    </div>
+                    <div className="card-qr" />
                 </div>
                 <div className="section-card__content">
                     <h2 className="section-title">資格</h2>
@@ -84,9 +80,7 @@ export default function AboutPage() {
             </section>
             <section className="section section-card">
                 <div className="section-card__decor section-card__decor--left" aria-hidden="true">
-                    <div className="vertical-label">
-                        <span>価値観</span>
-                    </div>
+                    <div className="card-dotgrid" />
                 </div>
                 <div className="section-card__content">
                     <h2 className="section-title">Values</h2>
@@ -123,9 +117,7 @@ export default function AboutPage() {
             </section>
             <section className="section section-card">
                 <div className="section-card__decor section-card__decor--left" aria-hidden="true">
-                    <div className="vertical-label">
-                        <span>趣味</span>
-                    </div>
+                    <div className="card-barcode card-barcode--thin" />
                 </div>
                 <div className="section-card__content">
                     <h2 className="section-title">趣味</h2>

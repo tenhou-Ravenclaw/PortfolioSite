@@ -243,9 +243,7 @@ export default function ArtifactsPage() {
                             {inProgressProjects.map((project) => (
                                 <div key={project.title} className="project-card">
                                     <div className="project-card__decor project-card__decor--left" aria-hidden="true">
-                                        <div className="vertical-label">
-                                            <span>進行中</span>
-                                        </div>
+                                        <div className="card-qr" />
                                     </div>
                                     <div className="project-card__content">
                                         <ProjectCard project={project} />
