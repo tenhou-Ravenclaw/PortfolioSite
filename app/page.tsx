@@ -49,6 +49,11 @@ export default function Home() {
               <ul className="awards-stack">
                 {events
                   .filter((ev) => ev.awards && ev.awards.length > 0)
+                  .sort((a, b) => {
+                    const dateA = a.date.split("~")[0].replace(/\//g, "-");
+                    const dateB = b.date.split("~")[0].replace(/\//g, "-");
+                    return dateB.localeCompare(dateA);
+                  })
                   .map((ev) => {
                     const year = ev.date.match(/^(\d{4})/)?.[1] ?? "";
                     return (
