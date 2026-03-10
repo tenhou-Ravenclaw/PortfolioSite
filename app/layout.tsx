@@ -5,6 +5,7 @@ import GlobalNav from "@/components/layout/GlobalNav";
 import OwlSplash from "@/components/ui/OwlSplash";
 import ClickEffect from "@/components/ui/ClickEffect";
 import Footer from "@/components/layout/Footer";
+import ChatBot from "@/components/ui/ChatBot";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -87,6 +88,7 @@ export default function RootLayout({
         <ClickEffect />
         <GlobalNav />
         {children}
+        <ChatBot />
         <Footer />
       </body>
     </html>
