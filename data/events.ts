@@ -213,14 +213,58 @@ export const events: Event[] = [
     },
     {
         title: "KYOTO PLATEAU HACK 2025",
-        date: "2025/11/13~2025/11/14",
+        date: "2025/12/13~2025/12/14",
         desc: "KYOTO PLATEAU HACK 2025に参加した。",
         url: "https://www.craftstadium.com/hackathon/kyoto-plateau-hack-2025",
         role: "参加者",
         learned: "",
         isHighlighted: true,
         awards: ["ボッチソン賞", "京都市役所賞"]
-    }
+    },
+    {
+        title: "技育CAMPハッカソン",
+        date: "2025/12/20~2025/12/21",
+        desc: "技育CAMPハッカソンに参加した。",
+        url: "https://x.com/geek_pjt/status/2002673314444300440",
+        role: "参加者",
+        learned: "",
+        isHighlighted: true,
+        awards: ["努力賞"]
+    },
+    {
+        title: "Horizon Development Conference",
+        date: "2026/02/6",
+        desc: "Horizon Development Conferenceに参加した。",
+        url: "https://ryukokuhorizon.connpass.com/event/378352/",
+        role: "出展者",
+        learned: "",
+    },
+    {
+        title: "KC3Hack 2026",
+        date: "2026/02/14~2026/02/22",
+        desc: "KC3Hack 2026に参加した。",
+        url: "https://kc3.me/hack/hack2026/",
+        role: "参加者",
+        learned: "",
+    },
+    {
+        title: "Geminiの中の人緊急来日イベント",
+        date: "2026/02/28",
+        desc: "Geminiの中の人緊急来日イベントに参加した。",
+        url: "https://gdgkwansai.connpass.com/event/384715/",
+        role: "スタッフ",
+        learned: "",
+    },
+    {
+        title: "Confidential Computing x LLM Ideathon",
+        date: "2026/02/14",
+        desc: "Confidential Computing x LLM Ideathonに参加した。",
+        url: "https://acompany.connpass.com/event/379852/",
+        role: "参加者",
+        learned: "",
+        isHighlighted: true,
+        awards: ["最優秀賞"]
+    },
 ];
 
 export const projects: Project[] = [
