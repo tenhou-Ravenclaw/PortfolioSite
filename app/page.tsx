@@ -26,7 +26,7 @@ export default function Home() {
     color: getRoleColor(activity),
   }));
 
-  const completedOrPublicProjects = projects.slice(0, HOME_PROJECTS_COUNT);
+  const featuredProjects = projects.slice(0, HOME_PROJECTS_COUNT);
 
   return (
     <>
@@ -83,7 +83,7 @@ export default function Home() {
             }
           >
             <div className="artifacts-stack">
-              {completedOrPublicProjects.map((project) => (
+              {featuredProjects.map((project) => (
                 <div className="artifacts-card" key={project.title}>
                   <div className="artifacts-card__head">
                     <h3>{project.title}</h3>
