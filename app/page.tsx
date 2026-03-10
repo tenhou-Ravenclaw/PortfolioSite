@@ -55,10 +55,12 @@ export default function Home() {
                     return dateB.localeCompare(dateA);
                   })
                   .map((ev) => {
-                    const year = ev.date.match(/^(\d{4})/)?.[1] ?? "";
+                    const match = ev.date.match(/^(\d{4})\/(\d{1,2})/);
+                    const year = match?.[1] ?? "";
+                    const month = match?.[2] ?? "";
                     return (
                       <li key={ev.title}>
-                        <span className="awards-stack__year">{year}年</span>
+                        <span className="awards-stack__year">{year}.{month}</span>
                         <div>
                           <strong>{ev.title}</strong>
                           <div className="awards-stack__prize">{ev.awards!.join("、")}</div>
