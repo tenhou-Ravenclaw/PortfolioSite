@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import type { Certification } from "../../data/certifications";
+import type { Certification } from "@/types";
 
 const CREDLY_EMBED_URL = "https://cdn.credly.com/assets/utilities/embed.js";
 

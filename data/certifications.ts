@@ -1,8 +1,4 @@
-export type Certification = {
-    /** Credly バッジID（data-share-badge-id に使用） */
-    id: string;
-    title: string;
-};
+import type { Certification } from "@/types";
 
 export const certifications: Certification[] = [
     {

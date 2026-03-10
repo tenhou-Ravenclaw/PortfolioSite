@@ -1,7 +1,8 @@
 "use client";
 
-import { Project, projects } from "../../data/event";
-import { parseDateString, formatYearMonth } from "../../lib/date";
+import type { Project } from "@/types";
+import { projects } from "@/data/events";
+import { parseDateString, formatYearMonth } from "@/lib/date";
 
 function formatProjectPeriod(startDate: string, endDate: string): string {
     const start = parseDateString(startDate);

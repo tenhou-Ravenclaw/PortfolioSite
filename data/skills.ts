@@ -1,11 +1,4 @@
-export type Skill = {
-    name: string;
-    icon: string; // SVGまたは画像パス
-    level?: number; // 1~5など
-    years?: string; // 学習開始年
-    description?: string; // ホバー時の説明
-    category: 'language' | 'tool'; // 言語 or ツール
-};
+import type { Skill } from "@/types";
 
 export const skills: Skill[] = [
     {
@@ -121,7 +114,7 @@ export const skills: Skill[] = [
         category: 'tool',
     },
     {
-        name: "MarkDown",
+        name: "Markdown",
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/markdown/markdown-original.svg",
         level: 4,
         years: "2024",
@@ -133,7 +126,7 @@ export const skills: Skill[] = [
         icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg",
         level: 4,
         years: "2024",
-        description: "普段使いのエディタ。だいたいGithub Copilotを使ってコーディングしてる。",
+        description: "普段使いのエディタ。だいたいGitHub Copilotを使ってコーディングしてる。",
         category: 'tool',
     },
     {

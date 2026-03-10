@@ -5,7 +5,6 @@ import Link from "next/link";
 export default function GlobalNav() {
     const navToggleRef = useRef<HTMLInputElement>(null);
     const [isOpen, setIsOpen] = useState(false);
-    // メニューを閉じる
     const closeMenu = () => {
         if (navToggleRef.current) navToggleRef.current.checked = false;
         setIsOpen(false);
@@ -20,7 +19,6 @@ export default function GlobalNav() {
     return (
         <nav className="global-nav">
             <input type="checkbox" id="nav-toggle" className="nav-toggle" ref={navToggleRef} />
-            {/* オーバーレイ */}
             {isOpen && <div className="nav-overlay" onClick={closeMenu} />}
             <label htmlFor="nav-toggle" className="nav-hamburger" aria-label="メニューを開く">
                 <span></span>
@@ -28,7 +26,6 @@ export default function GlobalNav() {
                 <span></span>
             </label>
             <div className="nav-menu">
-                {/* ×ボタン */}
                 <button className="nav-close" aria-label="メニューを閉じる" onClick={closeMenu}>
                     <span>&times;</span>
                 </button>

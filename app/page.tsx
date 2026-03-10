@@ -1,14 +1,15 @@
 import Link from "next/link";
-import { certifications } from "../data/certifications";
-import { events, projects } from "../data/event";
-import { skills } from "../data/skills";
-import { getRecentActivities, getRoleColor, getRoleText, formatActivityDate } from "../lib/activity";
-import HeroSection from "./components/HeroSection";
-import DataPanel from "./components/DataPanel";
-import ActivityRail, { Activity as ActivityRailItem } from "./components/ActivityRail";
-import SkillConsole from "./components/SkillConsole";
-import CredlyBadge from "./components/CredlyBadge";
-import ScrollRestorer from "./components/ScrollRestorer";
+import { certifications } from "@/data/certifications";
+import { events, projects } from "@/data/events";
+import { skills } from "@/data/skills";
+import { getRecentActivities, getRoleColor, getRoleText, formatActivityDate } from "@/lib/activity";
+import { parseEventDate, formatYearMonth } from "@/lib/date";
+import HeroSection from "@/components/sections/HeroSection";
+import DataPanel from "@/components/sections/DataPanel";
+import ActivityRail, { Activity as ActivityRailItem } from "@/components/sections/ActivityRail";
+import SkillConsole from "@/components/sections/SkillConsole";
+import CredlyBadge from "@/components/ui/CredlyBadge";
+import ScrollRestorer from "@/components/ui/ScrollRestorer";
 
 const featuredBadges = ["MySQL", "Java", "Next.js", "PHP"];
 const HOME_PROJECTS_COUNT = 3;
@@ -25,9 +26,7 @@ export default function Home() {
     color: getRoleColor(activity),
   }));
 
-  const completedOrPublicProjects = projects
-    .filter((project) => project.status === "completed" || project.github)
-    .slice(0, HOME_PROJECTS_COUNT);
+  const featuredProjects = projects.slice(0, HOME_PROJECTS_COUNT);
 
   return (
     <>
@@ -51,11 +50,12 @@ export default function Home() {
               <ul className="awards-stack">
                 {events
                   .filter((ev) => ev.awards && ev.awards.length > 0)
+                  .toSorted((a, b) => parseEventDate(b.date).getTime() - parseEventDate(a.date).getTime())
                   .map((ev) => {
-                    const year = ev.date.match(/^(\d{4})/)?.[1] ?? "";
+                    const ym = formatYearMonth(parseEventDate(ev.date));
                     return (
                       <li key={ev.title}>
-                        <span className="awards-stack__year">{year}年</span>
+                        <span className="awards-stack__year">{ym}</span>
                         <div>
                           <strong>{ev.title}</strong>
                           <div className="awards-stack__prize">{ev.awards!.join("、")}</div>
@@ -83,7 +83,7 @@ export default function Home() {
             }
           >
             <div className="artifacts-stack">
-              {completedOrPublicProjects.map((project) => (
+              {featuredProjects.map((project) => (
                 <div className="artifacts-card" key={project.title}>
                   <div className="artifacts-card__head">
                     <h3>{project.title}</h3>
