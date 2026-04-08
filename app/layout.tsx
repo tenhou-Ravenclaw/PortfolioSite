@@ -38,7 +38,7 @@ const notoSansJp = Noto_Sans_JP({
 });
 
 const getBaseUrl = () => {
-  if (process.env.VERCEL_ENV === 'production') return 'https://ten-hou.com';
+  if (process.env.VERCEL_ENV === 'production') return 'https://portfolio.ten-hou.com';
   if (process.env.VERCEL_URL) return `https://${process.env.VERCEL_URL}`;
   return 'http://localhost:3000';
 };
