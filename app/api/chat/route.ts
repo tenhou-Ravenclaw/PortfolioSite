@@ -94,13 +94,13 @@ export async function POST(req: NextRequest) {
 
   const groq = new Groq({ apiKey });
 
-  const history: ChatMessage[] = (messages ?? []).map((m) => ({
-    role: m.role,
-    content: m.content,
-  }));
+  const HISTORY_LIMIT = 6;
+  const history: ChatMessage[] = (messages ?? [])
+    .slice(-HISTORY_LIMIT)
+    .map((m) => ({ role: m.role, content: m.content }));
 
   const completion = await groq.chat.completions.create({
-    model: "llama-3.3-70b-versatile",
+    model: "llama-3.1-8b-instant",
     messages: [
       { role: "system", content: buildSystemPrompt() },
       ...history,
