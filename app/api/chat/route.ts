@@ -1,8 +1,12 @@
-import Groq from "groq-sdk";
+import Groq, { APIConnectionTimeoutError, APIError } from "groq-sdk";
 import { NextRequest, NextResponse } from "next/server";
 import { events, projects } from "@/data/events";
 import { skills } from "@/data/skills";
 import { certifications } from "@/data/certifications";
+import { consumeRateLimit, getClientIdentifier } from "./rate-limit";
+import { ChatRequestError, parseChatRequest, readJsonBody } from "./validation";
+
+const GROQ_TIMEOUT_MS = 15_000;
 
 function buildSystemPrompt(): string {
   const skillList = skills
@@ -71,44 +75,68 @@ ${projectList}
 ポートフォリオサイトの内容について聞かれた場合は、上記の情報を参考に答えてください。`;
 }
 
-type ChatMessage = {
-  role: "user" | "assistant";
-  content: string;
-};
-
 export async function POST(req: NextRequest) {
   const apiKey = process.env.GROQ_API_KEY;
   if (!apiKey) {
-    return NextResponse.json({ error: "GROQ_API_KEY が設定されていません" }, { status: 500 });
+    return NextResponse.json({ error: "チャットサービスを利用できません" }, { status: 503 });
   }
 
-  const body = await req.json();
-  const { messages, newMessage } = body as {
-    messages: ChatMessage[];
-    newMessage: string;
+  const rateLimit = consumeRateLimit(getClientIdentifier(req.headers));
+  const rateLimitHeaders = {
+    "RateLimit-Limit": String(rateLimit.limit),
+    "RateLimit-Remaining": String(rateLimit.remaining),
+    "RateLimit-Reset": String(Math.ceil(rateLimit.resetAt / 1_000)),
   };
-
-  if (!newMessage?.trim()) {
-    return NextResponse.json({ error: "メッセージが空です" }, { status: 400 });
+  if (!rateLimit.allowed) {
+    return NextResponse.json(
+      { error: "リクエストが多すぎます。しばらくしてからお試しください" },
+      {
+        status: 429,
+        headers: {
+          ...rateLimitHeaders,
+          "Retry-After": String(Math.max(1, Math.ceil((rateLimit.resetAt - Date.now()) / 1_000))),
+        },
+      },
+    );
   }
 
-  const groq = new Groq({ apiKey });
+  try {
+    const body = await readJsonBody(req);
+    const { messages, newMessage } = parseChatRequest(body);
+    const groq = new Groq({ apiKey, timeout: GROQ_TIMEOUT_MS, maxRetries: 0 });
 
-  const HISTORY_LIMIT = 6;
-  const history: ChatMessage[] = (messages ?? [])
-    .slice(-HISTORY_LIMIT)
-    .map((m) => ({ role: m.role, content: m.content }));
+    const completion = await groq.chat.completions.create({
+      model: "llama-3.1-8b-instant",
+      messages: [
+        { role: "system", content: buildSystemPrompt() },
+        ...messages,
+        { role: "user", content: newMessage },
+      ],
+      max_tokens: 512,
+    });
 
-  const completion = await groq.chat.completions.create({
-    model: "llama-3.1-8b-instant",
-    messages: [
-      { role: "system", content: buildSystemPrompt() },
-      ...history,
-      { role: "user", content: newMessage },
-    ],
-    max_tokens: 1024,
-  });
+    const text = completion.choices[0]?.message?.content ?? "応答を取得できませんでした。";
+    return NextResponse.json({ reply: text }, { headers: rateLimitHeaders });
+  } catch (error) {
+    if (error instanceof ChatRequestError) {
+      return NextResponse.json({ error: error.message }, { status: error.status, headers: rateLimitHeaders });
+    }
+    if (error instanceof APIConnectionTimeoutError) {
+      return NextResponse.json(
+        { error: "AIサービスがタイムアウトしました。しばらくしてからお試しください" },
+        { status: 504, headers: rateLimitHeaders },
+      );
+    }
+    if (error instanceof APIError) {
+      return NextResponse.json(
+        { error: "AIサービスから応答を取得できませんでした" },
+        { status: 502, headers: rateLimitHeaders },
+      );
+    }
 
-  const text = completion.choices[0]?.message?.content ?? "応答を取得できませんでした。";
-  return NextResponse.json({ reply: text });
+    return NextResponse.json(
+      { error: "チャットの処理中にエラーが発生しました" },
+      { status: 500, headers: rateLimitHeaders },
+    );
+  }
 }

@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import OwlGlyph from "@/components/ui/OwlGlyph";
+import { MAX_HISTORY_MESSAGES, MAX_NEW_MESSAGE_CHARS } from "@/app/api/chat/validation";
 
 type Message = {
   role: "user" | "assistant";
@@ -34,7 +35,7 @@ export default function ChatBot() {
     if (!text || isLoading) return;
 
     const userMessage: Message = { role: "user", content: text };
-    const history = messages.filter((m) => m !== WELCOME_MESSAGE || messages.indexOf(m) !== 0);
+    const history = messages.slice(1).slice(-MAX_HISTORY_MESSAGES);
     const newMessages = [...messages, userMessage];
     setMessages(newMessages);
     setInput("");
@@ -45,7 +46,7 @@ export default function ChatBot() {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          messages: history.slice(1),
+          messages: history,
           newMessage: text,
         }),
       });
@@ -123,6 +124,7 @@ export default function ChatBot() {
               onCompositionEnd={() => setIsComposing(false)}
               placeholder="メッセージを入力… (Enter で送信)"
               rows={1}
+              maxLength={MAX_NEW_MESSAGE_CHARS}
               disabled={isLoading}
             />
             <button
