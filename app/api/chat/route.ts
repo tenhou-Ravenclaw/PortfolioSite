@@ -52,7 +52,7 @@ function buildSystemPrompt(): string {
 - Webアプリケーション開発を中心に、ハードウェアやサーバーなど幅広く学んでいる
 - 最近のマイブームはキーボード設計
 - GDG（Google Developer Groups）のコミュニティ活動に積極的に参加・運営している
-- 連絡先: トップページにある「Contact me」ボタンを押すとGoogleフォームが開き、そこからメッセージを送れる
+- 連絡先: トップページにある「Contact me」ボタンを押すと/contactページに移動し、埋め込まれたフォームからメッセージを送れる
 - SNS・各種リンク: トップページにある「LinkedIn」「GitHub」「X（旧Twitter）」ボタンからそれぞれのプロフィールへアクセスできる
 - 英語名: Ayato Fujita
 - 肩書き: Software / Hardware Engineer、Product Manager
