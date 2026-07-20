@@ -57,25 +57,27 @@ const accountLinks: AccountLink[] = [
     href: "https://www.linkedin.com/in/彩翔-藤田-595a16352",
     caption: "Fujita Ayato",
     faviconDomain: "linkedin.com",
+    external: true,
   },
   {
     label: "GitHub",
     href: "https://github.com/tenhou-Ravenclaw",
     caption: "@tenhou",
     faviconDomain: "github.com",
+    external: true,
   },
   {
     label: "X",
     href: "https://x.com/tenhou_0126",
     caption: "@tenhou_0126",
     faviconDomain: "x.com",
+    external: true,
   },
   {
     label: "Contact me",
-    href: "https://forms.gle/mgff1SAhDBBkF4AG8",
+    href: "/contact",
     caption: "お問い合わせ",
     svgIcon: "mail",
-    external: true,
   },
 ];
 
@@ -124,8 +126,8 @@ const HeroSection = ({ featuredBadges }: HeroSectionProps) => {
               <Link
                 key={account.label}
                 href={account.href}
-                target="_blank"
-                rel="noopener noreferrer"
+                target={account.external ? "_blank" : undefined}
+                rel={account.external ? "noopener noreferrer" : undefined}
                 className="qr-badge"
                 aria-label={account.external ? `${account.label}（別サイトで開きます）` : undefined}
               >
