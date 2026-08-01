@@ -67,10 +67,10 @@ const accountLinks: AccountLink[] = [
     external: true,
   },
   {
-    label: "X",
-    href: "https://x.com/tenhou_0126",
-    caption: "@tenhou_0126",
-    faviconDomain: "x.com",
+    label: "Speaker Deck",
+    href: "https://speakerdeck.com/tenhou",
+    caption: "tenhou",
+    faviconDomain: "speakerdeck.com",
     external: true,
   },
   {
