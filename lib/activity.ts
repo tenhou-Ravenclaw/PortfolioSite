@@ -36,11 +36,9 @@ export function getRecentActivities(): Activity[] {
 
 export function getRoleColor(activity: Activity): string {
   if (activity.type === "event") {
-    switch (activity.role) {
-      case "イベントオーナー": return "#facc15";
-      case "スタッフ": return "#38bdfc";
-      default: return "#94a3b8";
-    }
+    if (activity.role.includes("イベントオーナー")) return "#facc15";
+    if (activity.role.includes("スタッフ")) return "#38bdfc";
+    return "#94a3b8";
   }
 
   switch (activity.status) {
