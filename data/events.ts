@@ -325,18 +325,18 @@ export const events: Event[] = [
         learned: "",
     },
     {
+        title: "Google Cloud Next '26 in Tokyo",
+        date: "2026/07/30~2026/07/31",
+        desc: "Google Cloud Next '26 in Tokyoに、GDGブーススタッフとして参加した。",
+        role: "スタッフ",
+        learned: "",
+    },
+    {
         title: "Google Devs' Innovative Crosstalk",
         date: "2026/08/02",
         desc: "Google Devs' Innovative Crosstalkに参加し、イベントオーナー、TechStageオーナー、TechStage司会を務めた。",
         url: "https://gdgkwansai.connpass.com/event/395360/",
-        role: "イベントオーナー、TechStageオーナー、TechStage司会",
-        learned: "",
-    },
-    {
-        title: "Google Cloud Next '26 in Tokyo",
-        date: "2026/08/30~2026/08/31",
-        desc: "Google Cloud Next '26 in Tokyoに、GDGブーススタッフとして参加した。",
-        role: "GDGブーススタッフ",
+        role: "イベントオーナー",
         learned: "",
     },
 ];
