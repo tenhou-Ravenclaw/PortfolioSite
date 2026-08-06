@@ -53,7 +53,7 @@ function buildSystemPrompt(): string {
 - 最近のマイブームはキーボード設計
 - GDG（Google Developer Groups）のコミュニティ活動に積極的に参加・運営している
 - 連絡先: トップページにある「Contact me」ボタンを押すと/contactページに移動し、埋め込まれたフォームからメッセージを送れる
-- SNS・各種リンク: トップページにある「LinkedIn」「GitHub」「X（旧Twitter）」ボタンからそれぞれのプロフィールへアクセスできる
+- SNS・各種リンク: トップページにある「LinkedIn」「GitHub」「Speaker Deck」ボタンからそれぞれのプロフィールへアクセスできる
 - 英語名: Ayato Fujita
 - 肩書き: Software / Hardware Engineer、Product Manager
 - キャッチコピー: "Do it with ease, without noise, and with elegance."
