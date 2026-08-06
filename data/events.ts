@@ -318,9 +318,9 @@ export const events: Event[] = [
         learned: "",
     },
     {
-        title: "speee インターン",
+        title: "Speee インターン",
         date: "2026/07/18~2026/07/20",
-        desc: "speeeのインターンシップに参加した。",
+        desc: "Speeeのインターンシップに参加した。",
         role: "インターン生",
         learned: "",
     },
@@ -328,7 +328,7 @@ export const events: Event[] = [
         title: "Google Cloud Next '26 in Tokyo",
         date: "2026/07/30~2026/07/31",
         desc: "Google Cloud Next '26 in Tokyoに、GDGブーススタッフとして参加した。",
-        role: "スタッフ",
+        role: "GDGブーススタッフ",
         learned: "",
     },
     {
@@ -336,7 +336,7 @@ export const events: Event[] = [
         date: "2026/08/02",
         desc: "Google Devs' Innovative Crosstalkに参加し、イベントオーナー、TechStageオーナー、TechStage司会を務めた。",
         url: "https://gdgkwansai.connpass.com/event/395360/",
-        role: "イベントオーナー",
+        role: "イベントオーナー、TechStageオーナー、TechStage司会",
         learned: "",
     },
 ];
