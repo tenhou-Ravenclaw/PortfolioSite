@@ -334,9 +334,9 @@ export const events: Event[] = [
     {
         title: "Google Devs' Innovative Crosstalk",
         date: "2026/08/02",
-        desc: "Google Devs' Innovative Crosstalkに参加し、イベントオーナー、TechStageオーナー、TechStage司会を務めた。",
+        desc: "Google Devs' Innovative Crosstalkに参加し、イベントオーナー、TechStageオーナー、TechStage司会を務め、LT登壇した。",
         url: "https://gdgkwansai.connpass.com/event/395360/",
-        role: "イベントオーナー、TechStageオーナー、TechStage司会",
+        role: "イベントオーナー、TechStageオーナー、TechStage司会、登壇者",
         learned: "",
     },
 ];
