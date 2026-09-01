@@ -178,6 +178,14 @@ export const skills: Skill[] = [
         category: 'tool',
     },
     {
+        name: "AWS",
+        icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original-wordmark.svg",
+        level: 2,
+        years: "2024",
+        description: "小児科用アプリ開発のデプロイ先として使用。ハッカソンやインターンでも利用経験あり。AWS Certified Cloud Practitioner取得済み。",
+        category: 'tool',
+    },
+    {
         name: "PLATEAU",
         icon: "/plateauIcon.jpg",
         level: 2,
