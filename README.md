@@ -34,3 +34,14 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+## CI
+
+`.github/workflows/ci.yml` により、`main` へのPR・pushで以下を自動実行する。
+
+- `npm ci`
+- `npm run lint`
+- `npm run typecheck`（[#48](https://github.com/tenhou-Ravenclaw/PortfolioSite/issues/48) で追加予定のscript）
+- `npm test`
+- `npm run build`
+- `npm audit --audit-level=high`（High以上の脆弱性検出）
