@@ -1,39 +1,60 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Tenhou Portfolio Site
 
-## Getting Started
+Next.js (App Router) + TypeScript で構築された個人ポートフォリオサイト。Groqを使ったAIチャットボットや、活動・イベント履歴、スキルの可視化などを含む。
 
-First, run the development server:
+## 必要環境
+
+- Node.js 20 以上
+- npm
+
+## セットアップ
+
+```bash
+git clone <このリポジトリ>
+cd PortfolioSite
+npm install
+cp .env.example .env.local
+```
+
+`.env.local` に必要な環境変数を設定する（詳細は `.env.example` を参照）。
+
+| 変数 | 必須 | 用途 |
+| --- | --- | --- |
+| `GROQ_API_KEY` | 必須 | AIチャットボット（`app/api/chat`）がGroq APIを呼び出すために使用。未設定の場合チャットAPIは503を返す。 |
+| `OWNER_NAME` | 任意 | AIチャットの回答文脈に含める本名。 |
+| `OWNER_NAME_KANA` | 任意 | `OWNER_NAME` のふりがな。`OWNER_NAME` 未設定時は無視される。 |
+
+秘密値そのものはコミットしない（`.env*` は `.gitignore` 対象、`.env.example` のみ例外）。
+
+## 開発
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+[http://localhost:3000](http://localhost:3000) で確認できる。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 検証
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run lint       # ESLint
+npm run typecheck  # next typegen でルート型を再生成してから tsc --noEmit
+npm test           # vitest
+npm run build      # 本番ビルド（Turbopack）
+```
 
-## Learn More
+`npm run typecheck` は毎回 `next typegen` でルート型を再生成してから型チェックするため、`dev`/`build` で残った古い `.next` 生成物の影響を受けずに安定して実行できる。
 
-To learn more about Next.js, take a look at the following resources:
+## 本番起動
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+npm run build
+npm run start
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## デプロイ
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+[Vercel](https://vercel.com) にデプロイしている。`main` ブランチへのマージで本番反映される。
 
 ## CI
 
@@ -41,7 +62,7 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 
 - `npm ci`
 - `npm run lint`
-- `npm run typecheck`（[#48](https://github.com/tenhou-Ravenclaw/PortfolioSite/issues/48) で追加予定のscript）
+- `npm run typecheck`
 - `npm test`
 - `npm run build`
 - `npm audit --audit-level=high`（High以上の脆弱性検出）

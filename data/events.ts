@@ -345,7 +345,7 @@ export const projects: Project[] = [
     {
         title: "ポートフォリオサイト開発",
         startDate: "2024/03/01",
-        endDate: "2025/09/30",
+        endDate: "進行中",
         status: "in-progress",
         desc: "Next.js と TypeScript を使用した個人ポートフォリオサイトの開発。レスポンシブデザインを重視した設計。",
         role: "フルスタック開発者",
@@ -360,7 +360,7 @@ export const projects: Project[] = [
     {
         title: "小児科用アプリ開発",
         startDate: "2024/04/01",
-        endDate: "2025/09/30",
+        endDate: "進行中",
         status: "in-progress",
         desc: "JavaScript と Swift を使用した小児科向けアプリの開発。ユーザー体験とアクセシビリティを重視した設計。",
         role: "プロダクトマネージャー",
@@ -375,7 +375,7 @@ export const projects: Project[] = [
     {
         title: "HackSphere 運営",
         startDate: "2024/11/01",
-        endDate: "2025/09/30",
+        endDate: "進行中",
         status: "in-progress",
         desc: "学生団体 HackSphere の設立と運営。イベント企画、メンバー管理、コミュニティ形成を担当。",
         role: "代表",
